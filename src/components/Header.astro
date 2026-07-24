@@ -1,0 +1,86 @@
+---
+---
+<header
+  data-header
+  class="fixed top-0 left-0 right-0 z-[8000] flex items-center justify-between transition-all duration-400"
+  style="padding: 18px clamp(20px,5vw,64px); border-bottom: 1px solid transparent;"
+>
+  <a href="#top" class="flex items-center no-underline">
+    <img src="/assets/mdn-mark.webp" alt="MDN Publicidad Studio" style="height:85px;width:auto;display:block;" />
+  </a>
+
+  <nav data-navlinks class="flex items-center gap-9">
+    <a href="#nosotros" class="mdn-navlink text-[13px] font-semibold tracking-[1.5px] uppercase text-[#C9C4BA] no-underline transition-colors duration-250 hover:text-[#FFB200]">Nosotros</a>
+    <a href="#servicios" class="mdn-navlink text-[13px] font-semibold tracking-[1.5px] uppercase text-[#C9C4BA] no-underline transition-colors duration-250 hover:text-[#FFB200]">Servicios</a>
+    <a href="#crecimiento" class="mdn-navlink text-[13px] font-semibold tracking-[1.5px] uppercase text-[#C9C4BA] no-underline transition-colors duration-250 hover:text-[#FFB200]">Crecimiento</a>
+    <a
+      href="#onboarding"
+      data-magnetic
+      class="text-[13px] font-bold tracking-[1.5px] uppercase text-[#0C0B0A] bg-[#FFB200] no-underline px-5 py-3 rounded-full transition-all duration-300 hover:bg-[#FFC233]"
+    >Empezar</a>
+  </nav>
+
+  <button
+    data-burger
+    aria-label="Menú"
+    class="hidden flex-col gap-[5px] bg-transparent border-0 cursor-pointer p-2"
+  >
+    <span class="block w-[26px] h-[2px] bg-[#F6F3EC] rounded-sm"></span>
+    <span class="block w-[26px] h-[2px] bg-[#F6F3EC] rounded-sm"></span>
+  </button>
+</header>
+
+<!-- Mobile menu -->
+<div
+  data-mobilemenu
+  class="fixed inset-0 z-[7900] bg-[#0C0B0A] hidden flex-col items-center justify-center gap-8"
+>
+  <a href="#nosotros" class="mdn-mlink font-display font-bold text-[34px] uppercase text-[#F6F3EC] no-underline tracking-wide">Nosotros</a>
+  <a href="#servicios" class="mdn-mlink font-display font-bold text-[34px] uppercase text-[#F6F3EC] no-underline tracking-wide">Servicios</a>
+  <a href="#crecimiento" class="mdn-mlink font-display font-bold text-[34px] uppercase text-[#F6F3EC] no-underline tracking-wide">Crecimiento</a>
+  <a href="#onboarding" class="mdn-mlink font-display font-bold text-[34px] uppercase text-[#FFB200] no-underline tracking-wide">Empezar</a>
+</div>
+
+<script>
+  const root = document.getElementById('mdn-site')!;
+  const header = root.querySelector<HTMLElement>('[data-header]')!;
+  const navLinks = root.querySelector<HTMLElement>('[data-navlinks]')!;
+  const burger = root.querySelector<HTMLElement>('[data-burger]')!;
+  const mm = root.querySelector<HTMLElement>('[data-mobilemenu]')!;
+
+  const applyResp = () => {
+    if (window.innerWidth < 860) {
+      navLinks.style.display = 'none';
+      burger.style.display = 'flex';
+    } else {
+      navLinks.style.display = 'flex';
+      burger.style.display = 'none';
+      mm.style.display = 'none';
+    }
+  };
+  applyResp();
+  window.addEventListener('resize', applyResp);
+
+  burger.addEventListener('click', () => {
+    mm.style.display = mm.style.display === 'flex' ? 'none' : 'flex';
+  });
+  root.querySelectorAll('.mdn-mlink').forEach(a =>
+    a.addEventListener('click', () => { mm.style.display = 'none'; })
+  );
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      header.style.background = 'rgba(12,11,10,.88)';
+      header.style.backdropFilter = 'blur(16px)';
+      header.style.borderBottomColor = 'rgba(255,255,255,.07)';
+      header.style.paddingTop = '12px';
+      header.style.paddingBottom = '12px';
+    } else {
+      header.style.background = 'transparent';
+      header.style.backdropFilter = 'none';
+      header.style.borderBottomColor = 'transparent';
+      header.style.paddingTop = '18px';
+      header.style.paddingBottom = '18px';
+    }
+  }, { passive: true });
+</script>

@@ -1,0 +1,101 @@
+---
+import { brands } from '../data/content';
+
+const third = Math.ceil(brands.length / 3);
+const row1 = brands.slice(0, third);
+const row2 = brands.slice(third, third * 2);
+const row3 = brands.slice(third * 2);
+const row1Double = [...row1, ...row1];
+const row2Double = [...row2, ...row2];
+const row3Double = [...row3, ...row3];
+---
+<section
+  id="crecimiento"
+  class="relative border-t border-white/[.08] overflow-hidden"
+  style="padding: clamp(80px,12vh,150px) clamp(20px,5vw,64px);"
+>
+  <div class="max-w-[1280px] mx-auto">
+    <div class="flex flex-wrap items-center mt-2.5" style="gap:clamp(30px,6vw,90px);">
+      <!-- Counter -->
+      <div data-counter class="flex-none">
+        <div
+          class="flex items-start font-display font-extrabold leading-[.8] text-[#FFB200] overflow-hidden"
+          style="height:clamp(96px,17.6vw,224px);contain:layout;"
+        >
+          <span data-count class="block tabular-nums" style="font-size:clamp(120px,22vw,280px);width:3ch;">0</span>
+          <span style="font-size:clamp(60px,10vw,130px);margin-top:.1em;">+</span>
+        </div>
+        <p class="mt-1.5 mb-0 font-display font-bold tracking-[3px] uppercase text-[14px] text-[#9a9489]">Marcas acompañadas</p>
+      </div>
+
+      <!-- Text -->
+      <div data-reveal class="flex-1 min-w-[280px] opacity-0 translate-y-6">
+        <h2 class="m-0 font-display font-extrabold uppercase leading-[1.02] tracking-[-0.4px]" style="font-size:clamp(28px,3.6vw,52px);">
+          Hemos acompañado a más de 500 marcas en su <span class="text-[#FFB200]">transformación digital</span>
+        </h2>
+        <p class="mt-5 mb-0 text-[18px] leading-[1.6] text-[#B8B3A8] max-w-[520px]">
+          Actualmente colaboramos con clientes líderes en diversos sectores, construyendo relaciones de largo plazo basadas en resultados.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logos marquee -->
+  <div class="mt-12 md:mt-20">
+    <p data-reveal class="text-center text-[12px] tracking-[3px] uppercase text-[#7d786e] mb-7 opacity-0 translate-y-6">
+      Marcas que confían en nosotros
+    </p>
+    <div
+      class="relative overflow-hidden"
+      style="-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);"
+    >
+      <div class="flex items-center" style="width:max-content;animation:mdnMarq 62s linear infinite;">
+        {row1Double.map((b) => (
+          <img
+            src={b.logo}
+            alt={b.name}
+            loading="lazy"
+            class="flex-none opacity-70 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
+            style="height:clamp(92px,10.4vw,128px);width:auto;margin:0 clamp(40px,6.8vw,88px);"
+          />
+        ))}
+      </div>
+    </div>
+
+    <!-- Segunda fila: dirección inversa -->
+    <div
+      class="relative overflow-hidden mt-4"
+      style="-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);"
+    >
+      <div class="flex items-center" style="width:max-content;animation:mdnMarq 74s linear infinite reverse;">
+        {row2Double.map((b) => (
+          <img
+            src={b.logo}
+            alt={b.name}
+            loading="lazy"
+            class="flex-none opacity-70 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
+            style="height:clamp(92px,10.4vw,128px);width:auto;margin:0 clamp(40px,6.8vw,88px);"
+          />
+        ))}
+      </div>
+    </div>
+
+    <!-- Tercera fila: dirección normal, más pequeña -->
+    <div
+      class="relative overflow-hidden mt-4"
+      style="-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);"
+    >
+      <div class="flex items-center" style="width:max-content;animation:mdnMarq 86s linear infinite;">
+        {row3Double.map((b) => (
+          <img
+            src={b.logo}
+            alt={b.name}
+            loading="lazy"
+            class="flex-none opacity-70 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
+            style="height:clamp(92px,10.4vw,128px);width:auto;margin:0 clamp(40px,6.8vw,88px);"
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

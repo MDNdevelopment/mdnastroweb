@@ -1,0 +1,82 @@
+---
+import OnboardingForm from './islands/OnboardingForm';
+---
+<section
+  id="onboarding"
+  style="padding: clamp(80px,12vh,150px) clamp(20px,5vw,64px);"
+>
+  <div class="max-w-[1080px] mx-auto">
+    <div data-reveal class="text-center mb-12 opacity-0 translate-y-6">
+      <h2 class="m-0 font-display font-extrabold uppercase leading-[.92] tracking-[-0.5px]" style="font-size:clamp(34px,6vw,84px);">
+        Cuéntanos sobre <span class="text-[#FFB200]">tu marca</span>
+      </h2>
+      <p class="mt-4 mx-auto mb-0 max-w-[480px] text-[18px] leading-[1.6] text-[#B8B3A8]">
+        Completa tu onboarding y preparamos una propuesta a la medida de tus objetivos. Te respondemos en menos de 24 horas.
+      </p>
+    </div>
+
+    <div
+      data-reveal
+      class="bg-[#15130F] border border-white/10 rounded-[24px] opacity-0 translate-y-6"
+      style="padding: clamp(26px,4vw,52px);"
+    >
+      <OnboardingForm client:load />
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .mdn-phone {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .mdn-phone .PhoneInputCountry {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #0c0b0a;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 12px;
+    padding: 0 12px;
+    transition: all 0.25s;
+  }
+  .mdn-phone .PhoneInputCountrySelect:focus-visible + .PhoneInputCountryIcon,
+  .mdn-phone:focus-within .PhoneInputCountry {
+    border-color: #ffb200;
+    background: #100e0b;
+  }
+  .mdn-phone .PhoneInputCountryIcon {
+    width: 22px;
+    height: 16px;
+    box-shadow: none;
+  }
+  .mdn-phone .PhoneInputCountrySelectArrow {
+    color: #9a9489;
+    opacity: 1;
+  }
+  .mdn-phone .PhoneInputInput {
+    flex: 1;
+    width: 100%;
+    background: #0c0b0a;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: #f6f3ec;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.25s;
+  }
+  .mdn-phone .PhoneInputInput::placeholder {
+    color: #6f6a61;
+  }
+  .mdn-phone .PhoneInputInput:focus {
+    border-color: #ffb200;
+    background: #100e0b;
+  }
+  .mdn-phone-error .PhoneInputInput,
+  .mdn-phone-error .PhoneInputCountry {
+    border-color: #ff5b4d !important;
+  }
+</style>

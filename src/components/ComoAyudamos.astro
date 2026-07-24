@@ -1,0 +1,78 @@
+---
+import { Image } from 'astro:assets';
+import { wallTags, helpItems } from '../data/content';
+
+const wallImages = import.meta.glob('../assets/comoAyudamos/*', { eager: true, import: 'default' });
+const getWallImage = (filename?: string) =>
+  filename ? wallImages[`../assets/comoAyudamos/${filename}`] : undefined;
+
+// Build wall rows server-side
+const rowA = wallTags.slice(0, 6);
+const rowB = wallTags.slice(6, 12);
+
+const mkRow = (arr: typeof wallTags) => [...arr, ...arr, ...arr, ...arr];
+---
+<section class="relative border-t border-white/[.08]" style="padding: clamp(60px,8vh,110px) 0;">
+  <div class="max-w-[1280px] mx-auto" style="padding: 0 clamp(20px,5vw,64px);">
+    <div data-reveal class="flex flex-wrap items-end gap-5 justify-between mb-12 opacity-0 translate-y-6">
+      <div>
+        <h2 class="mt-2.5 mb-0 font-display font-extrabold uppercase leading-[.95] tracking-[-0.5px]" style="font-size:clamp(32px,5vw,64px);">
+          ¿Cómo te <span class="text-[#FFB200]">ayudaremos?</span>
+        </h2>
+      </div>
+      <p class="max-w-[340px] m-0 text-[17px] leading-[1.6] text-[#9a9489]">
+        Todo empieza con una idea. La convertimos en una estrategia clara para que tu marca conecte, crezca y convierta.
+      </p>
+    </div>
+  </div>
+
+  <!-- Social wall marquee -->
+  <div
+    class="relative flex flex-col gap-4 py-2.5 pb-10"
+    style="-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);"
+  >
+    {[
+      { arr: mkRow(rowA), dur: 55, rev: false },
+      { arr: mkRow(rowB), dur: 65, rev: true },
+    ].map((row) => (
+      <div style={`display:flex;gap:16px;width:max-content;animation:mdnMarq ${row.dur}s linear infinite${row.rev ? ' reverse' : ''};`}>
+        {row.arr.map(([label, bg, filename], i) => {
+          const img = getWallImage(filename);
+          return (
+            <div
+              key={`${label}-${i}`}
+              style={`flex:0 0 auto;width:200px;aspect-ratio:1/1;border-radius:16px;background:linear-gradient(150deg,${bg},#161410);border:1px solid rgba(255,255,255,.07);position:relative;overflow:hidden;`}
+            >
+              {img ? (
+                <Image src={img} alt={label} class="absolute inset-0 h-full w-full object-cover" width={200} height={200} />
+              ) : (
+                <div style="position:absolute;inset:0;background:radial-gradient(circle at 70% 20%,rgba(255,178,0,.10),transparent 60%);" />
+              )}
+              <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,transparent 45%,rgba(10,9,8,.55) 65%,rgba(10,9,8,.92) 85%,#0A0908 100%);" />
+              <span style="position:absolute;top:14px;right:14px;width:26px;height:26px;border:1px solid rgba(255,255,255,.18);border-radius:50%;display:grid;place-items:center;font-size:11px;color:#FFB200;">✦</span>
+              <span style="position:absolute;left:16px;bottom:16px;font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:18px;text-transform:uppercase;letter-spacing:1px;color:#F6F3EC;">{label}</span>
+            </div>
+          );
+        })}
+      </div>
+    ))}
+  </div>
+
+  <!-- Help grid -->
+  <div class="max-w-[1280px] mx-auto" style="padding: 30px clamp(20px,5vw,64px) 0;">
+    <div
+      class="grid gap-px bg-white/[.08] border border-white/[.08] rounded-[18px] overflow-hidden"
+      style="grid-template-columns:repeat(auto-fit,minmax(250px,1fr));"
+    >
+      {helpItems.map((h) => (
+        <div
+          data-reveal
+          class="opacity-0 translate-y-6 bg-[#0F0E0C] p-7 min-h-[190px] flex flex-col justify-center transition-colors duration-350 hover:bg-[#15130F]"
+        >
+          <h3 class="m-0 mb-2.5 font-display font-bold text-[26px] uppercase text-[#FFB200] tracking-[.5px]">{h.title}</h3>
+          <p class="m-0 text-[16px] leading-[1.55] text-[#B8B3A8]">{h.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

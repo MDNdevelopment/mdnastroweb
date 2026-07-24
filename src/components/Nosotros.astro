@@ -1,0 +1,56 @@
+---
+import { pillars } from '../data/content';
+
+const words = ['Quiénes somos', 'MDN', 'Estrategia', 'Creatividad'];
+const wordsDouble = [...words, ...words];
+---
+<section
+  id="nosotros"
+  data-nos
+  class="relative border-t border-white/[.08] overflow-hidden"
+  style="padding: clamp(80px,12vh,150px) 0;"
+>
+  <!-- Giant marquee label (parallax) -->
+  <div
+    class="relative overflow-hidden mb-14"
+    style="-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);"
+  >
+    <div data-nos-marquee class="flex items-center" style="width:max-content;animation:mdnMarq 30s linear infinite;">
+      {wordsDouble.map((w) => (
+        <span
+          class="flex-none whitespace-nowrap font-display font-extrabold uppercase tracking-[-0.5px] text-[rgba(255,178,0,.14)]"
+          style="font-size:clamp(50px,8vw,120px);padding:0 clamp(20px,3vw,40px);"
+        >{w}</span>
+      ))}
+    </div>
+  </div>
+
+  <div class="max-w-[1280px] mx-auto" style="padding: 0 clamp(20px,5vw,64px);">
+    <div class="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
+      <div class="lg:w-2/5">
+        <h2 data-nos-heading class="m-0 opacity-0 translate-y-6 font-display font-extrabold uppercase leading-[.95] tracking-[-0.5px]" style="font-size:clamp(32px,4.4vw,58px);">
+          Quiénes <span class="text-[#FFB200]">somos</span>
+        </h2>
+      </div>
+      <p data-nos-lead class="lg:w-3/5 m-0 opacity-0 translate-y-6 text-[19px] leading-[1.65] text-[#B8B3A8]">
+        Somos un equipo especializado en gestión de redes sociales, comprometidos con potenciar la presencia digital de tu marca a través de acciones efectivas y creativas.
+      </p>
+    </div>
+
+    <!-- Pillar cards -->
+    <div class="mt-14 grid gap-6" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));perspective:1200px;">
+      {pillars.map((p) => (
+        <div
+          data-nos-card
+          class="opacity-0 translate-y-6 rounded-[24px] border border-white/10 p-8"
+          style="background:linear-gradient(162deg,#171510,#0F0D0B);will-change:transform;"
+        >
+          <p class="m-0 mb-4 font-display font-bold uppercase leading-none tracking-[-0.3px] text-[#F6F3EC]" style="font-size:clamp(20px,2vw,28px);">
+            {p.title}
+          </p>
+          <p class="m-0 leading-[1.65] text-[#B8B3A8]" style="font-size:16px;">{p.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

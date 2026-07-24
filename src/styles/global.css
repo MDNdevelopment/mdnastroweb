@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@theme {
+  --color-mdn-bg: #0C0B0A;
+  --color-mdn-surface: #0A0908;
+  --color-mdn-card: #15130F;
+  --color-mdn-card-alt: #0F0E0C;
+  --color-mdn-ink: #F6F3EC;
+  --color-mdn-mute: #B8B3A8;
+  --color-mdn-mute-deep: #9a9489;
+  --color-mdn-faint: #6f6a61;
+  --color-mdn-yellow: #FFB200;
+  --color-mdn-yellow-hover: #FFC233;
+  --color-mdn-fill-idle: #272420;
+
+  --font-display: "Saira Condensed", sans-serif;
+  --font-sans: "Hanken Grotesk", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #0C0B0A;
+  font-family: "Hanken Grotesk", sans-serif;
+}
+
+::selection {
+  background: #FFB200;
+  color: #0C0B0A;
+}
+
+#mdn-site {
+  scrollbar-color: #2a2722 #0C0B0A;
+}
+
+#mdn-site ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+#mdn-site ::-webkit-scrollbar-thumb {
+  background: #2a2722;
+  border-radius: 20px;
+}
+
+#mdn-site input::placeholder,
+#mdn-site textarea::placeholder {
+  color: #6f6a61;
+}
+
+@keyframes mdnSpin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes mdnFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes mdnMarq {
+  to { transform: translateX(-50%); }
+}
+
+@keyframes mdnPulse {
+  0%, 100% { opacity: .5; }
+  50% { opacity: 1; }
+}
