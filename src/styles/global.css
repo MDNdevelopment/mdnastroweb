@@ -15,6 +15,7 @@
 
   --font-display: "Saira Condensed", sans-serif;
   --font-sans: "Hanken Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
 * {

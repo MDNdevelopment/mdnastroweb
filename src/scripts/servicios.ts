@@ -7,29 +7,36 @@ export function initServicios(reduced: boolean) {
 
   if (!pin || !track || reduced) return;
 
-  // Wait for layout to settle
-  requestAnimationFrame(() => {
-    const trackW = track.scrollWidth;
-    const viewW = window.innerWidth;
-    const distance = trackW - viewW;
+  // El scroll-jacking (pin + scrub) solo tiene sentido en desktop, donde no
+  // hay gesto nativo de swipe horizontal. En móvil el track se convierte en
+  // un carrusel con scroll-snap táctil (ver Servicios.astro).
+  ScrollTrigger.matchMedia({
+    '(min-width: 860px)': () => {
+      // Wait for layout to settle
+      requestAnimationFrame(() => {
+        const trackW = track.scrollWidth;
+        const viewW = window.innerWidth;
+        const distance = trackW - viewW;
 
-    if (distance <= 0) return;
+        if (distance <= 0) return;
 
-    const deadZone = window.innerHeight * 0.6; // zona muerta al final para leer el CTA
+        const deadZone = window.innerHeight * 0.6; // zona muerta al final para leer el CTA
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: pin,
-        start: 'top top',
-        end: `+=${distance + deadZone}`,
-        pin: true,
-        scrub: 1,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-      },
-    });
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: pin,
+            start: 'top top',
+            end: `+=${distance + deadZone}`,
+            pin: true,
+            scrub: 1,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
 
-    tl.to(track, { x: -distance, ease: 'none', duration: distance });
-    tl.to({}, { duration: deadZone }); // tramo vacío = pausa con el CTA visible
+        tl.to(track, { x: -distance, ease: 'none', duration: distance });
+        tl.to({}, { duration: deadZone }); // tramo vacío = pausa con el CTA visible
+      });
+    },
   });
 }

@@ -46,6 +46,11 @@ import('./servicios').then(m => m.initServicios(prefersReduced));
 // ---- Counter ----
 import('./counter').then(m => m.initCounter(prefersReduced));
 
+// ---- Página de páginas web ----
+if (document.querySelector('[data-pw-hero]')) {
+  import('./paginas-web').then(m => m.initPaginasWeb(prefersReduced));
+}
+
 // ---- Magnetic buttons ----
 if (!prefersReduced) {
   document.querySelectorAll<HTMLElement>('[data-magnetic]').forEach(btn => {

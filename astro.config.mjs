@@ -5,6 +5,8 @@ import react from '@astrojs/react';
 import netlify from '@astrojs/netlify';
 
 export default defineConfig({
+  site: 'https://mdnpublicidad.com',
+  trailingSlash: 'always',
   output: 'server',
   adapter: netlify(),
   integrations: [react()],

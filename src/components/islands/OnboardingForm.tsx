@@ -1,8 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { actions } from 'astro:actions';
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { serviceChips } from '../../data/content';
+
+const WEB_CHIP = 'Web & apps';
+const TIPOS_PAGINA = ['Landing', 'Web corporativa', 'Sistema', 'Ayúdenme a elegir'];
+
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (el: HTMLElement, opts: Record<string, unknown>) => string;
+      reset: (widgetId?: string) => void;
+    };
+  }
+}
 
 type Step = 1 | 2;
 type Status = 'idle' | 'submitting' | 'success' | 'error';
@@ -18,6 +30,7 @@ interface Step2 {
   servicios: string[];
   objetivo: string;
   mensaje: string;
+  tipoPagina: string;
 }
 
 const INPUT_BASE =
@@ -31,8 +44,53 @@ export default function OnboardingForm() {
   const [step, setStep] = useState<Step>(1);
   const [status, setStatus] = useState<Status>('idle');
   const [s1, setS1] = useState<Step1>({ nombre: '', empresa: '', telefono: '', email: '' });
-  const [s2, setS2] = useState<Step2>({ servicios: [], objetivo: '', mensaje: '' });
+  const [s2, setS2] = useState<Step2>({ servicios: [], objetivo: '', mensaje: '', tipoPagina: '' });
   const [errors, setErrors] = useState<Partial<Record<keyof Step1 | keyof Step2, string>>>({});
+  const [captchaToken, setCaptchaToken] = useState('');
+  const [captchaError, setCaptchaError] = useState(false);
+  const captchaRef = useRef<HTMLDivElement | null>(null);
+  const widgetId = useRef<string | undefined>(undefined);
+
+  useEffect(() => {
+    if (step !== 2 || widgetId.current || !captchaRef.current) return;
+
+    let cancelled = false;
+    const tryRender = () => {
+      if (cancelled || !captchaRef.current) return;
+      if (!window.turnstile) {
+        setTimeout(tryRender, 200);
+        return;
+      }
+      widgetId.current = window.turnstile.render(captchaRef.current, {
+        sitekey: import.meta.env.PUBLIC_TURNSTILE_SITE_KEY,
+        theme: 'dark',
+        callback: (token: string) => {
+          setCaptchaToken(token);
+          setCaptchaError(false);
+        },
+        'expired-callback': () => setCaptchaToken(''),
+        'error-callback': () => setCaptchaToken(''),
+      });
+    };
+    tryRender();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [step]);
+
+  useEffect(() => {
+    const onPlanSelected = (e: Event) => {
+      const plan = (e as CustomEvent<string>).detail;
+      setS2(prev => ({
+        ...prev,
+        servicios: prev.servicios.includes(WEB_CHIP) ? prev.servicios : [...prev.servicios, WEB_CHIP],
+        tipoPagina: plan,
+      }));
+    };
+    window.addEventListener('mdn:plan-selected', onPlanSelected);
+    return () => window.removeEventListener('mdn:plan-selected', onPlanSelected);
+  }, []);
 
   const toggleChip = (chip: string) => {
     setS2(prev => ({
@@ -41,6 +99,7 @@ export default function OnboardingForm() {
         ? prev.servicios.filter(c => c !== chip)
         : [...prev.servicios, chip],
     }));
+    if (errors.servicios) setErrors(prev => ({ ...prev, servicios: undefined }));
   };
 
   const validateStep1 = () => {
@@ -57,10 +116,20 @@ export default function OnboardingForm() {
     if (validateStep1()) setStep(2);
   };
 
+  const validateStep2 = () => {
+    const e: typeof errors = {};
+    if (s2.servicios.length === 0) e.servicios = 'required';
+    if (!s2.objetivo.trim()) e.objetivo = 'required';
+    if (!s2.mensaje.trim()) e.mensaje = 'required';
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!s2.mensaje.trim()) {
-      setErrors({ mensaje: 'required' });
+    if (!validateStep2()) return;
+    if (!captchaToken) {
+      setCaptchaError(true);
       return;
     }
     setStatus('submitting');
@@ -70,11 +139,21 @@ export default function OnboardingForm() {
       s2.servicios.forEach(s => fd.append('servicios', s));
       fd.append('objetivo', s2.objetivo);
       fd.append('mensaje', s2.mensaje);
+      if (s2.tipoPagina) fd.append('tipoPagina', s2.tipoPagina);
+      fd.append('captchaToken', captchaToken);
 
       const { error } = await actions.submitOnboarding(fd);
-      setStatus(error ? 'error' : 'success');
+      if (error) {
+        setStatus('error');
+        window.turnstile?.reset(widgetId.current);
+        setCaptchaToken('');
+      } else {
+        setStatus('success');
+      }
     } catch {
       setStatus('error');
+      window.turnstile?.reset(widgetId.current);
+      setCaptchaToken('');
     }
   };
 
@@ -194,8 +273,8 @@ export default function OnboardingForm() {
 
         {step === 2 && (
           <div>
-            <p className="m-0 mb-3.5 text-[13px] font-semibold tracking-[1.5px] uppercase text-[#FFB200]">¿Qué servicios necesitas?</p>
-            <div className="flex flex-wrap gap-2.5 mb-6">
+            <p className="m-0 mb-3.5 text-[13px] font-semibold tracking-[1.5px] uppercase text-[#FFB200]">¿Qué servicios necesitas? *</p>
+            <div className="flex flex-wrap gap-2.5 mb-2">
               {serviceChips.map(chip => {
                 const on = s2.servicios.includes(chip);
                 return (
@@ -215,16 +294,50 @@ export default function OnboardingForm() {
                 );
               })}
             </div>
+            <p className="m-0 mb-4 text-[13px] text-[#ff5b4d] min-h-[16px]">
+              {errors.servicios ? 'Elige al menos un servicio.' : ''}
+            </p>
+
+            {s2.servicios.includes(WEB_CHIP) && (
+              <div className="mb-6">
+                <p className="m-0 mb-3.5 text-[13px] font-semibold tracking-[1.5px] uppercase text-[#FFB200]">¿Qué tipo de página quieres?</p>
+                <div role="radiogroup" aria-label="Tipo de página" className="flex flex-wrap gap-2.5">
+                  {TIPOS_PAGINA.map(tipo => {
+                    const on = s2.tipoPagina === tipo;
+                    return (
+                      <button
+                        key={tipo}
+                        type="button"
+                        role="radio"
+                        aria-checked={on}
+                        onClick={() => setS2(prev => ({ ...prev, tipoPagina: tipo }))}
+                        className="font-sans text-[14px] font-semibold cursor-pointer px-5 py-3 rounded-full border transition-all duration-250"
+                        style={{
+                          background: on ? '#FFB200' : '#0F0E0C',
+                          color: on ? '#0C0B0A' : '#C9C4BA',
+                          borderColor: on ? '#FFB200' : 'rgba(255,255,255,.16)',
+                        }}
+                      >
+                        {tipo}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
 
             <label className="flex flex-col gap-2.5 mb-5">
-              <span className={LABEL_BASE}>¿Cuál es tu objetivo principal?</span>
+              <span className={LABEL_BASE}>¿Cuál es tu objetivo principal? *</span>
               <input
                 name="objetivo"
                 type="text"
-                placeholder="Ej. aumentar ventas, crecer en redes, lanzar marca..."
+                placeholder="Ej. crear mi página web, aumentar ventas, crecer en redes..."
                 value={s2.objetivo}
-                onChange={e => setS2(prev => ({ ...prev, objetivo: e.target.value }))}
-                className={INPUT_BASE}
+                onChange={e => {
+                  setS2(prev => ({ ...prev, objetivo: e.target.value }));
+                  if (errors.objetivo) setErrors(prev => ({ ...prev, objetivo: undefined }));
+                }}
+                className={`${INPUT_BASE} ${errors.objetivo ? '!border-[#ff5b4d]' : ''}`}
               />
             </label>
 
@@ -242,6 +355,13 @@ export default function OnboardingForm() {
                 className={`${INPUT_BASE} resize-y min-h-[130px] leading-[1.55] ${errors.mensaje ? '!border-[#ff5b4d]' : ''}`}
               />
             </label>
+
+            <div className="mt-6">
+              <div ref={captchaRef} />
+              {captchaError && (
+                <p className="mt-2 text-[13px] text-[#ff5b4d]">Confirma que no eres un robot.</p>
+              )}
+            </div>
 
             {status === 'error' && (
               <p className="mt-3 text-[14px] text-[#ff5b4d]">Hubo un error al enviar. Intenta de nuevo.</p>

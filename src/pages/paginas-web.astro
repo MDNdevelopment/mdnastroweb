@@ -1,0 +1,682 @@
+---
+export const prerender = true;
+
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Onboarding from '../components/Onboarding.astro';
+import { paginasWebPlanes } from '../data/content';
+
+const faqs = [
+  {
+    q: '¿Cuánto cuesta una página web en Venezuela?',
+    a: 'Nuestros planes van desde $600 (pago único) para una landing page, $1.000 para una web corporativa con varias secciones, y desde $2.500 para un sistema a medida con panel de control. Todos incluyen hosting, dominio y SSL.',
+  },
+  {
+    q: '¿Cuánto tarda la entrega de mi página web?',
+    a: 'Una landing page se entrega en 3 días, una web corporativa en 15 días y un sistema a medida en 30 días, dependiendo del alcance del proyecto.',
+  },
+  {
+    q: '¿La página web incluye hosting y dominio?',
+    a: 'Sí. Todos los planes incluyen hosting, dominio, certificado SSL y respaldos periódicos, con una mensualidad de soporte y mantenimiento.',
+  },
+  {
+    q: '¿Puedo tener un panel para gestionar contenido, reservas o usuarios?',
+    a: 'Sí, con nuestro plan Sistema desarrollamos tu web junto a un panel de control con base de datos, ideal para catálogos, reservas de citas o portales de clientes.',
+  },
+];
+
+const jsonLdFaq = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const jsonLdBreadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://mdnpublicidad.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Páginas web', item: 'https://mdnpublicidad.com/paginas-web' },
+  ],
+};
+
+const proceso = [
+  { title: 'Briefing', desc: 'Nos sentamos contigo: qué vendes, a quién y qué quieres que haga la gente al entrar. Salimos con objetivos, referencias y estructura clara.' },
+  { title: 'Diseño', desc: 'Convertimos el esqueleto en una web con carácter: tipografía, color, jerarquía y una sola cosa clara que hacer en cada pantalla.' },
+  { title: 'Desarrollo', desc: 'Código propio, sin plantillas pesadas. Carga en menos de un segundo, SEO técnico y formularios que sí llegan a tu WhatsApp.' },
+  { title: 'Entrega', desc: 'Publicamos, medimos y te enseñamos a moverla. Tu web queda online, indexada y lista para recibir clientes desde el primer día.' },
+];
+
+const whyLines = [
+  { text: 'Tu cliente ya te está', accent: false },
+  { text: 'buscando ahora mismo.', accent: false },
+  { text: 'Si no te encuentra,', accent: true },
+  { text: 'encuentra a tu competencia.', accent: true },
+];
+
+const whyStats = [
+  { label: 'Credibilidad', value: 75, suffix: '%', desc: 'de la gente juzga si confía en tu negocio solo por cómo se ve tu web.' },
+  { label: 'Atención', value: 3, suffix: 's', desc: 'es lo que tarda un visitante en decidir si se queda o se va.' },
+  { label: 'Disponibilidad', value: 24, suffix: '/7', desc: 'tu web vende, informa y capta clientes mientras tú duermes.' },
+];
+---
+<Base
+  title="Diseño y Desarrollo de Páginas Web en Venezuela | MDN Publicidad"
+  description="Creamos tu página web en Venezuela: landing pages, sitios corporativos y sistemas a medida, con hosting, dominio, SSL y soporte incluidos. Desde $600."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLdFaq)} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLdBreadcrumb)} />
+  </Fragment>
+  <Header />
+
+  <section
+    id="top"
+    data-pw-hero
+    class="relative min-h-[70vh] flex flex-col justify-center overflow-hidden"
+    style="padding: 140px clamp(20px,5vw,64px) 60px;"
+  >
+    <!-- Floating SVG shapes -->
+    <div data-pw-shapes aria-hidden="true" class="absolute inset-0 pointer-events-none overflow-hidden z-0">
+
+      <!-- Large ring top-right -->
+      <svg class="hero-float-a absolute" style="top:6%;right:7%;width:clamp(120px,14vw,200px);opacity:.22;" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="100" r="90" stroke="#FFB200" stroke-width="2"/>
+        <circle cx="100" cy="100" r="60" stroke="#FFB200" stroke-width="1"/>
+      </svg>
+
+      <!-- Triangle mid-right -->
+      <svg class="hero-float-b absolute" style="top:38%;right:3%;width:clamp(60px,7vw,100px);opacity:.20;" viewBox="0 0 100 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,4 96,84 4,84" stroke="#F6F3EC" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- Small square bottom-right -->
+      <svg class="hero-float-c absolute" style="bottom:12%;right:18%;width:clamp(40px,4vw,64px);opacity:.22;" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="4" width="56" height="56" stroke="#FFB200" stroke-width="2" transform="rotate(18 32 32)"/>
+      </svg>
+
+      <!-- Cross / plus left -->
+      <svg class="hero-float-d absolute" style="bottom:28%;left:4%;width:clamp(36px,3.5vw,54px);opacity:.20;" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="27" y1="4" x2="27" y2="50" stroke="#F6F3EC" stroke-width="2" stroke-linecap="round"/>
+        <line x1="4" y1="27" x2="50" y2="27" stroke="#F6F3EC" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+
+      <!-- Diamond top-left -->
+      <svg class="hero-float-e absolute" style="top:18%;left:2%;width:clamp(50px,5vw,80px);opacity:.22;" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="40,4 76,40 40,76 4,40" stroke="#FFB200" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- Tiny circle scatter -->
+      <svg class="hero-float-f absolute" style="top:62%;left:14%;width:clamp(28px,2.5vw,42px);opacity:.22;" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="21" cy="21" r="17" stroke="#F6F3EC" stroke-width="1.5"/>
+      </svg>
+
+    </div>
+
+    <style>
+      @keyframes heroFloatA {
+        0%,100% { transform: translateY(0px) rotate(0deg); }
+        33%      { transform: translateY(-28px) rotate(6deg); }
+        66%      { transform: translateY(-10px) rotate(-4deg); }
+      }
+      @keyframes heroFloatB {
+        0%,100% { transform: translateY(0px) rotate(0deg); }
+        40%      { transform: translateY(-24px) rotate(-8deg); }
+        70%      { transform: translateY(-8px) rotate(5deg); }
+      }
+      @keyframes heroFloatC {
+        0%,100% { transform: translateY(0px) rotate(18deg); }
+        50%      { transform: translateY(-26px) rotate(42deg); }
+      }
+      @keyframes heroFloatD {
+        0%,100% { transform: translateY(0px) rotate(0deg); }
+        35%      { transform: translateY(-22px) rotate(22deg); }
+        70%      { transform: translateY(-6px) rotate(-10deg); }
+      }
+      @keyframes heroFloatE {
+        0%,100% { transform: translateY(0px) rotate(0deg); }
+        50%      { transform: translateY(-32px) rotate(-10deg); }
+      }
+      @keyframes heroFloatF {
+        0%,100% { transform: translateY(0px) scale(1); }
+        50%      { transform: translateY(-20px) scale(1.08); }
+      }
+      .hero-float-a { animation: heroFloatA 7s ease-in-out infinite; }
+      .hero-float-b { animation: heroFloatB 5.5s ease-in-out infinite 0.8s; }
+      .hero-float-c { animation: heroFloatC 6s ease-in-out infinite 0.3s; }
+      .hero-float-d { animation: heroFloatD 7.5s ease-in-out infinite 1.4s; }
+      .hero-float-e { animation: heroFloatE 8s ease-in-out infinite 0.6s; }
+      .hero-float-f { animation: heroFloatF 4.5s ease-in-out infinite 1s; }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hero-float-a, .hero-float-b, .hero-float-c,
+        .hero-float-d, .hero-float-e, .hero-float-f {
+          animation: none;
+        }
+      }
+    </style>
+
+    <div class="relative max-w-[1000px] mx-auto w-full">
+      <h1
+        data-pw-h1
+        class="m-0 opacity-0 translate-y-6 font-display font-extrabold uppercase leading-[.94] tracking-[-0.5px] text-[#F6F3EC]"
+        style="font-size:clamp(38px,6.4vw,86px);"
+      >
+        Diseñamos y desarrollamos <span class="text-[#FFB200]">tu página web</span>
+      </h1>
+      <p
+        data-pw-sub
+        class="mt-6 mb-0 opacity-0 translate-y-6 max-w-[620px] leading-[1.65] text-[#B8B3A8]"
+        style="font-size:clamp(17px,1.4vw,20px);"
+      >
+        Landing pages, sitios corporativos y sistemas a medida con panel de gestión. Hosting, dominio y soporte incluidos, entregados por un equipo con sede en Maracaibo, Venezuela.
+      </p>
+      <div data-pw-cta class="flex flex-wrap gap-4 items-center mt-10 opacity-0 translate-y-6">
+        <a
+          href="#onboarding"
+          data-magnetic
+          class="inline-flex items-center gap-2.5 text-[14px] font-bold tracking-[1px] uppercase text-[#0C0B0A] bg-[#FFB200] no-underline px-8 py-4 rounded-full transition-all duration-300 hover:bg-[#FFC233]"
+        >
+          Solicitar mi página web
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </a>
+        <a
+          href="#planes"
+          class="inline-flex items-center gap-2 text-[14px] font-semibold tracking-[1px] uppercase text-[#F6F3EC] no-underline py-4 px-2 border-b border-white/20 transition-colors duration-300 hover:border-[#FFB200]"
+        >
+          Ver planes y precios
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Por qué necesitas una web ============ -->
+  <section data-pw-why class="relative border-t border-white/[.08] overflow-hidden" style="padding: clamp(70px,11vh,130px) clamp(20px,5vw,64px) clamp(60px,9vh,100px);">
+    <div aria-hidden="true" class="absolute inset-0 pointer-events-none opacity-40" style="background-image:linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px); background-size: 8.33% 100%;"></div>
+
+    <div class="relative max-w-[1180px] mx-auto">
+      <h2 class="m-0 font-display font-extrabold uppercase leading-[.95] tracking-[-0.5px] text-[#F6F3EC]" style="font-size:clamp(30px,4.4vw,64px);text-wrap:balance;">
+        {whyLines.map((line) => (
+          <span class="block overflow-hidden pb-[.1em] -mb-[.1em]">
+            <span data-pw-why-line class={'block ' + (line.accent ? 'text-[#FFB200]' : '')} style="transform:translateY(110%);">{line.text}</span>
+          </span>
+        ))}
+      </h2>
+
+      <div class="grid gap-4 mt-14" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+        {whyStats.map((s) => (
+          <div data-reveal class="opacity-0 translate-y-6 flex flex-col gap-3.5 rounded-2xl border border-white/10 p-7" style="background:linear-gradient(162deg,#171510,#0F0D0B);">
+            <span class="font-display font-extrabold uppercase tracking-[2px] text-[13px] text-[#FFB200]">{s.label}</span>
+            <span class="font-display font-extrabold text-[#F6F3EC] leading-none" style="font-size:clamp(40px,4.4vw,54px);">
+              <span data-pw-count data-target={s.value}>0</span>{s.suffix}
+            </span>
+            <p class="m-0 text-[15px] leading-[1.55] text-[#9a9489]">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <div data-reveal class="opacity-0 translate-y-6 flex justify-end mt-14">
+        <div class="flex items-center gap-3 text-[12px] font-mono tracking-[.2em] uppercase text-[#6f6a61]">
+          <span>Así la construimos</span>
+          <span data-pw-scroll-hint class="block w-px h-11" style="background:linear-gradient(#FFB200, transparent); transform-origin:top center;"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Cómo lo hacemos (acto pinneado) ============ -->
+  <section data-pw-proceso class="relative border-t border-white/[.08] bg-[#0A0908] overflow-hidden">
+    <div data-pw-proceso-pin class="relative" style="height:100vh;">
+      <!-- Figuras geométricas planas de fondo (mismo lenguaje visual que el hero) -->
+      <div aria-hidden="true" class="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <svg class="proc-float-a absolute" style="top:8%;left:4%;width:clamp(90px,10vw,150px);opacity:.14;" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="90" stroke="#FFB200" stroke-width="2"/>
+          <circle cx="100" cy="100" r="60" stroke="#FFB200" stroke-width="1"/>
+        </svg>
+        <svg class="proc-float-b absolute" style="bottom:10%;right:5%;width:clamp(60px,6vw,90px);opacity:.16;" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="40,4 76,40 40,76 4,40" stroke="#FFB200" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+        <svg class="proc-float-c absolute" style="top:14%;right:10%;width:clamp(36px,3.5vw,54px);opacity:.16;" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="4" width="46" height="46" stroke="#F6F3EC" stroke-width="2" transform="rotate(18 27 27)"/>
+        </svg>
+        <svg class="proc-float-d absolute" style="bottom:16%;left:8%;width:clamp(30px,3vw,44px);opacity:.16;" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="22" y1="4" x2="22" y2="40" stroke="#F6F3EC" stroke-width="2" stroke-linecap="round"/>
+          <line x1="4" y1="22" x2="40" y2="22" stroke="#F6F3EC" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <style>
+        @keyframes procFloatA {
+          0%,100% { transform: translateY(0px) rotate(0deg); }
+          50%      { transform: translateY(-18px) rotate(6deg); }
+        }
+        @keyframes procFloatB {
+          0%,100% { transform: translateY(0px) rotate(0deg); }
+          50%      { transform: translateY(-22px) rotate(-8deg); }
+        }
+        @keyframes procFloatC {
+          0%,100% { transform: translateY(0px) rotate(18deg); }
+          50%      { transform: translateY(-14px) rotate(38deg); }
+        }
+        @keyframes procFloatD {
+          0%,100% { transform: translateY(0px) rotate(0deg); }
+          50%      { transform: translateY(-16px) rotate(14deg); }
+        }
+        .proc-float-a { animation: procFloatA 8s ease-in-out infinite; }
+        .proc-float-b { animation: procFloatB 6.5s ease-in-out infinite 0.4s; }
+        .proc-float-c { animation: procFloatC 7s ease-in-out infinite 0.8s; }
+        .proc-float-d { animation: procFloatD 7.5s ease-in-out infinite 1.2s; }
+
+        @media (prefers-reduced-motion: reduce) {
+          .proc-float-a, .proc-float-b, .proc-float-c, .proc-float-d {
+            animation: none;
+          }
+        }
+      </style>
+
+      <div class="absolute top-0 left-0 right-0 h-[2px] bg-white/[.08] z-10">
+        <div data-pw-progress class="h-full bg-[#FFB200]" style="transform-origin:left center; transform:scaleX(0);"></div>
+      </div>
+
+      <div data-pw-inner class="relative h-full flex flex-col items-center justify-center gap-8 md:gap-10" style="padding: clamp(90px,12vh,140px) 5vw clamp(50px,7vh,90px);">
+
+        <!-- Encabezado del paso (crossfade) -->
+        <div data-pw-panels class="relative w-full max-w-[820px] text-center" style="height:clamp(160px,22vh,210px);">
+          {proceso.map((step, i) => (
+            <div data-pw-panel class="absolute inset-0 flex flex-col items-center justify-center gap-4" style={i === 0 ? '' : 'opacity:0;'}>
+              <h3 class="m-0 font-display font-extrabold uppercase leading-[.95] tracking-[-0.5px] text-[#F6F3EC]" style="font-size:clamp(30px,4.4vw,58px);">{step.title}</h3>
+              <p class="m-0 max-w-[52ch] text-[16px] md:text-[17px] leading-[1.55] text-[#9a9489]">{step.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <!-- Browser mockup stage: protagonista visual -->
+        <div data-pw-stage-wrap class="relative flex items-center justify-center w-full flex-1 min-h-0">
+          <div data-pw-stage class="relative w-full rounded-xl border border-white/[.12] overflow-hidden" style="max-width:1080px;aspect-ratio:16/10.4;background:#171510;box-shadow:0 40px 90px rgba(0,0,0,.6);">
+
+            <div class="h-[42px] flex items-center gap-3.5 px-3.5 border-b border-white/[.09]" style="background:#15130F;">
+              <div class="flex gap-1.5">
+                <span class="w-[9px] h-[9px] rounded-full block bg-[#3A3835]"></span>
+                <span class="w-[9px] h-[9px] rounded-full block bg-[#3A3835]"></span>
+                <span class="w-[9px] h-[9px] rounded-full block bg-[#3A3835]"></span>
+              </div>
+              <div class="flex-1 h-[22px] rounded-md flex items-center gap-2 px-2.5 bg-[#0C0B0A] border border-white/[.07]">
+                <span data-pw-url-dot class="w-1.5 h-1.5 rounded-full block bg-[#55514B]"></span>
+                <span data-pw-url class="font-mono text-[11px] tracking-[.04em] whitespace-nowrap overflow-hidden text-ellipsis flex-1 text-[#7E7A72]">wireframe / estructura</span>
+              </div>
+            </div>
+
+            <div data-pw-canvas class="absolute bg-[#0E0D0C]" style="top:42px;left:0;width:720px;height:426px;transform-origin:top left;">
+
+              <!-- Capa 0: briefing (wireframe / notas) -->
+              <div data-pw-layer class="absolute inset-0 p-5 grid gap-4" style="grid-template-columns:1.05fr .95fr; background-image:radial-gradient(rgba(255,255,255,.055) 1px, transparent 1px); background-size:18px 18px;">
+                <div class="flex flex-col gap-3">
+                  <div data-pw-wf class="flex items-center justify-between border-b border-white/[.12] pb-2">
+                    <span class="font-display font-extrabold uppercase text-[19px] tracking-[.04em] text-[#F6F3EC]">Brief del proyecto</span>
+                    <span class="font-mono text-[9px] tracking-[.14em] text-[#6F6A62]">V1 · SESIÓN 01</span>
+                  </div>
+                  <div data-pw-wf class="flex flex-col gap-1">
+                    <span class="font-mono text-[9px] tracking-[.16em] text-[#6F6A62]">NEGOCIO</span>
+                    <span class="text-[13px] text-[#F6F3EC]">Taller de carpintería a medida</span>
+                  </div>
+                  <div data-pw-wf class="flex flex-col gap-1">
+                    <span class="font-mono text-[9px] tracking-[.16em] text-[#6F6A62]">OBJETIVO</span>
+                    <span class="text-[13px] text-[#F6F3EC]">Recibir <span class="text-[#FFB200]">10 presupuestos</span> al mes por WhatsApp</span>
+                  </div>
+                  <div data-pw-wf class="flex flex-col gap-1">
+                    <span class="font-mono text-[9px] tracking-[.16em] text-[#6F6A62]">PÚBLICO</span>
+                    <span class="text-[13px] text-[#F6F3EC]">Familias 30-55, reformas de vivienda</span>
+                  </div>
+                  <div data-pw-wf class="flex flex-col gap-1.5 mt-0.5">
+                    <span class="font-mono text-[9px] tracking-[.16em] text-[#6F6A62]">A RESOLVER</span>
+                    <span class="text-[12.5px] text-[#9a9489] flex gap-2 items-center"><span class="text-[#FFB200]">✔</span> Mostrar trabajos reales</span>
+                    <span class="text-[12.5px] text-[#9a9489] flex gap-2 items-center"><span class="text-[#FFB200]">✔</span> Precios claros, sin sorpresas</span>
+                    <span class="text-[12.5px] text-[#9a9489] flex gap-2 items-center"><span class="text-[#4E4A44]">○</span> Reseñas de clientes</span>
+                  </div>
+                </div>
+                <div class="relative">
+                  <div data-pw-wf class="absolute p-3 pb-4 text-[#0C0B0A] bg-[#FFB200] shadow-[0_10px_22px_rgba(0,0,0,.45)]" style="left:4%;top:0;width:44%;transform:rotate(-3deg);">
+                    <span class="font-display font-extrabold uppercase text-[15px] leading-[1.05] block">Confianza<br />ante todo</span>
+                    <span class="text-[10.5px] leading-[1.35] block mt-1 opacity-80">Fotos del taller + antes/después</span>
+                  </div>
+                  <div data-pw-wf class="absolute p-3 bg-[#1C1B19] border border-white/[.13] shadow-[0_10px_22px_rgba(0,0,0,.45)]" style="right:2%;top:14%;width:46%;transform:rotate(2.5deg);">
+                    <span class="font-display font-extrabold uppercase text-[15px] text-[#F6F3EC] block leading-[1.05]">Una sola<br />acción: pedir<br />presupuesto</span>
+                  </div>
+                  <div data-pw-wf class="absolute p-2.5 bg-[#F6F3EC] text-[#0C0B0A] shadow-[0_10px_22px_rgba(0,0,0,.45)]" style="left:8%;bottom:16%;width:40%;transform:rotate(1.5deg);">
+                    <span class="font-mono text-[9px] tracking-[.1em] block opacity-55">REFERENCIAS</span>
+                    <span class="text-[11.5px] leading-[1.3] block mt-1">Editorial, mucho blanco, foto grande</span>
+                  </div>
+                  <div data-pw-wf class="absolute flex gap-1.5 justify-end whitespace-nowrap" style="right:4%;bottom:4%;">
+                    <span class="border border-white/[.18] px-2 py-1 font-mono text-[9px] tracking-[.1em] text-[#C9C4BB]">ARTESANAL</span>
+                    <span class="border border-white/[.18] px-2 py-1 font-mono text-[9px] tracking-[.1em] text-[#C9C4BB]">CERCANO</span>
+                    <span class="border border-white/[.18] px-2 py-1 font-mono text-[9px] tracking-[.1em] text-[#C9C4BB]">LOCAL</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Capa 1: diseño (mockup tipo Figma) -->
+              <div data-pw-layer class="absolute inset-0 opacity-0 grid bg-[#171614]" style="grid-template-columns:44px 1fr 168px; background-image:radial-gradient(rgba(255,255,255,.05) 1px, transparent 1px); background-size:16px 16px;">
+                <div data-pw-ds class="border-r border-white/[.08] flex flex-col items-center gap-3 pt-3.5">
+                  <span class="w-4 h-4 border border-[#FFB200] block"></span>
+                  <span class="w-4 h-4 border border-white/[.22] rounded-full block"></span>
+                  <span class="w-4 h-0.5 bg-white/[.22] block mt-1.5"></span>
+                  <span class="w-3 h-3 border border-white/[.22] block mt-1.5" style="transform:rotate(45deg);"></span>
+                </div>
+
+                <div class="relative flex items-center justify-center p-6">
+                  <div data-pw-ds class="absolute top-2 left-7 font-mono text-[9px] tracking-[.14em] text-[#6F6A62]">DISEÑO.FIG · ARTBOARD DESKTOP 1440 · 100%</div>
+                  <div data-pw-ds class="relative w-full bg-[#0E0D0C] outline outline-[#FFB200]/85" style="height:76%;">
+                    <div class="absolute inset-0 p-3.5 flex flex-col gap-2 opacity-90">
+                      <div class="flex items-center justify-between">
+                        <span class="font-display font-extrabold uppercase text-[11px] tracking-[.06em] text-[#F6F3EC]">TU MARCA</span>
+                        <span class="bg-[#FFB200] text-[#0C0B0A] text-[7px] tracking-[.1em] px-2 py-1 rounded-full font-semibold">EMPEZAR</span>
+                      </div>
+                      <div class="font-display font-extrabold uppercase text-[26px] leading-[.95] text-[#F6F3EC]">Vende más<br /><span class="text-[#FFB200]">desde hoy</span></div>
+                      <div class="flex gap-2 flex-1">
+                        <div class="flex-1 border border-white/10 bg-white/[.02]"></div>
+                        <div class="flex-1 border border-white/10" style="background-image:repeating-linear-gradient(135deg, rgba(255,255,255,.07) 0 5px, transparent 5px 10px);"></div>
+                      </div>
+                    </div>
+                    <span class="absolute w-1.5 h-1.5 bg-[#FFB200] block" style="left:-3px;top:-3px;"></span>
+                    <span class="absolute w-1.5 h-1.5 bg-[#FFB200] block" style="right:-3px;top:-3px;"></span>
+                    <span class="absolute w-1.5 h-1.5 bg-[#FFB200] block" style="left:-3px;bottom:-3px;"></span>
+                    <span class="absolute w-1.5 h-1.5 bg-[#FFB200] block" style="right:-3px;bottom:-3px;"></span>
+                    <span data-pw-ds class="absolute bg-[#FFB200] text-[#0C0B0A] font-mono text-[8px] tracking-[.06em] px-1.5 py-0.5" style="left:50%;transform:translateX(-50%);bottom:-20px;">1440 × 2400</span>
+                  </div>
+                </div>
+
+                <div data-pw-ds class="border-l border-white/[.08] p-3.5 flex flex-col gap-3.5">
+                  <div class="flex flex-col gap-1.5">
+                    <span class="font-mono text-[8px] tracking-[.16em] text-[#6F6A62]">PALETA</span>
+                    <div class="flex gap-1.5">
+                      <span class="w-[22px] h-[22px] bg-[#0C0B0A] border border-white/[.18] block"></span>
+                      <span class="w-[22px] h-[22px] bg-[#FFB200] block"></span>
+                      <span class="w-[22px] h-[22px] bg-[#F6F3EC] block"></span>
+                      <span class="w-[22px] h-[22px] bg-[#9a9489] block"></span>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <span class="font-mono text-[8px] tracking-[.16em] text-[#6F6A62]">TIPOGRAFÍA</span>
+                    <span class="font-display font-extrabold uppercase text-[17px] text-[#F6F3EC] leading-none">Saira Cond 800</span>
+                    <span class="text-[10px] text-[#9a9489]">Hanken Regular · 16/24</span>
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <span class="font-mono text-[8px] tracking-[.16em] text-[#6F6A62]">CAPAS</span>
+                    <span class="font-mono text-[9px] text-[#C9C4BB]">▸ Hero</span>
+                    <span class="font-mono text-[9px] text-[#FFB200]">▾ CTA / Empezar</span>
+                    <span class="font-mono text-[9px] text-[#C9C4BB]">▸ Servicios</span>
+                    <span class="font-mono text-[9px] text-[#C9C4BB]">▸ Contacto</span>
+                  </div>
+                  <div class="mt-auto flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#FFB200] block"></span>
+                    <span class="font-mono text-[8px] tracking-[.1em] text-[#9a9489]">REVISIÓN 2 DE 2</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Capa 2: desarrollo (editor de código) -->
+              <div data-pw-layer class="absolute inset-0 opacity-0 bg-[#0A0908] p-5 font-mono text-[11.5px] leading-[1.85] text-[#8C877E] overflow-hidden">
+                <div data-pw-code class="opacity-0"><span class="text-[#4E4A44]">01</span>  <span class="text-[#FFB200]">---</span></div>
+                <div data-pw-code class="opacity-0"><span class="text-[#4E4A44]">02</span>  <span class="text-[#C9C4BB]">import</span> Hero <span class="text-[#C9C4BB]">from</span> <span class="text-[#FFB200]">'@/components/Hero.astro'</span></div>
+                <div data-pw-code class="opacity-0"><span class="text-[#4E4A44]">03</span>  <span class="text-[#C9C4BB]">import</span> {'{'} servicios {'}'} <span class="text-[#C9C4BB]">from</span> <span class="text-[#FFB200]">'@/data/site'</span></div>
+                <div data-pw-code class="opacity-0"><span class="text-[#4E4A44]">04</span>  <span class="text-[#FFB200]">---</span></div>
+                <div data-pw-code class="opacity-0"><span class="text-[#4E4A44]">05</span>  <span class="text-[#6F6A62]">&lt;Layout</span> title=<span class="text-[#FFB200]">"Tu negocio"</span><span class="text-[#6F6A62]">&gt;</span></div>
+                <div data-pw-code class="opacity-0"><span class="text-[#4E4A44]">06</span>    <span class="text-[#6F6A62]">&lt;Hero</span> cta=<span class="text-[#FFB200]">"Empezar"</span> <span class="text-[#6F6A62]">/&gt;</span></div>
+                <div data-pw-code class="opacity-0"><span class="text-[#4E4A44]">07</span>    <span class="text-[#6F6A62]">&lt;Servicios</span> items={'{servicios}'} <span class="text-[#6F6A62]">/&gt;</span></div>
+                <div data-pw-code class="opacity-0"><span class="text-[#4E4A44]">08</span>    <span class="text-[#6F6A62]">&lt;Contacto</span> whatsapp <span class="text-[#6F6A62]">/&gt;</span></div>
+                <div data-pw-code class="opacity-0"><span class="text-[#4E4A44]">09</span>  <span class="text-[#6F6A62]">&lt;/Layout&gt;</span></div>
+                <div data-pw-code class="opacity-0 mt-2.5 text-[#5E5A53]"><span class="text-[#4E4A44]">10</span>  <span class="text-[#7FBF6A]">✔</span> build 0.4s · 12 páginas · 98/100 performance</div>
+                <div data-pw-scanline class="absolute left-0 right-0 top-0 h-[90px] pointer-events-none" style="background:linear-gradient(rgba(255,178,0,0), rgba(255,178,0,.07), rgba(255,178,0,0));"></div>
+              </div>
+
+              <!-- Capa 3: entrega (sitio en vivo, con paleta e identidad propias del cliente) -->
+              <div data-pw-layer class="absolute inset-0 opacity-0 bg-[#231810]">
+                <div class="absolute inset-0 flex flex-col">
+                  <div class="flex items-center justify-between px-5 py-4">
+                    <div class="font-display font-extrabold text-[15px] tracking-[.06em] text-[#F1E6D8]">TALLER ROBLE</div>
+                    <div class="flex gap-4 items-center">
+                      <span class="text-[10px] tracking-[.16em] text-[#B8A290]">TRABAJOS</span>
+                      <span class="text-[10px] tracking-[.16em] text-[#B8A290]">CONTACTO</span>
+                      <span class="bg-[#C97A3D] text-[#231810] font-semibold text-[10px] tracking-[.12em] px-3 py-1.5 rounded-full">COTIZAR</span>
+                    </div>
+                  </div>
+                  <div class="flex-1 grid items-center" style="grid-template-columns:1.15fr .85fr;">
+                    <div class="px-5 flex flex-col gap-3">
+                      <div class="font-display font-extrabold uppercase text-[38px] leading-[.93] text-[#F1E6D8]">Muebles hechos<br /><span class="text-[#C97A3D]">a tu medida</span></div>
+                      <div class="text-[11px] text-[#B8A290] max-w-[30ch] leading-[1.5]">Diseño artesanal en madera maciza, presupuestos claros y contacto directo por WhatsApp.</div>
+                      <div class="flex gap-2 mt-0.5 items-center">
+                        <span class="bg-[#C97A3D] text-[#231810] font-semibold text-[10px] tracking-[.1em] px-4 py-2 rounded-full">PEDIR PRESUPUESTO</span>
+                        <span class="border border-[#F1E6D8]/20 text-[10px] tracking-[.1em] px-3.5 py-2 rounded-full text-[#D9CBBB]">VER TRABAJOS</span>
+                      </div>
+                    </div>
+                    <div class="mr-5 flex flex-col gap-2.5">
+                      <div class="h-24 rounded-lg border border-[#F1E6D8]/10 flex items-end justify-center pb-2" style="background-image:repeating-linear-gradient(135deg, rgba(201,122,61,.16) 0 6px, transparent 6px 12px);">
+                        <span class="font-mono text-[8px] tracking-[.14em] text-[#8C7568]">FOTO DEL TALLER</span>
+                      </div>
+                      <div class="border border-[#F1E6D8]/[.12] rounded-lg p-3 flex flex-col gap-1.5 bg-[#2E2015]">
+                        <span class="font-display font-extrabold uppercase text-[13px] tracking-[.03em] text-[#F1E6D8]">Pide tu presupuesto</span>
+                        <span class="h-5 border border-[#F1E6D8]/[.12] rounded flex items-center px-1.5 text-[8.5px] text-[#8C7568]">Nombre</span>
+                        <span class="h-5 border border-[#F1E6D8]/[.12] rounded flex items-center px-1.5 text-[8.5px] text-[#8C7568]">Teléfono / WhatsApp</span>
+                        <span class="bg-[#C97A3D] text-[#231810] font-semibold text-[9px] tracking-[.1em] py-1.5 rounded-full text-center">ENVIAR</span>
+                        <span class="font-mono text-[7.5px] tracking-[.06em] text-[#8C7568] text-center">RESPUESTA EN MENOS DE 24 H</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div data-pw-chip class="absolute opacity-0 rounded-full px-3.5 py-2 flex items-center gap-2 font-mono text-[10px] tracking-[.08em] text-[#F1E6D8] border border-[#F1E6D8]/[.12]" style="left:18px;bottom:18px;background:rgba(35,24,16,.92);">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#7FBF6A] block"></span>ONLINE
+                </div>
+                <div data-pw-chip class="absolute opacity-0 rounded-full px-3.5 py-2 font-mono text-[10px] tracking-[.08em] text-[#F1E6D8] border border-[#F1E6D8]/[.12]" style="left:50%;transform:translateX(-50%);bottom:18px;background:rgba(35,24,16,.92);">0.4s de carga</div>
+                <div data-pw-chip class="absolute opacity-0 rounded-full px-3.5 py-2 font-mono text-[10px] tracking-[.08em] font-medium text-[#231810] bg-[#C97A3D]" style="right:18px;bottom:18px;">+1 cliente</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Indicador de pasos (horizontal) -->
+        <div data-pw-steps-nav class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+          {proceso.map((step, i) => (
+            <div data-pw-step-nav-item class="flex items-center gap-2" style={i === 0 ? 'opacity:1;' : 'opacity:.35;'}>
+              <span class="font-display font-extrabold text-[14px] text-[#FFB200]">0{i + 1}</span>
+              <span class="font-mono text-[11px] tracking-[.2em] uppercase text-[#F6F3EC]">{step.title}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <style>
+      @keyframes pwScan {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(400%); }
+      }
+      [data-pw-scanline] { animation: pwScan 3.2s linear infinite; }
+
+      @media (prefers-reduced-motion: reduce) {
+        [data-pw-scanline] { animation: none; }
+      }
+    </style>
+  </section>
+
+  <section id="planes" class="relative border-t border-white/[.08] bg-[#0A0908]" style="padding: clamp(70px,10vh,120px) clamp(20px,5vw,64px);">
+    <div class="max-w-[1200px] mx-auto">
+      <h2 class="m-0 font-display font-extrabold uppercase leading-[.95] tracking-[-0.5px] text-[#F6F3EC]" style="font-size:clamp(30px,4vw,52px);">
+        Planes de <span class="text-[#FFB200]">páginas web</span>
+      </h2>
+      <p class="mt-4 mb-0 max-w-[560px] text-[17px] leading-[1.6] text-[#9a9489]">
+        Elige el plan según tu proyecto. Todos incluyen hosting, dominio, SSL y respaldos periódicos.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12" style="perspective:1200px;">
+        {paginasWebPlanes.map((p) => (
+          <article
+            data-pw-plan-card
+            class={
+              'relative flex flex-col rounded-2xl p-7 border opacity-0 ' +
+              (p.destacado ? 'border-[#FFB200] md:-mt-2' : 'border-white/10')
+            }
+            style="background:linear-gradient(162deg,#171510,#0F0D0B);will-change:transform;"
+          >
+            {p.destacado && (
+              <span class="absolute -top-3 left-7 text-[11px] font-bold tracking-[1.2px] uppercase text-[#0C0B0A] bg-[#FFB200] px-3 py-1 rounded-full">
+                Recomendado
+              </span>
+            )}
+            <h3 class="m-0 mt-1 font-display font-bold uppercase text-[22px] text-[#F6F3EC]">{p.nombre}</h3>
+            <p class="m-0 mt-2 text-[15px] leading-[1.5] text-[#9a9489]">{p.resumen}</p>
+
+            <div class="mt-5 flex items-baseline gap-2">
+              <span class="font-display font-extrabold text-[#FFB200]" style="font-size:clamp(30px,3vw,38px);">{p.precio}</span>
+              <span class="text-[12px] text-[#9a9489]">{p.precioNota}</span>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mt-4">
+              <span class="text-[12px] font-semibold text-[#F6F3EC] border border-white/[.18] rounded-full px-3 py-1">⏱ {p.entrega}</span>
+              <span class="text-[12px] font-semibold text-[#F6F3EC] border border-white/[.18] rounded-full px-3 py-1">{p.mensualidad}</span>
+            </div>
+
+            <ul class="m-0 mt-5 mb-0 flex flex-col gap-2.5 list-none p-0 flex-1">
+              {p.features.map((f) => (
+                <li class="flex items-start gap-2 text-[14px] leading-[1.5] text-[#B8B3A8]">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFB200" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5">
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+
+            <p class="m-0 mt-5 text-[12px] leading-[1.5] text-[#9a9489]">
+              <span class="font-semibold text-[#F6F3EC]">Ideal para:</span> {p.idealPara}
+            </p>
+
+            <a
+              href="#onboarding"
+              data-plan={p.nombre}
+              class={
+                'mt-6 inline-flex items-center justify-center gap-2 text-[13px] font-bold tracking-[1px] uppercase no-underline px-6 py-3.5 rounded-full transition-colors duration-300 ' +
+                (p.destacado
+                  ? 'text-[#0C0B0A] bg-[#FFB200] hover:bg-[#FFC233]'
+                  : 'text-[#F6F3EC] bg-transparent border border-white/20 hover:bg-white/10')
+              }
+            >
+              Lo quiero
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll<HTMLAnchorElement>('a[data-plan]').forEach((el) => {
+      el.addEventListener('click', () => {
+        window.dispatchEvent(new CustomEvent('mdn:plan-selected', { detail: el.dataset.plan }));
+      });
+    });
+  </script>
+
+  <section class="relative border-t border-white/[.08]" style="padding: clamp(70px,10vh,120px) clamp(20px,5vw,64px);">
+    <div class="max-w-[860px] mx-auto">
+      <h2 class="m-0 font-display font-extrabold uppercase leading-[.95] tracking-[-0.5px] text-[#F6F3EC]" style="font-size:clamp(28px,3.6vw,44px);">
+        Preguntas <span class="text-[#FFB200]">frecuentes</span>
+      </h2>
+      <div class="mt-10 flex flex-col gap-4">
+        {faqs.map((f) => (
+          <details data-accordion data-reveal class="group opacity-0 translate-y-6 rounded-2xl border border-white/10 bg-white/[.02] p-6" style="overflow:hidden;">
+            <summary class="cursor-pointer list-none font-display font-bold text-[17px] text-[#F6F3EC] flex items-center justify-between gap-4">
+              {f.q}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFB200" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 transition-transform duration-300 group-open:rotate-45">
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+            </summary>
+            <p class="faq-content m-0 mt-4 text-[15px] leading-[1.65] text-[#B8B3A8]">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <script>
+    class Accordion {
+      el: HTMLDetailsElement;
+      summary: HTMLElement;
+      content: HTMLElement;
+      animation: Animation | null = null;
+      isClosing = false;
+      isExpanding = false;
+
+      constructor(el: HTMLDetailsElement) {
+        this.el = el;
+        this.summary = el.querySelector('summary')!;
+        this.content = el.querySelector('.faq-content')!;
+        this.summary.addEventListener('click', (e) => this.onClick(e));
+      }
+
+      onClick(e: Event) {
+        e.preventDefault();
+        this.el.style.overflow = 'hidden';
+        if (this.isClosing || !this.el.open) {
+          this.open();
+        } else if (this.isExpanding || this.el.open) {
+          this.shrink();
+        }
+      }
+
+      shrink() {
+        this.isClosing = true;
+        const startHeight = `${this.el.offsetHeight}px`;
+        const cs = getComputedStyle(this.el);
+        const pad = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
+        const endHeight = `${this.summary.offsetHeight + pad}px`;
+        this.animation?.cancel();
+        this.animation = this.el.animate({ height: [startHeight, endHeight] }, { duration: 250, easing: 'ease-out' });
+        this.animation.onfinish = () => this.onAnimationFinish(false);
+        this.animation.oncancel = () => { this.isClosing = false; };
+      }
+
+      open() {
+        document.querySelectorAll<HTMLDetailsElement>('details[data-accordion]').forEach((d) => {
+          if (d !== this.el && d.open) (d as any)._accordion?.shrink();
+        });
+        this.el.style.height = `${this.el.offsetHeight}px`;
+        this.el.open = true;
+        window.requestAnimationFrame(() => this.expand());
+      }
+
+      expand() {
+        this.isExpanding = true;
+        const startHeight = `${this.el.offsetHeight}px`;
+        const endHeight = `${this.el.scrollHeight}px`;
+        this.animation?.cancel();
+        this.animation = this.el.animate({ height: [startHeight, endHeight] }, { duration: 250, easing: 'ease-out' });
+        this.animation.onfinish = () => this.onAnimationFinish(true);
+        this.animation.oncancel = () => { this.isExpanding = false; };
+      }
+
+      onAnimationFinish(open: boolean) {
+        this.el.open = open;
+        this.animation = null;
+        this.isClosing = false;
+        this.isExpanding = false;
+        this.el.style.height = '';
+        this.el.style.overflow = '';
+      }
+    }
+
+    document.querySelectorAll<HTMLDetailsElement>('details[data-accordion]').forEach((el) => {
+      (el as any)._accordion = new Accordion(el);
+    });
+  </script>
+
+  <Onboarding />
+  <Footer />
+</Base>

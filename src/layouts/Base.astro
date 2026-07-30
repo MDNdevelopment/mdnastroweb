@@ -2,11 +2,16 @@
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
 }
 const {
   title = 'MDN Publicidad Studio — Fortalecemos tu Presencia Digital',
-  description = 'Gestionamos tus redes, tú administras el resultado. Un equipo especializado que convierte tu marca en presencia digital medible. Venezuela · Chile · Miami.',
+  description = 'Estudio creativo de publicidad: diseño y desarrollo de páginas web, gestión de redes sociales y branding. Venezuela · Chile · Miami.',
+  image = '/assets/logo.webp',
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImageURL = new URL(image, Astro.site);
 ---
 <!doctype html>
 <html lang="es">
@@ -15,29 +20,55 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalURL} />
+
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_VE" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content="MDN Publicidad Studio" />
+    <meta property="og:image" content={socialImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageURL} />
+
     <meta name="theme-color" content="#0C0B0A" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
 
     <!-- Preconnect for Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
 
-    <!-- JSON-LD Organization -->
+    <!-- Cloudflare Turnstile (captcha del formulario de onboarding) -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+    <!-- JSON-LD: ProfessionalService (Organization) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
+        "@type": "ProfessionalService",
         "name": "MDN Publicidad Studio",
         "url": "https://mdnpublicidad.com",
         "logo": "https://mdnpublicidad.com/assets/mdn-mark.webp",
+        "image": "https://mdnpublicidad.com/assets/logo.webp",
+        "sameAs": [
+          "https://www.instagram.com/mdnpublicidad",
+          "https://www.tiktok.com/@mdnpublicidad",
+          "https://www.linkedin.com/company/mdnpublicidad"
+        ],
         "contactPoint": {
           "@type": "ContactPoint",
           "telephone": "+1-786-450-4876",
@@ -48,13 +79,63 @@ const {
           { "@type": "PostalAddress", "addressLocality": "Maracaibo", "addressCountry": "VE" },
           { "@type": "PostalAddress", "addressLocality": "Santiago", "addressCountry": "CL" },
           { "@type": "PostalAddress", "addressLocality": "Miami", "addressCountry": "US" }
-        ]
+        ],
+        "areaServed": ["Venezuela", "Chile", "Estados Unidos"]
+      }
+    </script>
+
+    <!-- JSON-LD: WebSite -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "MDN Publicidad Studio",
+        "url": "https://mdnpublicidad.com"
+      }
+    </script>
+
+    <!-- JSON-LD: Service — Diseño y desarrollo de páginas web -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Diseño y desarrollo de páginas web",
+        "name": "Páginas web — MDN Publicidad",
+        "description": "Diseño y desarrollo de páginas web: landing pages, sitios corporativos y sistemas a medida con hosting, dominio y soporte incluidos.",
+        "provider": { "@type": "ProfessionalService", "name": "MDN Publicidad Studio", "url": "https://mdnpublicidad.com" },
+        "areaServed": ["Venezuela", "Chile", "Estados Unidos"],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Planes de páginas web",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": { "@type": "Service", "name": "Landing", "description": "Una sola página, ideal para captar contactos. Entrega en 3 días." },
+              "price": "600",
+              "priceCurrency": "USD"
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": { "@type": "Service", "name": "Web corporativa", "description": "Inicio + 4 secciones para mostrar tu empresa. Entrega en 15 días." },
+              "price": "1000",
+              "priceCurrency": "USD"
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": { "@type": "Service", "name": "Sistema", "description": "Web + panel de control para gestionar contenido, reservas o usuarios. Entrega en 30 días." },
+              "price": "2500",
+              "priceCurrency": "USD"
+            }
+          ]
+        }
       }
     </script>
 
     <style is:global>
       @import "../styles/global.css";
     </style>
+
+    <slot name="head" />
   </head>
   <body>
     <div id="mdn-site" class="relative bg-[#0C0B0A] text-[#F6F3EC] overflow-x-clip">

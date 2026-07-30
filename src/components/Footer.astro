@@ -28,10 +28,6 @@ const socialLinks: Record<string, string> = {
         <p class="mt-5 mb-6 max-w-[300px] text-[17px] leading-[1.65] text-[#9a9489]">
           Estudio creativo de marketing. Convertimos marcas en presencia digital medible, con alcance local, nacional e internacional.
         </p>
-        <div class="inline-flex items-center gap-2 border border-white/[.14] rounded-full px-3.5 py-1.5">
-          <span class="font-display font-extrabold text-[15px] text-[#FFB200] bg-[#0C0B0A] px-1.5 py-0.5 rounded-[5px]">MDN</span>
-          <span class="font-display font-bold text-[15px] tracking-[1px] text-[#F6F3EC]">Academy</span>
-        </div>
       </div>
 
       <!-- Locations column -->
@@ -53,7 +49,7 @@ const socialLinks: Record<string, string> = {
             },
           ].map(loc => (
             <div
-              class="flex items-center gap-3.5 border border-white/10 rounded-[14px] bg-white/[.02] transition-all duration-250 cursor-default hover:border-[rgba(255,178,0,.45)] hover:translate-x-1"
+              class="flex items-center gap-3.5 border border-white/10 rounded-[14px] bg-white/[.02]"
               style="padding:11px 14px;"
             >
               <svg width="30" height="30" viewBox="0 0 28 28" style="flex:0 0 auto;" set:html={loc.flag} />

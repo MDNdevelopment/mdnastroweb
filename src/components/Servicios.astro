@@ -11,14 +11,14 @@ const getServiceImage = (filename?: string) =>
   data-svc-section
   class="relative border-t border-white/[.08] bg-[#0A0908]"
 >
-  <div data-svc-pin class="h-screen overflow-hidden flex items-center">
+  <div data-svc-pin class="h-screen md:overflow-hidden flex items-center">
     <div
       data-svc-track
-      class="flex items-center will-change-transform"
+      class="flex items-center will-change-transform overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none"
       style="gap:clamp(20px,2.4vw,38px);padding:0 clamp(20px,5vw,64px);"
     >
       <!-- Intro slide -->
-      <div style="flex:0 0 auto;width:min(80vw,440px);height:66vh;min-height:430px;display:flex;flex-direction:column;justify-content:center;padding-right:clamp(10px,2vw,30px);">
+      <div class="snap-center md:snap-align-none" style="flex:0 0 auto;width:min(80vw,440px);height:66vh;min-height:430px;display:flex;flex-direction:column;justify-content:center;padding-right:clamp(10px,2vw,30px);">
         <h2 class="mt-3.5 mb-0 font-display font-extrabold uppercase leading-[.95] tracking-[-0.5px] text-[#F6F3EC]" style="font-size:clamp(34px,4.4vw,60px);">
           Nuestros <span class="text-[#FFB200]">servicios</span>
         </h2>
@@ -38,13 +38,13 @@ const getServiceImage = (filename?: string) =>
         const img = getServiceImage(s.image);
         return (
           <div
-            class="svc-panel relative flex-none flex flex-col overflow-hidden rounded-[26px] border border-white/10"
+            class="svc-panel snap-center md:snap-align-none relative flex-none flex flex-col overflow-hidden rounded-[26px] border border-white/10"
             style={`width:min(84vw,400px);height:66vh;min-height:430px;background:linear-gradient(162deg,#171510,#0F0D0B);padding:clamp(28px,3vw,44px);`}
           >
             {img && (
               <Image
                 src={img}
-                alt=""
+                alt={s.title === 'Plataformas y proyectos web' ? 'Diseño y desarrollo de páginas web — MDN Publicidad' : ''}
                 class="absolute inset-0 h-full w-full object-cover"
                 widths={[400, 800]}
                 sizes="(min-width: 768px) 400px, 84vw"
@@ -57,13 +57,29 @@ const getServiceImage = (filename?: string) =>
             <div class="relative" style="margin-top:clamp(130px,18vh,210px);">
               <h3 class="m-0 mb-4 font-display font-bold uppercase leading-none tracking-[.3px] text-[#F6F3EC]" style="font-size:clamp(26px,2.7vw,38px);">{s.title}</h3>
               <p class="m-0 text-[17px] leading-[1.65] text-[#B8B3A8]">{s.desc}</p>
+              {s.title === 'Plataformas y proyectos web' && (
+                <div class="relative mt-5">
+                  <p class="sr-only">
+                    Planes de páginas web desde $600: Landing, Web corporativa y Sistema a medida — con hosting, dominio y soporte incluidos.
+                  </p>
+                  <a
+                    href="/paginas-web/"
+                    class="relative z-10 inline-flex items-center gap-2.5 text-[14px] font-bold tracking-[1px] uppercase text-[#0C0B0A] bg-[#FFB200] no-underline px-8 py-4 rounded-full transition-colors duration-300 hover:bg-[#FFC233]"
+                  >
+                    Ver opciones
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M5 12h14M13 6l6 6-6 6"/>
+                    </svg>
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         );
       })}
 
       <!-- End CTA slide -->
-      <div style="flex:0 0 auto;width:min(72vw,380px);height:66vh;min-height:430px;display:flex;flex-direction:column;justify-content:center;gap:26px;padding-left:clamp(6px,1.5vw,24px);">
+      <div class="snap-center md:snap-align-none" style="flex:0 0 auto;width:min(72vw,380px);height:66vh;min-height:430px;display:flex;flex-direction:column;justify-content:center;gap:26px;padding-left:clamp(6px,1.5vw,24px);">
         <h3 class="m-0 font-display font-extrabold uppercase leading-[.98] tracking-[-0.4px] text-[#F6F3EC]" style="font-size:clamp(30px,3.6vw,50px);">
           ¿Listo para <span class="text-[#FFB200]">construir</span> tu marca?
         </h3>
