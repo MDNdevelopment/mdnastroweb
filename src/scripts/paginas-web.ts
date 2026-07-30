@@ -44,25 +44,18 @@ function initHero(reduced: boolean) {
   }
 }
 
-// ---- Por qué: headline línea por línea + tarjetas de estadística con conteo ----
+// ---- Por qué: tarjetas de estadística con conteo ----
 function initWhy(reduced: boolean) {
   const section = document.querySelector<HTMLElement>('[data-pw-why]');
-  const lines = Array.from(document.querySelectorAll<HTMLElement>('[data-pw-why-line]'));
   const counts = Array.from(document.querySelectorAll<HTMLElement>('[data-pw-count]'));
   const hint = document.querySelector<HTMLElement>('[data-pw-scroll-hint]');
   if (!section) return;
 
   if (reduced) {
-    gsap.set(lines, { y: 0 });
     counts.forEach((el) => {
       el.textContent = el.dataset.target ?? '0';
     });
     return;
-  }
-
-  if (lines.length) {
-    gsap.timeline({ scrollTrigger: { trigger: section, start: 'top 85%', once: true } })
-      .to(lines, { y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08 });
   }
 
   counts.forEach((el) => {

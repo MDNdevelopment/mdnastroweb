@@ -34,7 +34,7 @@ interface Step2 {
 }
 
 const INPUT_BASE =
-  'w-full bg-[#0C0B0A] border border-white/[.14] rounded-xl px-4 py-3.5 text-[#F6F3EC] text-[15px] font-sans outline-none transition-all duration-250 focus:border-[#FFB200] focus:bg-[#100E0B] placeholder:text-[#6f6a61]';
+  'w-full bg-[#0C0B0A] border border-white/[.14] rounded-xl px-4 py-3.5 text-[#F6F3EC] text-[16px] font-sans outline-none transition-all duration-250 focus:border-[#FFB200] focus:bg-[#100E0B] placeholder:text-[#6f6a61]';
 
 const LABEL_BASE = 'text-[12px] font-semibold tracking-[1.4px] uppercase text-[#9a9489]';
 

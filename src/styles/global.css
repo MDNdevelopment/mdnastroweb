@@ -13,9 +13,9 @@
   --color-mdn-yellow-hover: #FFC233;
   --color-mdn-fill-idle: #272420;
 
-  --font-display: "Saira Condensed", sans-serif;
-  --font-sans: "Hanken Grotesk", sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-display: var(--font-display-src), "Saira Condensed", sans-serif;
+  --font-sans: var(--font-sans-src), "Hanken Grotesk", sans-serif;
+  --font-mono: var(--font-mono-src), "JetBrains Mono", ui-monospace, monospace;
 }
 
 * {
@@ -29,7 +29,7 @@ html {
 body {
   margin: 0;
   background: #0C0B0A;
-  font-family: "Hanken Grotesk", sans-serif;
+  font-family: var(--font-sans);
 }
 
 ::selection {

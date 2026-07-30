@@ -52,13 +52,6 @@ const proceso = [
   { title: 'Entrega', desc: 'Publicamos, medimos y te enseñamos a moverla. Tu web queda online, indexada y lista para recibir clientes desde el primer día.' },
 ];
 
-const whyLines = [
-  { text: 'Tu cliente ya te está', accent: false },
-  { text: 'buscando ahora mismo.', accent: false },
-  { text: 'Si no te encuentra,', accent: true },
-  { text: 'encuentra a tu competencia.', accent: true },
-];
-
 const whyStats = [
   { label: 'Credibilidad', value: 75, suffix: '%', desc: 'de la gente juzga si confía en tu negocio solo por cómo se ve tu web.' },
   { label: 'Atención', value: 3, suffix: 's', desc: 'es lo que tarda un visitante en decidir si se queda o se va.' },
@@ -161,7 +154,7 @@ const whyStats = [
       }
     </style>
 
-    <div class="relative max-w-[1000px] mx-auto w-full">
+    <div class="relative max-w-[1280px] mx-auto w-full">
       <h1
         data-pw-h1
         class="m-0 opacity-0 translate-y-6 font-display font-extrabold uppercase leading-[.94] tracking-[-0.5px] text-[#F6F3EC]"
@@ -172,7 +165,7 @@ const whyStats = [
       <p
         data-pw-sub
         class="mt-6 mb-0 opacity-0 translate-y-6 max-w-[620px] leading-[1.65] text-[#B8B3A8]"
-        style="font-size:clamp(17px,1.4vw,20px);"
+        style="font-size:clamp(18px,1.5vw,22px);"
       >
         Landing pages, sitios corporativos y sistemas a medida con panel de gestión. Hosting, dominio y soporte incluidos, entregados por un equipo con sede en Maracaibo, Venezuela.
       </p>
@@ -201,23 +194,27 @@ const whyStats = [
   <section data-pw-why class="relative border-t border-white/[.08] overflow-hidden" style="padding: clamp(70px,11vh,130px) clamp(20px,5vw,64px) clamp(60px,9vh,100px);">
     <div aria-hidden="true" class="absolute inset-0 pointer-events-none opacity-40" style="background-image:linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px); background-size: 8.33% 100%;"></div>
 
-    <div class="relative max-w-[1180px] mx-auto">
-      <h2 class="m-0 font-display font-extrabold uppercase leading-[.95] tracking-[-0.5px] text-[#F6F3EC]" style="font-size:clamp(30px,4.4vw,64px);text-wrap:balance;">
-        {whyLines.map((line) => (
-          <span class="block overflow-hidden pb-[.1em] -mb-[.1em]">
-            <span data-pw-why-line class={'block ' + (line.accent ? 'text-[#FFB200]' : '')} style="transform:translateY(110%);">{line.text}</span>
-          </span>
-        ))}
-      </h2>
+    <div class="relative max-w-[1280px] mx-auto">
+      <div class="max-w-[640px]">
+        <h2
+          data-reveal
+          class="m-0 opacity-0 translate-y-6 font-display font-semibold text-[#F6F3EC]"
+          style="font-size:clamp(28px,3.6vw,48px);line-height:1.1;letter-spacing:-0.3px;text-wrap:balance;"
+        >
+          Tu cliente ya te está buscando ahora mismo.
+          <span class="text-[#B8B3A8] font-normal"> Si no te encuentra, </span>
+          <span class="text-[#FFB200]">encuentra a tu competencia.</span>
+        </h2>
+      </div>
 
       <div class="grid gap-4 mt-14" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
         {whyStats.map((s) => (
           <div data-reveal class="opacity-0 translate-y-6 flex flex-col gap-3.5 rounded-2xl border border-white/10 p-7" style="background:linear-gradient(162deg,#171510,#0F0D0B);">
-            <span class="font-display font-extrabold uppercase tracking-[2px] text-[13px] text-[#FFB200]">{s.label}</span>
+            <span class="font-display font-extrabold uppercase tracking-[2px] text-[16px] text-[#FFB200]">{s.label}</span>
             <span class="font-display font-extrabold text-[#F6F3EC] leading-none" style="font-size:clamp(40px,4.4vw,54px);">
               <span data-pw-count data-target={s.value}>0</span>{s.suffix}
             </span>
-            <p class="m-0 text-[15px] leading-[1.55] text-[#9a9489]">{s.desc}</p>
+            <p class="m-0 text-[17px] leading-[1.55] text-[#9a9489]">{s.desc}</p>
           </div>
         ))}
       </div>
@@ -285,20 +282,33 @@ const whyStats = [
         <div data-pw-progress class="h-full bg-[#FFB200]" style="transform-origin:left center; transform:scaleX(0);"></div>
       </div>
 
-      <div data-pw-inner class="relative h-full flex flex-col items-center justify-center gap-8 md:gap-10" style="padding: clamp(90px,12vh,140px) 5vw clamp(50px,7vh,90px);">
+      <div data-pw-inner class="relative h-full max-w-[1280px] mx-auto flex flex-col items-center justify-start md:grid md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.25fr)] md:items-center gap-4 md:gap-12" style="padding: clamp(90px,12vh,140px) clamp(20px,5vw,64px) clamp(50px,7vh,90px);">
 
-        <!-- Encabezado del paso (crossfade) -->
-        <div data-pw-panels class="relative w-full max-w-[820px] text-center" style="height:clamp(160px,22vh,210px);">
-          {proceso.map((step, i) => (
-            <div data-pw-panel class="absolute inset-0 flex flex-col items-center justify-center gap-4" style={i === 0 ? '' : 'opacity:0;'}>
-              <h3 class="m-0 font-display font-extrabold uppercase leading-[.95] tracking-[-0.5px] text-[#F6F3EC]" style="font-size:clamp(30px,4.4vw,58px);">{step.title}</h3>
-              <p class="m-0 max-w-[52ch] text-[16px] md:text-[17px] leading-[1.55] text-[#9a9489]">{step.desc}</p>
-            </div>
-          ))}
+        <!-- Columna izquierda: paso activo (texto) + índice de pasos -->
+        <div class="flex flex-col items-center md:items-start gap-8 md:gap-10 w-full">
+          <!-- Encabezado del paso (crossfade) -->
+          <div data-pw-panels class="relative w-full max-w-[820px] text-center md:text-left" style="height:clamp(160px,22vh,210px);">
+            {proceso.map((step, i) => (
+              <div data-pw-panel class="absolute inset-0 flex flex-col items-center md:items-start justify-center gap-4" style={i === 0 ? '' : 'opacity:0;'}>
+                <h3 class="m-0 font-display font-extrabold uppercase leading-[.95] tracking-[-0.5px] text-[#F6F3EC]" style="font-size:clamp(30px,4.4vw,58px);">{step.title}</h3>
+                <p class="m-0 max-w-[52ch] text-[17px] md:text-[18px] leading-[1.55] text-[#9a9489]">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <!-- Indicador de pasos -->
+          <div data-pw-steps-nav class="flex flex-wrap items-center justify-center md:flex-col md:items-start gap-x-10 gap-y-4 md:gap-y-5">
+            {proceso.map((step, i) => (
+              <div data-pw-step-nav-item class="flex items-center gap-3" style={i === 0 ? 'opacity:1;' : 'opacity:.35;'}>
+                <span class="font-display font-extrabold text-[20px] text-[#FFB200]">0{i + 1}</span>
+                <span class="font-mono text-[14px] tracking-[.2em] uppercase text-[#F6F3EC]">{step.title}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
         <!-- Browser mockup stage: protagonista visual -->
-        <div data-pw-stage-wrap class="relative flex items-center justify-center w-full flex-1 min-h-0">
+        <div data-pw-stage-wrap class="relative flex items-center justify-center w-full md:h-full md:flex-1 md:min-h-0">
           <div data-pw-stage class="relative w-full rounded-xl border border-white/[.12] overflow-hidden" style="max-width:1080px;aspect-ratio:16/10.4;background:#171510;box-shadow:0 40px 90px rgba(0,0,0,.6);">
 
             <div class="h-[42px] flex items-center gap-3.5 px-3.5 border-b border-white/[.09]" style="background:#15130F;">
@@ -362,9 +372,9 @@ const whyStats = [
               </div>
 
               <!-- Capa 1: diseño (mockup tipo Figma) -->
-              <div data-pw-layer class="absolute inset-0 opacity-0 grid bg-[#171614]" style="grid-template-columns:44px 1fr 168px; background-image:radial-gradient(rgba(255,255,255,.05) 1px, transparent 1px); background-size:16px 16px;">
+              <div data-pw-layer class="absolute inset-0 opacity-0 grid bg-[#161513]" style="grid-template-columns:44px 1fr 168px; background-image:radial-gradient(rgba(255,255,255,.05) 1px, transparent 1px); background-size:16px 16px;">
                 <div data-pw-ds class="border-r border-white/[.08] flex flex-col items-center gap-3 pt-3.5">
-                  <span class="w-4 h-4 border border-[#FFB200] block"></span>
+                  <span class="w-4 h-4 border border-white/70 block"></span>
                   <span class="w-4 h-4 border border-white/[.22] rounded-full block"></span>
                   <span class="w-4 h-0.5 bg-white/[.22] block mt-1.5"></span>
                   <span class="w-3 h-3 border border-white/[.22] block mt-1.5" style="transform:rotate(45deg);"></span>
@@ -372,23 +382,23 @@ const whyStats = [
 
                 <div class="relative flex items-center justify-center p-6">
                   <div data-pw-ds class="absolute top-2 left-7 font-mono text-[9px] tracking-[.14em] text-[#6F6A62]">DISEÑO.FIG · ARTBOARD DESKTOP 1440 · 100%</div>
-                  <div data-pw-ds class="relative w-full bg-[#0E0D0C] outline outline-[#FFB200]/85" style="height:76%;">
+                  <div data-pw-ds class="relative w-full bg-[#231810] outline outline-white/30" style="height:76%;">
                     <div class="absolute inset-0 p-3.5 flex flex-col gap-2 opacity-90">
                       <div class="flex items-center justify-between">
-                        <span class="font-display font-extrabold uppercase text-[11px] tracking-[.06em] text-[#F6F3EC]">TU MARCA</span>
-                        <span class="bg-[#FFB200] text-[#0C0B0A] text-[7px] tracking-[.1em] px-2 py-1 rounded-full font-semibold">EMPEZAR</span>
+                        <span class="font-display font-extrabold uppercase text-[11px] tracking-[.06em] text-[#F1E6D8]">TU MARCA</span>
+                        <span class="bg-[#C97A3D] text-[#231810] text-[7px] tracking-[.1em] px-2 py-1 rounded-full font-semibold">EMPEZAR</span>
                       </div>
-                      <div class="font-display font-extrabold uppercase text-[26px] leading-[.95] text-[#F6F3EC]">Vende más<br /><span class="text-[#FFB200]">desde hoy</span></div>
+                      <div class="font-display font-extrabold uppercase text-[26px] leading-[.95] text-[#F1E6D8]">Muebles hechos<br /><span class="text-[#C97A3D]">a tu medida</span></div>
                       <div class="flex gap-2 flex-1">
                         <div class="flex-1 border border-white/10 bg-white/[.02]"></div>
                         <div class="flex-1 border border-white/10" style="background-image:repeating-linear-gradient(135deg, rgba(255,255,255,.07) 0 5px, transparent 5px 10px);"></div>
                       </div>
                     </div>
-                    <span class="absolute w-1.5 h-1.5 bg-[#FFB200] block" style="left:-3px;top:-3px;"></span>
-                    <span class="absolute w-1.5 h-1.5 bg-[#FFB200] block" style="right:-3px;top:-3px;"></span>
-                    <span class="absolute w-1.5 h-1.5 bg-[#FFB200] block" style="left:-3px;bottom:-3px;"></span>
-                    <span class="absolute w-1.5 h-1.5 bg-[#FFB200] block" style="right:-3px;bottom:-3px;"></span>
-                    <span data-pw-ds class="absolute bg-[#FFB200] text-[#0C0B0A] font-mono text-[8px] tracking-[.06em] px-1.5 py-0.5" style="left:50%;transform:translateX(-50%);bottom:-20px;">1440 × 2400</span>
+                    <span class="absolute w-1.5 h-1.5 bg-[#F6F3EC] block" style="left:-3px;top:-3px;"></span>
+                    <span class="absolute w-1.5 h-1.5 bg-[#F6F3EC] block" style="right:-3px;top:-3px;"></span>
+                    <span class="absolute w-1.5 h-1.5 bg-[#F6F3EC] block" style="left:-3px;bottom:-3px;"></span>
+                    <span class="absolute w-1.5 h-1.5 bg-[#F6F3EC] block" style="right:-3px;bottom:-3px;"></span>
+                    <span data-pw-ds class="absolute bg-[#F6F3EC] text-[#0C0B0A] font-mono text-[8px] tracking-[.06em] px-1.5 py-0.5" style="left:50%;transform:translateX(-50%);bottom:-20px;">1440 × 2400</span>
                   </div>
                 </div>
 
@@ -396,10 +406,10 @@ const whyStats = [
                   <div class="flex flex-col gap-1.5">
                     <span class="font-mono text-[8px] tracking-[.16em] text-[#6F6A62]">PALETA</span>
                     <div class="flex gap-1.5">
-                      <span class="w-[22px] h-[22px] bg-[#0C0B0A] border border-white/[.18] block"></span>
-                      <span class="w-[22px] h-[22px] bg-[#FFB200] block"></span>
-                      <span class="w-[22px] h-[22px] bg-[#F6F3EC] block"></span>
-                      <span class="w-[22px] h-[22px] bg-[#9a9489] block"></span>
+                      <span class="w-[22px] h-[22px] bg-[#231810] border border-white/[.18] block"></span>
+                      <span class="w-[22px] h-[22px] bg-[#C97A3D] block"></span>
+                      <span class="w-[22px] h-[22px] bg-[#F1E6D8] block"></span>
+                      <span class="w-[22px] h-[22px] bg-[#B8A290] block"></span>
                     </div>
                   </div>
                   <div class="flex flex-col gap-1">
@@ -410,12 +420,12 @@ const whyStats = [
                   <div class="flex flex-col gap-1">
                     <span class="font-mono text-[8px] tracking-[.16em] text-[#6F6A62]">CAPAS</span>
                     <span class="font-mono text-[9px] text-[#C9C4BB]">▸ Hero</span>
-                    <span class="font-mono text-[9px] text-[#FFB200]">▾ CTA / Empezar</span>
+                    <span class="font-mono text-[9px] text-[#F6F3EC]">▾ CTA / Empezar</span>
                     <span class="font-mono text-[9px] text-[#C9C4BB]">▸ Servicios</span>
                     <span class="font-mono text-[9px] text-[#C9C4BB]">▸ Contacto</span>
                   </div>
                   <div class="mt-auto flex items-center gap-1.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#FFB200] block"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#F6F3EC] block"></span>
                     <span class="font-mono text-[8px] tracking-[.1em] text-[#9a9489]">REVISIÓN 2 DE 2</span>
                   </div>
                 </div>
@@ -457,15 +467,15 @@ const whyStats = [
                       </div>
                     </div>
                     <div class="mr-5 flex flex-col gap-2.5">
-                      <div class="h-24 rounded-lg border border-[#F1E6D8]/10 flex items-end justify-center pb-2" style="background-image:repeating-linear-gradient(135deg, rgba(201,122,61,.16) 0 6px, transparent 6px 12px);">
-                        <span class="font-mono text-[8px] tracking-[.14em] text-[#8C7568]">FOTO DEL TALLER</span>
+                      <div class="h-24 rounded-lg flex items-end justify-center pb-2 bg-[#EFE3D3]" style="background-image:repeating-linear-gradient(135deg, rgba(35,24,16,.07) 0 6px, transparent 6px 12px);">
+                        <span class="font-mono text-[8px] tracking-[.14em] text-[#6B5849]">FOTO DEL TALLER</span>
                       </div>
-                      <div class="border border-[#F1E6D8]/[.12] rounded-lg p-3 flex flex-col gap-1.5 bg-[#2E2015]">
-                        <span class="font-display font-extrabold uppercase text-[13px] tracking-[.03em] text-[#F1E6D8]">Pide tu presupuesto</span>
-                        <span class="h-5 border border-[#F1E6D8]/[.12] rounded flex items-center px-1.5 text-[8.5px] text-[#8C7568]">Nombre</span>
-                        <span class="h-5 border border-[#F1E6D8]/[.12] rounded flex items-center px-1.5 text-[8.5px] text-[#8C7568]">Teléfono / WhatsApp</span>
+                      <div class="rounded-lg p-3 flex flex-col gap-1.5 bg-[#F1E6D8]">
+                        <span class="font-display font-extrabold uppercase text-[13px] tracking-[.03em] text-[#231810]">Pide tu presupuesto</span>
+                        <span class="h-5 border border-[#231810]/[.15] rounded flex items-center px-1.5 text-[8.5px] text-[#6B5849]">Nombre</span>
+                        <span class="h-5 border border-[#231810]/[.15] rounded flex items-center px-1.5 text-[8.5px] text-[#6B5849]">Teléfono / WhatsApp</span>
                         <span class="bg-[#C97A3D] text-[#231810] font-semibold text-[9px] tracking-[.1em] py-1.5 rounded-full text-center">ENVIAR</span>
-                        <span class="font-mono text-[7.5px] tracking-[.06em] text-[#8C7568] text-center">RESPUESTA EN MENOS DE 24 H</span>
+                        <span class="font-mono text-[7.5px] tracking-[.06em] text-[#6B5849] text-center">RESPUESTA EN MENOS DE 24 H</span>
                       </div>
                     </div>
                   </div>
@@ -479,16 +489,6 @@ const whyStats = [
 
             </div>
           </div>
-        </div>
-
-        <!-- Indicador de pasos (horizontal) -->
-        <div data-pw-steps-nav class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-          {proceso.map((step, i) => (
-            <div data-pw-step-nav-item class="flex items-center gap-2" style={i === 0 ? 'opacity:1;' : 'opacity:.35;'}>
-              <span class="font-display font-extrabold text-[14px] text-[#FFB200]">0{i + 1}</span>
-              <span class="font-mono text-[11px] tracking-[.2em] uppercase text-[#F6F3EC]">{step.title}</span>
-            </div>
-          ))}
         </div>
       </div>
     </div>
@@ -507,11 +507,11 @@ const whyStats = [
   </section>
 
   <section id="planes" class="relative border-t border-white/[.08] bg-[#0A0908]" style="padding: clamp(70px,10vh,120px) clamp(20px,5vw,64px);">
-    <div class="max-w-[1200px] mx-auto">
+    <div class="max-w-[1280px] mx-auto">
       <h2 class="m-0 font-display font-extrabold uppercase leading-[.95] tracking-[-0.5px] text-[#F6F3EC]" style="font-size:clamp(30px,4vw,52px);">
         Planes de <span class="text-[#FFB200]">páginas web</span>
       </h2>
-      <p class="mt-4 mb-0 max-w-[560px] text-[17px] leading-[1.6] text-[#9a9489]">
+      <p class="mt-4 mb-0 max-w-[560px] text-[19px] leading-[1.6] text-[#9a9489]">
         Elige el plan según tu proyecto. Todos incluyen hosting, dominio, SSL y respaldos periódicos.
       </p>
 
@@ -531,7 +531,7 @@ const whyStats = [
               </span>
             )}
             <h3 class="m-0 mt-1 font-display font-bold uppercase text-[22px] text-[#F6F3EC]">{p.nombre}</h3>
-            <p class="m-0 mt-2 text-[15px] leading-[1.5] text-[#9a9489]">{p.resumen}</p>
+            <p class="m-0 mt-2 text-[16px] leading-[1.5] text-[#9a9489]">{p.resumen}</p>
 
             <div class="mt-5 flex items-baseline gap-2">
               <span class="font-display font-extrabold text-[#FFB200]" style="font-size:clamp(30px,3vw,38px);">{p.precio}</span>
@@ -545,7 +545,7 @@ const whyStats = [
 
             <ul class="m-0 mt-5 mb-0 flex flex-col gap-2.5 list-none p-0 flex-1">
               {p.features.map((f) => (
-                <li class="flex items-start gap-2 text-[14px] leading-[1.5] text-[#B8B3A8]">
+                <li class="flex items-start gap-2 text-[15px] leading-[1.5] text-[#B8B3A8]">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFB200" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5">
                     <path d="M20 6L9 17l-5-5" />
                   </svg>
@@ -585,7 +585,7 @@ const whyStats = [
   </script>
 
   <section class="relative border-t border-white/[.08]" style="padding: clamp(70px,10vh,120px) clamp(20px,5vw,64px);">
-    <div class="max-w-[860px] mx-auto">
+    <div class="max-w-[1280px] mx-auto">
       <h2 class="m-0 font-display font-extrabold uppercase leading-[.95] tracking-[-0.5px] text-[#F6F3EC]" style="font-size:clamp(28px,3.6vw,44px);">
         Preguntas <span class="text-[#FFB200]">frecuentes</span>
       </h2>
@@ -598,7 +598,7 @@ const whyStats = [
                 <path d="M12 5v14M5 12h14"/>
               </svg>
             </summary>
-            <p class="faq-content m-0 mt-4 text-[15px] leading-[1.65] text-[#B8B3A8]">{f.a}</p>
+            <p class="faq-content m-0 mt-4 text-[16px] leading-[1.65] text-[#B8B3A8]">{f.a}</p>
           </details>
         ))}
       </div>

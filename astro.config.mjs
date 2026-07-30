@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
 import netlify from '@astrojs/netlify';
@@ -15,4 +15,25 @@ export default defineConfig({
   },
   compressHTML: true,
   prefetch: { defaultStrategy: 'viewport' },
+  fonts: [
+    {
+      provider: fontProviders.google(),
+      name: 'Saira Condensed',
+      cssVariable: '--font-display-src',
+      weights: [500, 600, 700, 800],
+    },
+    {
+      provider: fontProviders.google(),
+      name: 'Hanken Grotesk',
+      cssVariable: '--font-sans-src',
+      weights: [400, 500, 600, 700],
+      styles: ['normal', 'italic'],
+    },
+    {
+      provider: fontProviders.google(),
+      name: 'JetBrains Mono',
+      cssVariable: '--font-mono-src',
+      weights: [400, 500],
+    },
+  ],
 });

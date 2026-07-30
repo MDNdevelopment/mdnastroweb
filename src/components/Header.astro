@@ -6,10 +6,10 @@
   style="padding: 18px clamp(20px,5vw,64px); border-bottom: 1px solid transparent;"
 >
   <a href="/" class="flex items-center no-underline">
-    <img src="/assets/mdn-mark.webp" alt="MDN Publicidad Studio" style="height:85px;width:auto;display:block;" />
+    <img src="/assets/mdn-mark.webp" alt="MDN Publicidad Studio" width="85" height="85" style="height:85px;width:auto;display:block;" />
   </a>
 
-  <nav data-navlinks class="flex items-center gap-9">
+  <nav data-navlinks class="hidden min-[860px]:flex items-center gap-9">
     <a href="/" class="mdn-navlink text-[13px] font-semibold tracking-[1.5px] uppercase text-[#C9C4BA] no-underline transition-colors duration-250 hover:text-[#FFB200]">Inicio</a>
     <a href="/#nosotros" class="mdn-navlink text-[13px] font-semibold tracking-[1.5px] uppercase text-[#C9C4BA] no-underline transition-colors duration-250 hover:text-[#FFB200]">Nosotros</a>
     <a href="/paginas-web/" class="mdn-navlink text-[13px] font-semibold tracking-[1.5px] uppercase text-[#C9C4BA] no-underline transition-colors duration-250 hover:text-[#FFB200]">Páginas web</a>
@@ -25,7 +25,7 @@
   <button
     data-burger
     aria-label="Menú"
-    class="hidden flex-col gap-[5px] bg-transparent border-0 cursor-pointer p-2"
+    class="flex min-[860px]:hidden flex-col gap-[5px] bg-transparent border-0 cursor-pointer p-2"
   >
     <span class="block w-[26px] h-[2px] bg-[#F6F3EC] rounded-sm"></span>
     <span class="block w-[26px] h-[2px] bg-[#F6F3EC] rounded-sm"></span>
@@ -48,22 +48,14 @@
 <script>
   const root = document.getElementById('mdn-site')!;
   const header = root.querySelector<HTMLElement>('[data-header]')!;
-  const navLinks = root.querySelector<HTMLElement>('[data-navlinks]')!;
   const burger = root.querySelector<HTMLElement>('[data-burger]')!;
   const mm = root.querySelector<HTMLElement>('[data-mobilemenu]')!;
 
-  const applyResp = () => {
-    if (window.innerWidth < 860) {
-      navLinks.style.display = 'none';
-      burger.style.display = 'flex';
-    } else {
-      navLinks.style.display = 'flex';
-      burger.style.display = 'none';
-      mm.style.display = 'none';
-    }
-  };
-  applyResp();
-  window.addEventListener('resize', applyResp);
+  // La visibilidad nav-links / burger la resuelve el CSS (hidden min-[860px]:flex),
+  // sin flash inicial. Acá solo cerramos el overlay móvil si se redimensiona a desktop.
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 860) mm.style.display = 'none';
+  });
 
   burger.addEventListener('click', () => {
     mm.style.display = mm.style.display === 'flex' ? 'none' : 'flex';

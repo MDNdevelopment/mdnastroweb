@@ -24,8 +24,8 @@ const socialLinks: Record<string, string> = {
 
       <!-- Brand column -->
       <div class="flex-[1_1_300px] max-w-[380px]">
-        <img src="/assets/mdn-mark.webp" alt="MDN Publicidad Studio" style="height:72px;width:auto;display:block;" />
-        <p class="mt-5 mb-6 max-w-[300px] text-[17px] leading-[1.65] text-[#9a9489]">
+        <img src="/assets/mdn-mark.webp" alt="MDN Publicidad Studio" width="72" height="72" style="height:72px;width:auto;display:block;" />
+        <p class="mt-5 mb-6 max-w-[300px] text-[18px] leading-[1.65] text-[#9a9489]">
           Estudio creativo de marketing. Convertimos marcas en presencia digital medible, con alcance local, nacional e internacional.
         </p>
       </div>
@@ -37,7 +37,7 @@ const socialLinks: Record<string, string> = {
           {[
             {
               city: 'Maracaibo', country: 'Venezuela',
-              flag: `<defs><clipPath id="flgVE"><circle cx="14" cy="14" r="13"/></clipPath></defs><g clip-path="url(#flgVE)"><rect width="28" height="9.34" fill="#FCD116"/><rect y="9.34" width="28" height="9.33" fill="#00247D"/><rect y="18.67" width="28" height="9.33" fill="#CF142B"/></g><circle cx="14" cy="14" r="13" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.4"/>`
+              flag: `<defs><clipPath id="flgVE"><circle cx="14" cy="14" r="13"/></clipPath></defs><g clip-path="url(#flgVE)"><rect width="28" height="9.34" fill="#FCD116"/><rect y="9.34" width="28" height="9.33" fill="#00247D"/><rect y="18.67" width="28" height="9.33" fill="#CF142B"/><g fill="#fff"><circle cx="4.6" cy="15.2" r="0.75"/><circle cx="7.9" cy="13.1" r="0.75"/><circle cx="11.2" cy="11.9" r="0.75"/><circle cx="14" cy="11.5" r="0.75"/><circle cx="16.8" cy="11.9" r="0.75"/><circle cx="20.1" cy="13.1" r="0.75"/><circle cx="23.4" cy="15.2" r="0.75"/></g></g><circle cx="14" cy="14" r="13" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.4"/>`
             },
             {
               city: 'Santiago', country: 'Chile',
@@ -45,14 +45,14 @@ const socialLinks: Record<string, string> = {
             },
             {
               city: 'Miami', country: 'Estados Unidos',
-              flag: `<defs><clipPath id="flgUS"><circle cx="14" cy="14" r="13"/></clipPath></defs><g clip-path="url(#flgUS)"><rect width="28" height="28" fill="#fff"/><rect width="28" height="4" fill="#B22234"/><rect width="28" height="4" y="8" fill="#B22234"/><rect width="28" height="4" y="16" fill="#B22234"/><rect width="28" height="4" y="24" fill="#B22234"/><rect width="13" height="15" fill="#3C3B6E"/></g><circle cx="14" cy="14" r="13" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.4"/>`
+              flag: `<defs><clipPath id="flgUS"><circle cx="14" cy="14" r="13"/></clipPath></defs><g clip-path="url(#flgUS)"><rect width="28" height="28" fill="#fff"/><rect width="28" height="4" fill="#B22234"/><rect width="28" height="4" y="8" fill="#B22234"/><rect width="28" height="4" y="16" fill="#B22234"/><rect width="28" height="4" y="24" fill="#B22234"/><rect width="13" height="15" fill="#3C3B6E"/><g fill="#fff"><circle cx="2.8" cy="2.5" r="0.55"/><circle cx="6.2" cy="2.5" r="0.55"/><circle cx="9.6" cy="2.5" r="0.55"/><circle cx="4.5" cy="5" r="0.55"/><circle cx="7.9" cy="5" r="0.55"/><circle cx="11.3" cy="5" r="0.55"/><circle cx="2.8" cy="7.5" r="0.55"/><circle cx="6.2" cy="7.5" r="0.55"/><circle cx="9.6" cy="7.5" r="0.55"/><circle cx="4.5" cy="10" r="0.55"/><circle cx="7.9" cy="10" r="0.55"/><circle cx="11.3" cy="10" r="0.55"/><circle cx="2.8" cy="12.5" r="0.55"/><circle cx="6.2" cy="12.5" r="0.55"/><circle cx="9.6" cy="12.5" r="0.55"/></g></g><circle cx="14" cy="14" r="13" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.4"/>`
             },
-          ].map(loc => (
+          ].map((loc, i) => (
             <div
-              class="flex items-center gap-3.5 border border-white/10 rounded-[14px] bg-white/[.02]"
-              style="padding:11px 14px;"
+              class="flex items-center gap-3.5"
+              style={`padding:9px 0;${i > 0 ? 'border-top:1px solid rgba(255,255,255,.06);' : ''}`}
             >
-              <svg width="30" height="30" viewBox="0 0 28 28" style="flex:0 0 auto;" set:html={loc.flag} />
+              <svg width="26" height="26" viewBox="0 0 28 28" style="flex:0 0 auto;" set:html={loc.flag} />
               <span class="flex flex-col leading-[1.25]">
                 <span class="font-semibold text-[15px] text-[#F6F3EC]">{loc.city}</span>
                 <span class="text-[12px] text-[#8a857b]">{loc.country}</span>

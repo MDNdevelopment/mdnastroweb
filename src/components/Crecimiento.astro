@@ -1,6 +1,12 @@
 ---
 import { brands } from '../data/content';
 
+// Los logos vienen de Cloudinary sin transformar (originales a resolución completa).
+// Se piden a ~2x el tamaño máximo de render (160px) para pantallas retina, en formato
+// y calidad automáticos, sin recortar ni ampliar la imagen original.
+const cdn = (url: string) =>
+  url.replace('/image/upload/', '/image/upload/f_auto,q_auto,w_320,c_limit/');
+
 const third = Math.ceil(brands.length / 3);
 const row1 = brands.slice(0, third);
 const row2 = brands.slice(third, third * 2);
@@ -33,7 +39,7 @@ const row3Double = [...row3, ...row3];
         <h2 class="m-0 font-display font-extrabold uppercase leading-[1.02] tracking-[-0.4px]" style="font-size:clamp(28px,3.6vw,52px);">
           Hemos acompañado a más de 500 marcas en su <span class="text-[#FFB200]">transformación digital</span>
         </h2>
-        <p class="mt-5 mb-0 text-[18px] leading-[1.6] text-[#B8B3A8] max-w-[520px]">
+        <p class="mt-5 mb-0 text-[20px] leading-[1.6] text-[#B8B3A8] max-w-[520px]">
           Actualmente colaboramos con clientes líderes en diversos sectores, construyendo relaciones de largo plazo basadas en resultados.
         </p>
       </div>
@@ -52,8 +58,12 @@ const row3Double = [...row3, ...row3];
       <div class="flex items-center" style="width:max-content;animation:mdnMarq 62s linear infinite;">
         {row1Double.map((b) => (
           <img
-            src={b.logo}
+            src={cdn(b.logo)}
             alt={b.name}
+            width="160"
+            height="160"
+            loading="lazy"
+            decoding="async"
             class="flex-none opacity-70 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
             style={`height:calc(clamp(116px,13vw,160px) * ${b.scale ?? 1});aspect-ratio:1/1;width:auto;margin:0 clamp(40px,6.8vw,88px);`}
           />
@@ -69,8 +79,12 @@ const row3Double = [...row3, ...row3];
       <div class="flex items-center" style="width:max-content;animation:mdnMarq 74s linear infinite reverse;">
         {row2Double.map((b) => (
           <img
-            src={b.logo}
+            src={cdn(b.logo)}
             alt={b.name}
+            width="160"
+            height="160"
+            loading="lazy"
+            decoding="async"
             class="flex-none opacity-70 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
             style={`height:calc(clamp(116px,13vw,160px) * ${b.scale ?? 1});aspect-ratio:1/1;width:auto;margin:0 clamp(40px,6.8vw,88px);`}
           />
@@ -86,8 +100,12 @@ const row3Double = [...row3, ...row3];
       <div class="flex items-center" style="width:max-content;animation:mdnMarq 86s linear infinite;">
         {row3Double.map((b) => (
           <img
-            src={b.logo}
+            src={cdn(b.logo)}
             alt={b.name}
+            width="160"
+            height="160"
+            loading="lazy"
+            decoding="async"
             class="flex-none opacity-70 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
             style={`height:calc(clamp(116px,13vw,160px) * ${b.scale ?? 1});aspect-ratio:1/1;width:auto;margin:0 clamp(40px,6.8vw,88px);`}
           />
