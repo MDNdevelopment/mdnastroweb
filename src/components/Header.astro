@@ -10,14 +10,16 @@
   </a>
 
   <nav data-navlinks class="hidden min-[860px]:flex items-center gap-9">
-    <a href="/" class="mdn-navlink text-[13px] font-semibold tracking-[1.5px] uppercase text-[#C9C4BA] no-underline transition-colors duration-250 hover:text-[#FFB200]">Inicio</a>
-    <a href="/#nosotros" class="mdn-navlink text-[13px] font-semibold tracking-[1.5px] uppercase text-[#C9C4BA] no-underline transition-colors duration-250 hover:text-[#FFB200]">Nosotros</a>
-    <a href="/paginas-web/" class="mdn-navlink text-[13px] font-semibold tracking-[1.5px] uppercase text-[#C9C4BA] no-underline transition-colors duration-250 hover:text-[#FFB200]">Páginas web</a>
-    <a href="/#servicios" class="mdn-navlink text-[13px] font-semibold tracking-[1.5px] uppercase text-[#C9C4BA] no-underline transition-colors duration-250 hover:text-[#FFB200]">Servicios</a>
-    <a href="/#crecimiento" class="mdn-navlink text-[13px] font-semibold tracking-[1.5px] uppercase text-[#C9C4BA] no-underline transition-colors duration-250 hover:text-[#FFB200]">Crecimiento</a>
+    <a href="/" data-ga-event="nav_click" data-ga-label="inicio" class="mdn-navlink text-[13px] font-semibold tracking-[1.5px] uppercase text-[#C9C4BA] no-underline transition-colors duration-250 hover:text-[#FFB200]">Inicio</a>
+    <a href="/#nosotros" data-ga-event="nav_click" data-ga-label="nosotros" class="mdn-navlink text-[13px] font-semibold tracking-[1.5px] uppercase text-[#C9C4BA] no-underline transition-colors duration-250 hover:text-[#FFB200]">Nosotros</a>
+    <a href="/paginas-web/" data-ga-event="nav_click" data-ga-label="paginas_web" class="mdn-navlink text-[13px] font-semibold tracking-[1.5px] uppercase text-[#C9C4BA] no-underline transition-colors duration-250 hover:text-[#FFB200]">Páginas web</a>
+    <a href="/#servicios" data-ga-event="nav_click" data-ga-label="servicios" class="mdn-navlink text-[13px] font-semibold tracking-[1.5px] uppercase text-[#C9C4BA] no-underline transition-colors duration-250 hover:text-[#FFB200]">Servicios</a>
+    <a href="/#crecimiento" data-ga-event="nav_click" data-ga-label="crecimiento" class="mdn-navlink text-[13px] font-semibold tracking-[1.5px] uppercase text-[#C9C4BA] no-underline transition-colors duration-250 hover:text-[#FFB200]">Crecimiento</a>
     <a
       href="#onboarding"
       data-magnetic
+      data-ga-event="cta_click"
+      data-ga-label="header_empezar"
       class="text-[13px] font-bold tracking-[1.5px] uppercase text-[#0C0B0A] bg-[#FFB200] no-underline px-5 py-3 rounded-full transition-all duration-300 hover:bg-[#FFC233]"
     >Empezar</a>
   </nav>
@@ -37,12 +39,12 @@
   data-mobilemenu
   class="fixed inset-0 z-[7900] bg-[#0C0B0A] hidden flex-col items-center justify-center gap-8"
 >
-  <a href="/" class="mdn-mlink font-display font-bold text-[34px] uppercase text-[#F6F3EC] no-underline tracking-wide">Inicio</a>
-  <a href="/#nosotros" class="mdn-mlink font-display font-bold text-[34px] uppercase text-[#F6F3EC] no-underline tracking-wide">Nosotros</a>
-  <a href="/paginas-web/" class="mdn-mlink font-display font-bold text-[34px] uppercase text-[#F6F3EC] no-underline tracking-wide">Páginas web</a>
-  <a href="/#servicios" class="mdn-mlink font-display font-bold text-[34px] uppercase text-[#F6F3EC] no-underline tracking-wide">Servicios</a>
-  <a href="/#crecimiento" class="mdn-mlink font-display font-bold text-[34px] uppercase text-[#F6F3EC] no-underline tracking-wide">Crecimiento</a>
-  <a href="#onboarding" class="mdn-mlink font-display font-bold text-[34px] uppercase text-[#FFB200] no-underline tracking-wide">Empezar</a>
+  <a href="/" data-ga-event="nav_click" data-ga-label="inicio_mobile" class="mdn-mlink font-display font-bold text-[34px] uppercase text-[#F6F3EC] no-underline tracking-wide">Inicio</a>
+  <a href="/#nosotros" data-ga-event="nav_click" data-ga-label="nosotros_mobile" class="mdn-mlink font-display font-bold text-[34px] uppercase text-[#F6F3EC] no-underline tracking-wide">Nosotros</a>
+  <a href="/paginas-web/" data-ga-event="nav_click" data-ga-label="paginas_web_mobile" class="mdn-mlink font-display font-bold text-[34px] uppercase text-[#F6F3EC] no-underline tracking-wide">Páginas web</a>
+  <a href="/#servicios" data-ga-event="nav_click" data-ga-label="servicios_mobile" class="mdn-mlink font-display font-bold text-[34px] uppercase text-[#F6F3EC] no-underline tracking-wide">Servicios</a>
+  <a href="/#crecimiento" data-ga-event="nav_click" data-ga-label="crecimiento_mobile" class="mdn-mlink font-display font-bold text-[34px] uppercase text-[#F6F3EC] no-underline tracking-wide">Crecimiento</a>
+  <a href="#onboarding" data-ga-event="cta_click" data-ga-label="header_empezar_mobile" class="mdn-mlink font-display font-bold text-[34px] uppercase text-[#FFB200] no-underline tracking-wide">Empezar</a>
 </div>
 
 <script>

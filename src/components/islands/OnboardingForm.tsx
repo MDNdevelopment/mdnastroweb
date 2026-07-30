@@ -3,6 +3,7 @@ import { actions } from 'astro:actions';
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { serviceChips } from '../../data/content';
+import { trackEvent } from '../../scripts/analytics';
 
 const WEB_CHIP = 'Web & apps';
 const TIPOS_PAGINA = ['Landing', 'Web corporativa', 'Sistema', 'Ayúdenme a elegir'];
@@ -113,7 +114,10 @@ export default function OnboardingForm() {
   };
 
   const handleNext = () => {
-    if (validateStep1()) setStep(2);
+    if (validateStep1()) {
+      setStep(2);
+      trackEvent('onboarding_step2');
+    }
   };
 
   const validateStep2 = () => {
@@ -149,6 +153,10 @@ export default function OnboardingForm() {
         setCaptchaToken('');
       } else {
         setStatus('success');
+        trackEvent('generate_lead', {
+          tipo_pagina: s2.tipoPagina || undefined,
+          servicios: s2.servicios.join(', '),
+        });
       }
     } catch {
       setStatus('error');

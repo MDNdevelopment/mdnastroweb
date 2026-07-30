@@ -169,10 +169,12 @@ const whyStats = [
       >
         Landing pages, sitios corporativos y sistemas a medida con panel de gestión. Hosting, dominio y soporte incluidos, entregados por un equipo con sede en Maracaibo, Venezuela.
       </p>
-      <div data-pw-cta class="flex flex-wrap gap-4 items-center mt-10 opacity-0 translate-y-6">
+      <div data-pw-cta class="flex flex-col sm:flex-row gap-4 items-start sm:items-center mt-10 opacity-0 translate-y-6">
         <a
           href="#onboarding"
           data-magnetic
+          data-ga-event="cta_click"
+          data-ga-label="pw_hero_solicitar"
           class="inline-flex items-center gap-2.5 text-[14px] font-bold tracking-[1px] uppercase text-[#0C0B0A] bg-[#FFB200] no-underline px-8 py-4 rounded-full transition-all duration-300 hover:bg-[#FFC233]"
         >
           Solicitar mi página web
@@ -182,6 +184,8 @@ const whyStats = [
         </a>
         <a
           href="#planes"
+          data-ga-event="cta_click"
+          data-ga-label="pw_hero_ver_planes"
           class="inline-flex items-center gap-2 text-[14px] font-semibold tracking-[1px] uppercase text-[#F6F3EC] no-underline py-4 px-2 border-b border-white/20 transition-colors duration-300 hover:border-[#FFB200]"
         >
           Ver planes y precios
@@ -580,6 +584,7 @@ const whyStats = [
     document.querySelectorAll<HTMLAnchorElement>('a[data-plan]').forEach((el) => {
       el.addEventListener('click', () => {
         window.dispatchEvent(new CustomEvent('mdn:plan-selected', { detail: el.dataset.plan }));
+        (window as any).gtag?.('event', 'select_plan', { plan_name: el.dataset.plan });
       });
     });
   </script>

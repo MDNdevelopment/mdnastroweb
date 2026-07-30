@@ -51,6 +51,16 @@ const socialImageURL = new URL(image, Astro.site);
     <Font cssVariable="--font-sans-src" preload />
     <Font cssVariable="--font-mono-src" />
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VBSVY6EV2J"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-VBSVY6EV2J');
+    </script>
+
     <!-- Cloudflare Turnstile (captcha del formulario de onboarding) -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
@@ -152,6 +162,8 @@ const socialImageURL = new URL(image, Astro.site);
       <a
         href="https://wa.me/17864504876"
         data-whatsapp
+        data-ga-event="whatsapp_click"
+        data-ga-location="fab"
         aria-label="Contactar por WhatsApp"
         target="_blank"
         rel="noopener noreferrer"
@@ -165,6 +177,7 @@ const socialImageURL = new URL(image, Astro.site);
 
     <script>
       import '../scripts/animations';
+      import '../scripts/analytics';
     </script>
   </body>
 </html>
