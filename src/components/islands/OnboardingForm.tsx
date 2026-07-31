@@ -41,6 +41,17 @@ const LABEL_BASE = 'text-[12px] font-semibold tracking-[1.4px] uppercase text-[#
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const TURNSTILE_SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+
+function loadTurnstileScript() {
+  if (window.turnstile || document.querySelector(`script[src="${TURNSTILE_SRC}"]`)) return;
+  const script = document.createElement('script');
+  script.src = TURNSTILE_SRC;
+  script.async = true;
+  script.defer = true;
+  document.head.appendChild(script);
+}
+
 export default function OnboardingForm() {
   const [step, setStep] = useState<Step>(1);
   const [status, setStatus] = useState<Status>('idle');
@@ -56,6 +67,7 @@ export default function OnboardingForm() {
     if (step !== 2 || widgetId.current || !captchaRef.current) return;
 
     let cancelled = false;
+    loadTurnstileScript();
     const tryRender = () => {
       if (cancelled || !captchaRef.current) return;
       if (!window.turnstile) {

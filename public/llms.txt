@@ -3,19 +3,27 @@
 > Agencia de publicidad y diseño web con sedes en Maracaibo (Venezuela),
 > Santiago (Chile) y Miami (Estados Unidos).
 
+## Páginas
+- [Inicio](https://mdnpublicidad.com/): servicios, portafolio y contacto.
+- [Páginas web y planes](https://mdnpublicidad.com/paginas-web/): landing, web corporativa y sistemas a medida.
+
 ## Servicios
-- Diseño y desarrollo de páginas web — desde 600 USD
-- Gestión de redes sociales
-- Branding y diseño gráfico
-- Producciones audiovisuales 2D y 3D
-- Asesoría y acompañamiento
+- [Diseño y desarrollo web](https://mdnpublicidad.com/paginas-web/) — desde 600 USD
+- [Gestión de redes sociales](https://mdnpublicidad.com/)
+- [Branding y diseño gráfico](https://mdnpublicidad.com/)
+- [Producciones audiovisuales 2D y 3D](https://mdnpublicidad.com/)
 
 ## Planes web
-- Landing: 600 USD, una página, entrega en 3 días
-- Web corporativa: 1.000 USD, inicio + 4 secciones, entrega en 15 días
-- Sistema a medida: desde 2.500 USD, con panel de control, entrega en 30 días
-Todos incluyen hosting, dominio, SSL y soporte.
+- [Landing](https://mdnpublicidad.com/paginas-web/): 600 USD, una página, entrega en 3 días.
+- [Web corporativa](https://mdnpublicidad.com/paginas-web/): 1.000 USD, inicio + 4 secciones, entrega en 15 días.
+- [Sistema a medida](https://mdnpublicidad.com/paginas-web/): desde 2.500 USD, con panel de control, entrega en 30 días.
+
+Todos los planes incluyen hosting, dominio, SSL y soporte.
+
+## Legal
+- [Política de privacidad](https://mdnpublicidad.com/politica-de-privacidad/)
+- [Política de cookies](https://mdnpublicidad.com/politica-de-cookies/)
 
 ## Contacto
-info@mdnpublicidad.com · +1 (786) 450-4876
-https://mdnpublicidad.com
+- [Email](mailto:info@mdnpublicidad.com)
+- [WhatsApp](https://wa.me/17864504876)

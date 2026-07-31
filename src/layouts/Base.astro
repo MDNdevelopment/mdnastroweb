@@ -88,8 +88,8 @@ const socialImageURL = new URL(image, Astro.site);
       gtag('config', 'G-VBSVY6EV2J');
     </script>
 
-    <!-- Cloudflare Turnstile (captcha del formulario de onboarding) -->
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <!-- Cloudflare Turnstile: se carga bajo demanda desde OnboardingForm.tsx (paso 2)
+         para evitar cookies de terceros en cada carga de página -->
 
     <!-- JSON-LD: ProfessionalService (Organization) -->
     <script type="application/ld+json">
