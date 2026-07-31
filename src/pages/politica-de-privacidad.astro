@@ -1,0 +1,124 @@
+---
+export const prerender = true;
+
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const secciones = [
+  {
+    titulo: '1. Responsable del tratamiento',
+    body: [
+      'MDN Publicidad Studio ("MDN", "nosotros") es responsable del tratamiento de los datos personales que recogemos a través de este sitio web (mdnpublicidad.com).',
+      'Contacto: info@mdnpublicidad.com · +1 (786) 450-4876. Operamos con equipo en Maracaibo (Venezuela), Santiago (Chile) y Miami (Estados Unidos).',
+    ],
+  },
+  {
+    titulo: '2. Qué datos recopilamos',
+    body: [
+      'A través de nuestro formulario de contacto ("solicitar mi página web" / onboarding) recopilamos los datos que tú nos proporcionas voluntariamente: nombre, empresa, teléfono, correo electrónico, servicios de interés, tipo de página (si aplica), objetivo principal y el mensaje que nos escribas.',
+      'También recopilamos datos de navegación mediante cookies de analítica (Google Analytics), solo si aceptas su uso — ver nuestra Política de Cookies.',
+    ],
+  },
+  {
+    titulo: '3. Para qué usamos tus datos',
+    body: [
+      'Usamos tus datos exclusivamente para responder a tu solicitud de contacto o presupuesto, entender tu proyecto y, si avanzamos, prestarte el servicio contratado.',
+      'No vendemos ni cedemos tus datos personales a terceros con fines comerciales ajenos a nuestro servicio.',
+    ],
+  },
+  {
+    titulo: '4. Base legal',
+    body: [
+      'El tratamiento se basa en tu consentimiento, otorgado al completar y enviar voluntariamente el formulario de contacto de este sitio.',
+    ],
+  },
+  {
+    titulo: '5. Con quién compartimos tus datos',
+    body: [
+      'Para operar el sitio y prestar el servicio trabajamos con los siguientes proveedores (encargados del tratamiento), que procesan datos en nuestro nombre y bajo sus propias políticas de seguridad:',
+    ],
+    lista: [
+      'Supabase — almacenamiento de la información enviada por el formulario.',
+      'Cloudflare (Turnstile) — verificación anti-spam del formulario de contacto.',
+      'Google Analytics — analítica del sitio, solo si aceptas cookies de analítica.',
+      'Cloudinary — alojamiento de imágenes del sitio.',
+      'Netlify — alojamiento (hosting) del sitio web.',
+    ],
+  },
+  {
+    titulo: '6. Cuánto tiempo conservamos tus datos',
+    body: [
+      'Conservamos tus datos mientras exista una relación comercial o de interés con nosotros, y mientras no solicites su eliminación. Puedes pedir que eliminemos tus datos en cualquier momento escribiendo a info@mdnpublicidad.com.',
+    ],
+  },
+  {
+    titulo: '7. Tus derechos',
+    body: [
+      'Puedes solicitarnos en cualquier momento el acceso, rectificación, eliminación u oposición al tratamiento de tus datos personales, escribiendo a info@mdnpublicidad.com. Atenderemos tu solicitud a la brevedad posible.',
+    ],
+  },
+  {
+    titulo: '8. Cookies',
+    body: [
+      'Este sitio utiliza cookies. Para más información sobre qué cookies usamos y cómo gestionarlas, consulta nuestra ',
+    ],
+    linkCookies: true,
+  },
+  {
+    titulo: '9. Cambios a esta política',
+    body: [
+      'Podemos actualizar esta política ocasionalmente para reflejar cambios en el sitio o en la normativa aplicable. La fecha de la última actualización se indica al final de esta página.',
+    ],
+  },
+];
+---
+<Base
+  title="Política de Privacidad | MDN Publicidad Studio"
+  description="Cómo recopilamos, usamos y protegemos los datos personales que nos compartes en mdnpublicidad.com."
+>
+  <Header />
+
+  <section class="relative" style="padding: clamp(120px,16vh,180px) clamp(20px,5vw,64px) clamp(70px,9vh,110px);">
+    <div class="max-w-[820px] mx-auto">
+      <h1
+        class="m-0 font-display font-extrabold uppercase leading-[.95] tracking-[-0.5px] text-[#F6F3EC]"
+        style="font-size:clamp(32px,4.4vw,54px);"
+      >
+        Política de <span class="text-[#FFB200]">privacidad</span>
+      </h1>
+      <p class="mt-5 mb-0 text-[17px] leading-[1.6] text-[#9a9489]">
+        En MDN Publicidad Studio nos tomamos en serio la privacidad de tus datos. Aquí explicamos, en un lenguaje claro, qué información recopilamos cuando visitas o interactúas con este sitio y cómo la usamos.
+      </p>
+
+      <div class="mt-14 flex flex-col gap-10">
+        {secciones.map((s) => (
+          <div>
+            <h2 class="m-0 mb-3 font-display font-bold uppercase text-[20px] tracking-[.02em] text-[#F6F3EC]">{s.titulo}</h2>
+            {s.body.map((p) => (
+              <p class="m-0 mb-3 text-[16px] leading-[1.7] text-[#B8B3A8]">
+                {p}{s.linkCookies && (
+                  <a href="/politica-de-cookies/" class="text-[#FFB200] underline decoration-white/30 underline-offset-2 hover:text-[#FFC233]">política de cookies</a>
+                )}{s.linkCookies && '.'}
+              </p>
+            ))}
+            {s.lista && (
+              <ul class="m-0 mt-2 flex flex-col gap-2 list-none p-0">
+                {s.lista.map((item) => (
+                  <li class="flex items-start gap-2.5 text-[16px] leading-[1.6] text-[#B8B3A8]">
+                    <span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#FFB200] shrink-0"></span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <p class="mt-14 text-[13px] text-[#6f6a61]">Última actualización: 31 de julio de 2026.</p>
+    </div>
+  </section>
+
+  <Footer />
+</Base>

@@ -109,7 +109,26 @@ const socialLinks: Record<string, string> = {
     <!-- Copyright -->
     <div class="mt-12 pt-6 border-t border-white/[.08] flex flex-wrap gap-3.5 justify-between items-center">
       <p class="m-0 text-[13px] text-[#6f6a61]">© 2026 MDN Publicidad Studio. Todos los derechos reservados.</p>
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-2">
+        <a href="/politica-de-privacidad/" class="text-[13px] text-[#6f6a61] no-underline transition-colors duration-250 hover:text-[#FFB200]">Política de privacidad</a>
+        <a href="/politica-de-cookies/" class="text-[13px] text-[#6f6a61] no-underline transition-colors duration-250 hover:text-[#FFB200]">Política de cookies</a>
+        <button
+          type="button"
+          data-mdn-cookie-settings
+          class="text-[13px] text-[#6f6a61] bg-transparent border-none p-0 cursor-pointer transition-colors duration-250 hover:text-[#FFB200]"
+        >
+          Configurar cookies
+        </button>
+      </div>
       <p class="m-0 text-[13px] text-[#6f6a61] tracking-[1px]">Fortalecemos tu presencia digital.</p>
     </div>
   </div>
 </footer>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-mdn-cookie-settings]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      window.dispatchEvent(new CustomEvent('mdn:open-cookie-settings'));
+    });
+  });
+</script>

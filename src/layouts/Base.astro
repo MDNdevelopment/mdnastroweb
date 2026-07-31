@@ -1,5 +1,6 @@
 ---
 import { Font } from 'astro:assets';
+import CookieBanner from '../components/CookieBanner.astro';
 
 interface Props {
   title?: string;
@@ -55,13 +56,35 @@ const socialImageURL = new URL(image, Astro.site);
     <Font cssVariable="--font-sans-src" preload />
     <Font cssVariable="--font-mono-src" />
 
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) + Consent Mode v2: sin consentimiento del usuario no se
+         almacenan cookies de analítica (ver CookieBanner.astro) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VBSVY6EV2J"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
 
+      // Por defecto, todo denegado hasta que el usuario decida en el banner de cookies
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500,
+      });
+
+      // Si ya había aceptado en una visita anterior, restaurar el consentimiento
+      try {
+        if (localStorage.getItem('mdn-cookie-consent') === 'accepted') {
+          gtag('consent', 'update', {
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted',
+            analytics_storage: 'granted',
+          });
+        }
+      } catch (e) {}
+
+      gtag('js', new Date());
       gtag('config', 'G-VBSVY6EV2J');
     </script>
 
@@ -177,6 +200,8 @@ const socialImageURL = new URL(image, Astro.site);
           <path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.27-1.38a9.86 9.86 0 0 0 4.77 1.22h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.13-2.9-7A9.82 9.82 0 0 0 12.04 2zm0 1.65c2.2 0 4.27.86 5.83 2.42a8.2 8.2 0 0 1 2.42 5.83c0 4.54-3.7 8.24-8.25 8.24a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.12.82.83-3.05-.2-.31a8.2 8.2 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.25-8.24zm-2.56 4.4c-.13 0-.34.05-.52.24-.18.2-.69.68-.69 1.65 0 .97.71 1.91.81 2.04.1.13 1.39 2.12 3.37 2.98.47.2.84.32 1.12.42.47.15.9.13 1.24.08.38-.06 1.16-.47 1.33-.93.16-.46.16-.85.11-.93-.05-.08-.18-.13-.38-.23-.2-.1-1.16-.57-1.34-.64-.18-.07-.31-.1-.44.1-.13.2-.5.64-.62.77-.11.13-.23.15-.43.05-.2-.1-.84-.31-1.6-.99-.59-.53-.99-1.18-1.11-1.38-.12-.2-.01-.31.09-.41.09-.09.2-.23.3-.35.1-.12.13-.2.2-.34.07-.13.03-.25-.02-.35-.05-.1-.44-1.08-.62-1.48-.16-.38-.32-.33-.44-.34h-.38z"/>
         </svg>
       </a>
+
+      <CookieBanner />
     </div>
 
     <script>

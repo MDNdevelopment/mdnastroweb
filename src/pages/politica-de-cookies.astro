@@ -1,0 +1,110 @@
+---
+export const prerender = true;
+
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const cookies = [
+  {
+    nombre: '_ga, _ga_*',
+    proveedor: 'Google Analytics',
+    tipo: 'Analítica',
+    duracion: '~2 años',
+    proposito: 'Miden el uso del sitio (páginas visitadas, origen del tráfico) de forma agregada. Solo se instalan si aceptas cookies.',
+  },
+  {
+    nombre: 'cf_clearance / __cf_bm',
+    proveedor: 'Cloudflare Turnstile',
+    tipo: 'Necesaria / seguridad',
+    duracion: 'Sesión',
+    proposito: 'Verifica que quien envía el formulario de contacto es una persona real, no un bot.',
+  },
+  {
+    nombre: 'mdn-cookie-consent',
+    proveedor: 'MDN Publicidad Studio (localStorage)',
+    tipo: 'Necesaria / técnica',
+    duracion: 'Hasta que la borres',
+    proposito: 'Guarda tu decisión sobre el uso de cookies (aceptar / rechazar) para no volver a preguntarte en cada visita.',
+  },
+];
+---
+<Base
+  title="Política de Cookies | MDN Publicidad Studio"
+  description="Qué cookies usa mdnpublicidad.com, para qué sirven y cómo puedes gestionarlas o retirar tu consentimiento."
+>
+  <Header />
+
+  <section class="relative" style="padding: clamp(120px,16vh,180px) clamp(20px,5vw,64px) clamp(70px,9vh,110px);">
+    <div class="max-w-[820px] mx-auto">
+      <h1
+        class="m-0 font-display font-extrabold uppercase leading-[.95] tracking-[-0.5px] text-[#F6F3EC]"
+        style="font-size:clamp(32px,4.4vw,54px);"
+      >
+        Política de <span class="text-[#FFB200]">cookies</span>
+      </h1>
+      <p class="mt-5 mb-0 text-[17px] leading-[1.6] text-[#9a9489]">
+        Esta página explica qué son las cookies, cuáles usamos en mdnpublicidad.com y cómo puedes gestionarlas.
+      </p>
+
+      <div class="mt-14 flex flex-col gap-10">
+        <div>
+          <h2 class="m-0 mb-3 font-display font-bold uppercase text-[20px] tracking-[.02em] text-[#F6F3EC]">1. ¿Qué son las cookies?</h2>
+          <p class="m-0 text-[16px] leading-[1.7] text-[#B8B3A8]">
+            Las cookies son pequeños archivos que un sitio web guarda en tu navegador para recordar información sobre tu visita, como tus preferencias o el uso que haces del sitio.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="m-0 mb-3 font-display font-bold uppercase text-[20px] tracking-[.02em] text-[#F6F3EC]">2. Cookies que usamos</h2>
+          <p class="m-0 mb-5 text-[16px] leading-[1.7] text-[#B8B3A8]">
+            Las cookies de analítica (Google Analytics) solo se activan si las aceptas en el banner de cookies. Las cookies necesarias se usan siempre, ya que son imprescindibles para el funcionamiento y la seguridad del sitio.
+          </p>
+          <div class="overflow-x-auto rounded-2xl border border-white/10">
+            <table class="w-full border-collapse text-left" style="min-width:560px;">
+              <thead>
+                <tr class="bg-white/[.04]">
+                  <th class="px-4 py-3 text-[12px] font-bold tracking-[1px] uppercase text-[#FFB200]">Cookie</th>
+                  <th class="px-4 py-3 text-[12px] font-bold tracking-[1px] uppercase text-[#FFB200]">Tipo</th>
+                  <th class="px-4 py-3 text-[12px] font-bold tracking-[1px] uppercase text-[#FFB200]">Duración</th>
+                  <th class="px-4 py-3 text-[12px] font-bold tracking-[1px] uppercase text-[#FFB200]">Finalidad</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cookies.map((c, i) => (
+                  <tr class={i > 0 ? 'border-t border-white/10' : ''}>
+                    <td class="px-4 py-3.5 align-top text-[14px] font-mono text-[#F6F3EC]">{c.nombre}<br /><span class="text-[12px] text-[#6f6a61] font-sans">{c.proveedor}</span></td>
+                    <td class="px-4 py-3.5 align-top text-[14px] text-[#B8B3A8]">{c.tipo}</td>
+                    <td class="px-4 py-3.5 align-top text-[14px] text-[#B8B3A8]">{c.duracion}</td>
+                    <td class="px-4 py-3.5 align-top text-[14px] leading-[1.55] text-[#B8B3A8]">{c.proposito}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="m-0 mb-3 font-display font-bold uppercase text-[20px] tracking-[.02em] text-[#F6F3EC]">3. Cómo gestionar tu consentimiento</h2>
+          <p class="m-0 mb-3 text-[16px] leading-[1.7] text-[#B8B3A8]">
+            Puedes aceptar o rechazar las cookies de analítica en el banner que aparece en tu primera visita. Si quieres cambiar tu decisión en cualquier momento, usa el enlace <strong class="text-[#F6F3EC]">"Configurar cookies"</strong> en el pie de página de cualquier sección del sitio.
+          </p>
+          <p class="m-0 text-[16px] leading-[1.7] text-[#B8B3A8]">
+            También puedes bloquear o eliminar cookies desde la configuración de tu navegador; ten en cuenta que esto puede afectar el funcionamiento de algunas partes del sitio.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="m-0 mb-3 font-display font-bold uppercase text-[20px] tracking-[.02em] text-[#F6F3EC]">4. Más información</h2>
+          <p class="m-0 text-[16px] leading-[1.7] text-[#B8B3A8]">
+            Para saber cómo tratamos los datos personales que nos compartes, consulta nuestra <a href="/politica-de-privacidad/" class="text-[#FFB200] underline decoration-white/30 underline-offset-2 hover:text-[#FFC233]">política de privacidad</a>. Ante cualquier duda, escríbenos a info@mdnpublicidad.com.
+          </p>
+        </div>
+      </div>
+
+      <p class="mt-14 text-[13px] text-[#6f6a61]">Última actualización: 31 de julio de 2026.</p>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
