@@ -7,9 +7,9 @@ export const wallTags = [
 
 export const helpItems = [
   { title: 'Analizamos', desc: 'Estudiamos tu marca y tu mercado para definir la web y la presencia digital que necesitas.' },
-  { title: 'Construimos', desc: 'Creamos una identidad gráfica sólida y coherente para tu marca.' },
-  { title: 'Fidelizamos', desc: 'Retenemos a tus clientes con herramientas y plataformas web.' },
-  { title: 'Convertimos', desc: 'Creamos contenidos visuales que captan la atención y convierten.' },
+  { title: 'Construimos', desc: 'Desarrollamos tu página web y presencia digital a medida, rápida y lista para vender.' },
+  { title: 'Fidelizamos', desc: 'Creamos una identidad gráfica sólida y coherente que hace que tus clientes te reconozcan y vuelvan.' },
+  { title: 'Convertimos', desc: 'Optimizamos cada pieza y llamada a la acción para convertir visitas en clientes.' },
 ];
 
 export const services = [

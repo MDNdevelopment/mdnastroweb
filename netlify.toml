@@ -1,0 +1,32 @@
+# Redirects para la mudanza de dominio (WordPress/Elementor -> este sitio Astro).
+# Netlify procesa este archivo en cada deploy; ver "Deploy log" -> "Redirects".
+# No se declara [build] aquí a propósito: se respeta la configuración de build/publish
+# ya existente en el dashboard de Netlify (adapter @astrojs/netlify, output "server").
+
+# 1) Dominio de trabajo de Netlify -> dominio final, para evitar contenido duplicado
+#    una vez publicado en mdnpublicidad.com.
+[[redirects]]
+  from = "https://mdnpublicidad.netlify.app/*"
+  to = "https://mdnpublicidad.com/:splat"
+  status = 301
+  force = true
+
+# 2) TODO antes de mudar el dominio: mapear las URLs indexadas del WordPress/Elementor
+#    actual a las rutas nuevas, para no perder el posicionamiento acumulado.
+#    Exportar el listado real desde Google Search Console ("Páginas" > URLs indexadas)
+#    o un crawl del sitio viejo -- no asumir rutas. Ejemplos de la forma que deben tomar:
+#
+# [[redirects]]
+#   from = "/wp-content/uploads/*"
+#   to = "/assets/:splat"
+#   status = 301
+#
+# [[redirects]]
+#   from = "/servicios/diseno-web"  # ruta vieja de Elementor
+#   to = "/paginas-web/"
+#   status = 301
+#
+# [[redirects]]
+#   from = "/blog/*"                # si el WP tenía blog indexado y el nuevo sitio no lo tiene
+#   to = "/"
+#   status = 301

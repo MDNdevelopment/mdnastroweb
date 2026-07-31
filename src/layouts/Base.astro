@@ -1,6 +1,7 @@
 ---
 import { Font } from 'astro:assets';
 import CookieBanner from '../components/CookieBanner.astro';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title?: string;
@@ -10,7 +11,7 @@ interface Props {
 const {
   title = 'MDN Publicidad Studio — Fortalecemos tu Presencia Digital',
   description = 'Estudio creativo de publicidad: diseño y desarrollo de páginas web, gestión de redes sociales y branding. Venezuela · Chile · Miami.',
-  image = '/assets/logo.webp',
+  image = '/assets/og-card.jpg',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -184,6 +185,8 @@ const socialImageURL = new URL(image, Astro.site);
 
 
       <slot />
+
+      <Footer />
 
       <!-- WhatsApp FAB -->
       <a
