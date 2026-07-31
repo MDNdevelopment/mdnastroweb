@@ -17,8 +17,9 @@ const secciones = [
     titulo: '2. Qué datos recopilamos',
     body: [
       'A través de nuestro formulario de contacto ("solicitar mi página web" / onboarding) recopilamos los datos que tú nos proporcionas voluntariamente: nombre, empresa, teléfono, correo electrónico, servicios de interés, tipo de página (si aplica), objetivo principal y el mensaje que nos escribas.',
-      'También recopilamos datos de navegación mediante cookies de analítica (Google Analytics), solo si aceptas su uso — ver nuestra Política de Cookies.',
+      'También recopilamos datos de navegación mediante cookies de analítica (Google Analytics), solo si aceptas su uso. Más información en nuestra ',
     ],
+    linkCookiesIndex: 1,
   },
   {
     titulo: '3. Para qué usamos tus datos',
@@ -63,7 +64,7 @@ const secciones = [
     body: [
       'Este sitio utiliza cookies. Para más información sobre qué cookies usamos y cómo gestionarlas, consulta nuestra ',
     ],
-    linkCookies: true,
+    linkCookiesIndex: 0,
   },
   {
     titulo: '9. Cambios a esta política',
@@ -95,11 +96,11 @@ const secciones = [
         {secciones.map((s) => (
           <div>
             <h2 class="m-0 mb-3 font-display font-bold uppercase text-[20px] tracking-[.02em] text-[#F6F3EC]">{s.titulo}</h2>
-            {s.body.map((p) => (
+            {s.body.map((p, i) => (
               <p class="m-0 mb-3 text-[16px] leading-[1.7] text-[#B8B3A8]">
-                {p}{s.linkCookies && (
+                {p}{s.linkCookiesIndex === i && (
                   <a href="/politica-de-cookies/" class="text-[#FFB200] underline decoration-white/30 underline-offset-2 hover:text-[#FFC233]">política de cookies</a>
-                )}{s.linkCookies && '.'}
+                )}{s.linkCookiesIndex === i && '.'}
               </p>
             ))}
             {s.lista && (
