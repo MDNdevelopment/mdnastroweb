@@ -3,12 +3,15 @@ import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import Nosotros from '../components/Nosotros.astro';
+import Cintillo from '../components/Cintillo.astro';
 import ComoAyudamos from '../components/ComoAyudamos.astro';
 import Servicios from '../components/Servicios.astro';
 import Crecimiento from '../components/Crecimiento.astro';
 import ComunidadCTA from '../components/ComunidadCTA.astro';
+import Faq from '../components/Faq.astro';
 import Onboarding from '../components/Onboarding.astro';
 import Footer from '../components/Footer.astro';
+import { wallTags, homeFaqs } from '../data/content';
 ---
 <Base
   title="MDN Publicidad — Agencia de Publicidad y Diseño Web en Venezuela"
@@ -17,10 +20,13 @@ import Footer from '../components/Footer.astro';
   <Header />
   <Hero />
   <Nosotros />
-  <ComoAyudamos />
+  <Cintillo tags={wallTags.slice(0, 6)} dur={55} />
   <Servicios />
+  <Cintillo tags={wallTags.slice(6, 12)} dur={65} reverse />
+  <ComoAyudamos />
   <Crecimiento />
   <ComunidadCTA />
+  <Faq faqs={homeFaqs} />
   <Onboarding />
   <Footer />
 </Base>

@@ -18,30 +18,35 @@ export const services = [
     title: 'Plataformas y proyectos web',
     desc: 'Diseño y desarrollo de páginas web a medida: landing pages, sitios corporativos y sistemas con panel de gestión, desde sitios web hasta aplicaciones y herramientas interactivas que facilitan la experiencia del usuario y optimizan la gestión de tu negocio.',
     image: 'web.webp',
+    alt: 'Diseño y desarrollo de páginas web — MDN Publicidad',
   },
   {
     tag: 'Estrategia & contenido',
     title: 'Gestión de redes sociales',
     desc: 'Analizamos tu marca y el mercado para desarrollar planes personalizados que maximizan el impacto de cada campaña, ya sea en redes sociales o en otras plataformas digitales. Desde la creación de contenido hasta la comprensión de resultados, optimizamos cada paso para maximizar tu impacto digital.',
     image: 'redes-sociales.webp',
+    alt: 'Gestión de redes sociales para marcas — MDN Publicidad',
   },
   {
     tag: 'Identidad visual',
     title: 'Branding y diseño gráfico',
     desc: 'Creamos identidades visuales fuertes y coherentes que reflejan la esencia de tu marca, fortaleciendo el reconocimiento y la confianza de tus clientes. Nuestro equipo de diseñadores desarrolla piezas gráficas atractivas para todas tus necesidades online y offline.',
     image: 'branding.webp',
+    alt: 'Branding y diseño gráfico de identidad visual — MDN Publicidad',
   },
   {
     tag: 'Video 2D · 3D · Motion',
     title: 'Producciones audiovisuales',
     desc: 'Organizamos contenidos audiovisuales profesionales que conectan emocionalmente con tu audiencia. Videos corporativos 2D y 3D, promocionales y animaciones que potencian tu storytelling y aumentan la visibilidad.',
     image: 'audiovisual.webp',
+    alt: 'Producción audiovisual y animación 2D y 3D — MDN Publicidad',
   },
   {
     tag: 'Consultoría continua',
     title: 'Asesoría y acompañamiento',
     desc: 'Proporcionamos asesoría personalizada para brindarte las tácticas más adecuadas que te permitan alcanzar tus objetivos. Nuestro equipo está a tu disposición para orientarte en cada fase del proceso y, si lo deseas, acompañarte en la ejecución.',
     image: 'asesoria.webp',
+    alt: 'Asesoría y acompañamiento en estrategia digital — MDN Publicidad',
   },
 ];
 
@@ -92,6 +97,60 @@ export const paginasWebPlanes = [
     destacado: false,
   },
 ] as const;
+
+export const proyectos = [
+  {
+    nombre: 'Da Vinci Ristorante',
+    categoria: 'RESTAURANTE · GASTRONOMÍA',
+    descripcion: 'Restaurante italiano en Maracaibo desde 1996: web con menú, reserva por WhatsApp y presencia de marca a la altura de su cocina.',
+    url: 'davinci-nueva.netlify.app',
+    imagen: 'https://res.cloudinary.com/mdnclientes/image/upload/v1785513159/clientes/proyectos/davinci-ristorante.png',
+    alt: 'Captura de la página web de Da Vinci Ristorante',
+  },
+  {
+    nombre: 'Nuvitt',
+    categoria: 'CATÁLOGO · SALUD',
+    descripcion: 'Suplementos vitamínicos certificados por la FDA: catálogo por objetivo de salud, ficha de producto y disponibilidad en farmacias.',
+    url: 'nuvitt.com',
+    imagen: 'https://res.cloudinary.com/mdnclientes/image/upload/v1785513898/clientes/proyectos/nuvitt.png',
+    alt: 'Captura de la página web de Nuvitt',
+  },
+  {
+    nombre: 'TurboPre',
+    categoria: 'CORPORATIVA · INDUSTRIAL',
+    descripcion: 'Mantenimiento y soporte técnico para turbinas y equipos rotativos: presencia corporativa, servicios y captación de clientes industriales.',
+    url: 'turbopre.com',
+    imagen: 'https://res.cloudinary.com/mdnclientes/image/upload/v1785513897/clientes/proyectos/turbopre.png',
+    alt: 'Captura de la página web de TurboPre',
+  },
+] as const;
+
+export const homeFaqs = [
+  {
+    q: '¿Cuánto cuesta una página web?',
+    a: 'Desde $600 una landing page, $1.000 una web corporativa y desde $2.500 un sistema a medida con panel de control. Todos incluyen hosting, dominio, SSL y soporte.',
+  },
+  {
+    q: '¿Cuánto tardan en entregar?',
+    a: 'Una landing se entrega en 3 días, una web corporativa en 15 y un sistema a medida en 30, dependiendo del alcance del proyecto.',
+  },
+  {
+    q: '¿El hosting y el dominio están incluidos?',
+    a: 'Sí. Todos los planes incluyen hosting, dominio, certificado SSL y respaldos periódicos, con una mensualidad de soporte y mantenimiento.',
+  },
+  {
+    q: '¿Trabajan con clientes fuera de Venezuela?',
+    a: 'Sí. Tenemos sedes en Maracaibo (Venezuela), Santiago (Chile) y Miami (Estados Unidos), y trabajamos con marcas de forma remota.',
+  },
+  {
+    q: '¿Qué incluye la gestión de redes sociales?',
+    a: 'Estrategia de contenido, diseño de piezas, calendario de publicación, gestión de la comunidad y análisis de resultados.',
+  },
+  {
+    q: '¿Ofrecen soporte después de la entrega?',
+    a: 'Sí. Para páginas web, cada plan incluye una mensualidad de soporte y mantenimiento que cubre actualizaciones, respaldos y acompañamiento.',
+  },
+];
 
 export const brands: { name: string; logo: string; scale?: number }[] = [
   { name: 'udo', logo: 'https://res.cloudinary.com/mdnclientes/image/upload/v1784917571/clientes/10_kf689r.webp' },
@@ -150,17 +209,8 @@ export const brands: { name: string; logo: string; scale?: number }[] = [
 
 export const serviceChips = ['Web & apps', 'Gestión de redes', 'Branding & diseño', 'Audiovisual', 'Asesoría'];
 
-export const pillars = [
-  {
-    title: 'Estructura',
-    desc: 'Nuestra estructura en Venezuela, Chile y Miami nos permite ofrecer servicios con alcance local, nacional e internacional.',
-  },
-  {
-    title: 'Resultados',
-    desc: 'Obtenemos resultados medibles y alineados a tus objetivos de negocio, en cada fase del proceso.',
-  },
-  {
-    title: 'Enfoque',
-    desc: 'Acciones efectivas y creativas con un solo objetivo: que tu marca crezca y conecte con su público.',
-  },
+export const stats = [
+  { value: 100, label: 'Identidades visuales desarrolladas' },
+  { value: 500, label: 'Marcas acompañadas en su transformación digital' },
+  { value: 15, label: 'Años creando e impulsando marcas' },
 ];

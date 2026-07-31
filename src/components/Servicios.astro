@@ -9,7 +9,7 @@ const getServiceImage = (filename?: string) =>
 <section
   id="servicios"
   data-svc-section
-  class="relative border-t border-white/[.08] bg-[#0A0908]"
+  class="relative bg-[#0A0908]"
 >
   <div data-svc-pin class="h-screen md:overflow-hidden flex items-center">
     <div
@@ -44,7 +44,7 @@ const getServiceImage = (filename?: string) =>
             {img && (
               <Image
                 src={img}
-                alt={s.title === 'Plataformas y proyectos web' ? 'Diseño y desarrollo de páginas web — MDN Publicidad' : ''}
+                alt={s.alt}
                 class="absolute inset-0 h-full w-full object-cover"
                 widths={[400, 800]}
                 sizes="(min-width: 768px) 400px, 84vw"

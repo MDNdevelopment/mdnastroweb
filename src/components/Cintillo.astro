@@ -1,0 +1,43 @@
+---
+import { Image } from 'astro:assets';
+import type { wallTags } from '../data/content';
+
+interface Props {
+  tags: (typeof wallTags)[number][];
+  dur: number;
+  reverse?: boolean;
+}
+
+const { tags, dur, reverse = false } = Astro.props;
+
+const wallImages = import.meta.glob('../assets/comoAyudamos/*', { eager: true, import: 'default' });
+const getWallImage = (filename?: string) =>
+  filename ? wallImages[`../assets/comoAyudamos/${filename}`] : undefined;
+
+const row = [...tags, ...tags, ...tags, ...tags];
+---
+<div
+  class="relative overflow-hidden"
+  style="padding: clamp(10px,1.6vh,20px) 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);"
+>
+  <div style={`display:flex;gap:16px;width:max-content;animation:mdnMarq ${dur}s linear infinite${reverse ? ' reverse' : ''};`}>
+    {row.map(([label, bg, filename], i) => {
+      const img = getWallImage(filename);
+      return (
+        <div
+          key={`${label}-${i}`}
+          style={`flex:0 0 auto;width:200px;aspect-ratio:1/1;border-radius:16px;background:linear-gradient(150deg,${bg},#161410);border:1px solid rgba(255,255,255,.07);position:relative;overflow:hidden;`}
+        >
+          {img ? (
+            <Image src={img} alt={label} class="absolute inset-0 h-full w-full object-cover" width={200} height={200} />
+          ) : (
+            <div style="position:absolute;inset:0;background:radial-gradient(circle at 70% 20%,rgba(255,178,0,.10),transparent 60%);" />
+          )}
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,transparent 45%,rgba(10,9,8,.55) 65%,rgba(10,9,8,.92) 85%,#0A0908 100%);" />
+          <span style="position:absolute;top:14px;right:14px;width:26px;height:26px;border:1px solid rgba(255,255,255,.18);border-radius:50%;display:grid;place-items:center;font-size:11px;color:#FFB200;">✦</span>
+          <span style="position:absolute;left:16px;bottom:16px;font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:18px;text-transform:uppercase;letter-spacing:1px;color:#F6F3EC;">{label}</span>
+        </div>
+      );
+    })}
+  </div>
+</div>

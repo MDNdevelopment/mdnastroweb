@@ -20,14 +20,14 @@ export default defineConfig({
       provider: fontProviders.google(),
       name: 'Saira Condensed',
       cssVariable: '--font-display-src',
-      weights: [500, 600, 700, 800],
+      weights: [600, 700, 800],
     },
     {
       provider: fontProviders.google(),
       name: 'Hanken Grotesk',
       cssVariable: '--font-sans-src',
-      weights: [400, 500, 600, 700],
-      styles: ['normal', 'italic'],
+      weights: [400, 600, 700],
+      styles: ['normal'],
     },
     {
       provider: fontProviders.google(),

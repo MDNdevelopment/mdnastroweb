@@ -254,6 +254,8 @@ export default function OnboardingForm() {
                 <PhoneInput
                   international
                   defaultCountry="VE"
+                  countries={['VE', 'CL', 'US', 'CO', 'PA', 'ES', 'MX']}
+                  flagUrl="/flags/{XX}.svg"
                   placeholder="Tu número"
                   value={s1.telefono}
                   onChange={value => {

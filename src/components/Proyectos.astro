@@ -1,0 +1,96 @@
+---
+import { proyectos } from '../data/content';
+
+// Las capturas vienen de Cloudinary sin transformar. Se piden a un ancho
+// suficiente para el mockup (~760px de render) en formato y calidad
+// automáticos, sin recortar ni ampliar la imagen original.
+const cdn = (url: string) =>
+  url.replace('/image/upload/', '/image/upload/f_auto,q_auto,w_760,c_limit/');
+
+const jsonLdProyectos = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: proyectos
+    .filter((p) => p.url)
+    .map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'CreativeWork',
+        name: p.nombre,
+        description: p.descripcion,
+        url: `https://${p.url}`,
+      },
+    })),
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(jsonLdProyectos)} />
+
+<section class="relative border-t border-white/[.08] bg-[#0A0908] overflow-hidden" style="padding: clamp(70px,10vh,120px) clamp(20px,5vw,64px);">
+  <div aria-hidden="true" class="absolute inset-0 pointer-events-none opacity-40" style="background-image:linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 8.33% 100%;"></div>
+
+  <div class="relative max-w-[1280px] mx-auto">
+    <div class="flex flex-wrap items-end justify-between gap-6 border-b border-white/[.12] pb-6">
+      <h2 class="m-0 font-display font-extrabold uppercase leading-[.92] tracking-[-0.5px] text-[#F6F3EC]" style="font-size:clamp(28px,3.6vw,48px);">
+        Páginas web que ya están <span class="text-[#FFB200]">trabajando ahí fuera</span>
+      </h2>
+      <div class="flex flex-col gap-2 max-w-[32ch]">
+        <span class="font-mono text-[11px] tracking-[.2em] uppercase text-[#6f6a61]">Haz clic en una para ver el sitio</span>
+        <p class="m-0 text-[15px] leading-[1.5] text-[#9a9489]">Landing pages, tiendas online y sistemas de reservas diseñados y desarrollados por nuestro equipo.</p>
+      </div>
+    </div>
+
+    <div class="grid gap-5 mt-12" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr));">
+      {proyectos.map((p) => (
+        <a
+          href={p.url ? `https://${p.url}` : '#'}
+          target={p.url ? '_blank' : undefined}
+          rel={p.url ? 'noopener' : undefined}
+          data-reveal
+          data-ga-event="portfolio_click"
+          data-ga-label={p.nombre}
+          class="group relative flex flex-col rounded-xl border border-white/10 bg-[#111010] overflow-hidden opacity-0 translate-y-6 no-underline transition-all duration-300 hover:border-[#FFB200] hover:-translate-y-1.5"
+        >
+          <div class="h-[34px] flex items-center gap-2.5 px-3 border-b border-white/[.08]" style="background:#191817;">
+            <div class="flex gap-1.5">
+              <span class="w-[7px] h-[7px] rounded-full block bg-[#3A3835]"></span>
+              <span class="w-[7px] h-[7px] rounded-full block bg-[#3A3835]"></span>
+              <span class="w-[7px] h-[7px] rounded-full block bg-[#3A3835]"></span>
+            </div>
+            <span class="font-mono text-[10px] tracking-[.04em] whitespace-nowrap overflow-hidden text-ellipsis text-[#7E7A72]">{p.url || 'proyecto.com'}</span>
+          </div>
+
+          <div class="relative overflow-hidden bg-[#0E0D0C]" style="aspect-ratio:16/10.5;">
+            {p.imagen ? (
+              <img
+                src={cdn(p.imagen)}
+                alt={p.alt}
+                loading="lazy"
+                decoding="async"
+                class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.05]"
+              />
+            ) : (
+              <div
+                aria-hidden="true"
+                class="absolute inset-0 transition-transform duration-700 group-hover:scale-[1.05]"
+                style="background-image:repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 1px, transparent 1px 14px); border: 1px dashed rgba(255,255,255,.14);"
+              >
+                <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-mono text-[10px] tracking-[.16em] uppercase text-[#55514B] whitespace-nowrap">Captura del proyecto</span>
+              </div>
+            )}
+            <div class="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none" style="background:linear-gradient(to top, rgba(10,10,10,.9), rgba(10,10,10,0) 58%);"></div>
+            <div class="absolute left-3.5 bottom-3 opacity-0 translate-y-3 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 text-[#0C0B0A] bg-[#FFB200] font-mono text-[10px] tracking-[.14em] px-3.5 py-2 rounded-full">
+              VER WEB →
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-1.5 px-4.5 pt-4.5 pb-1" style="padding-left:18px;padding-right:18px;padding-top:18px;">
+            <span class="font-display font-extrabold uppercase text-[22px] leading-none text-[#F6F3EC]">{p.nombre}</span>
+            <span class="font-mono text-[10px] tracking-[.16em] text-[#6F6A62]">{p.categoria}</span>
+          </div>
+          <p class="m-0 px-4.5 pb-5 text-[14px] leading-[1.55] text-[#8C877E]" style="padding-left:18px;padding-right:18px;">{p.descripcion}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

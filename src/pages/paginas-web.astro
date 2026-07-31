@@ -5,6 +5,8 @@ import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Onboarding from '../components/Onboarding.astro';
+import Faq from '../components/Faq.astro';
+import Proyectos from '../components/Proyectos.astro';
 import { paginasWebPlanes } from '../data/content';
 
 const faqs = [
@@ -25,16 +27,6 @@ const faqs = [
     a: 'Sí, con nuestro plan Sistema desarrollamos tu web junto a un panel de control con base de datos, ideal para catálogos, reservas de citas o portales de clientes.',
   },
 ];
-
-const jsonLdFaq = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqs.map((f) => ({
-    '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
-  })),
-};
 
 const jsonLdBreadcrumb = {
   '@context': 'https://schema.org',
@@ -63,7 +55,6 @@ const whyStats = [
   description="Creamos tu página web en Venezuela: landing pages, sitios corporativos y sistemas a medida, con hosting, dominio, SSL y soporte incluidos. Desde $600."
 >
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLdFaq)} />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLdBreadcrumb)} />
   </Fragment>
   <Header />
@@ -510,6 +501,8 @@ const whyStats = [
     </style>
   </section>
 
+  <Proyectos />
+
   <section id="planes" class="relative border-t border-white/[.08] bg-[#0A0908]" style="padding: clamp(70px,10vh,120px) clamp(20px,5vw,64px);">
     <div class="max-w-[1280px] mx-auto">
       <h2 class="m-0 font-display font-extrabold uppercase leading-[.95] tracking-[-0.5px] text-[#F6F3EC]" style="font-size:clamp(30px,4vw,52px);">
@@ -589,98 +582,7 @@ const whyStats = [
     });
   </script>
 
-  <section class="relative border-t border-white/[.08]" style="padding: clamp(70px,10vh,120px) clamp(20px,5vw,64px);">
-    <div class="max-w-[1280px] mx-auto">
-      <h2 class="m-0 font-display font-extrabold uppercase leading-[.95] tracking-[-0.5px] text-[#F6F3EC]" style="font-size:clamp(28px,3.6vw,44px);">
-        Preguntas <span class="text-[#FFB200]">frecuentes</span>
-      </h2>
-      <div class="mt-10 flex flex-col gap-4">
-        {faqs.map((f) => (
-          <details data-accordion data-reveal class="group opacity-0 translate-y-6 rounded-2xl border border-white/10 bg-white/[.02] p-6" style="overflow:hidden;">
-            <summary class="cursor-pointer list-none font-display font-bold text-[17px] text-[#F6F3EC] flex items-center justify-between gap-4">
-              {f.q}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFB200" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 transition-transform duration-300 group-open:rotate-45">
-                <path d="M12 5v14M5 12h14"/>
-              </svg>
-            </summary>
-            <p class="faq-content m-0 mt-4 text-[16px] leading-[1.65] text-[#B8B3A8]">{f.a}</p>
-          </details>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <script>
-    class Accordion {
-      el: HTMLDetailsElement;
-      summary: HTMLElement;
-      content: HTMLElement;
-      animation: Animation | null = null;
-      isClosing = false;
-      isExpanding = false;
-
-      constructor(el: HTMLDetailsElement) {
-        this.el = el;
-        this.summary = el.querySelector('summary')!;
-        this.content = el.querySelector('.faq-content')!;
-        this.summary.addEventListener('click', (e) => this.onClick(e));
-      }
-
-      onClick(e: Event) {
-        e.preventDefault();
-        this.el.style.overflow = 'hidden';
-        if (this.isClosing || !this.el.open) {
-          this.open();
-        } else if (this.isExpanding || this.el.open) {
-          this.shrink();
-        }
-      }
-
-      shrink() {
-        this.isClosing = true;
-        const startHeight = `${this.el.offsetHeight}px`;
-        const cs = getComputedStyle(this.el);
-        const pad = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
-        const endHeight = `${this.summary.offsetHeight + pad}px`;
-        this.animation?.cancel();
-        this.animation = this.el.animate({ height: [startHeight, endHeight] }, { duration: 250, easing: 'ease-out' });
-        this.animation.onfinish = () => this.onAnimationFinish(false);
-        this.animation.oncancel = () => { this.isClosing = false; };
-      }
-
-      open() {
-        document.querySelectorAll<HTMLDetailsElement>('details[data-accordion]').forEach((d) => {
-          if (d !== this.el && d.open) (d as any)._accordion?.shrink();
-        });
-        this.el.style.height = `${this.el.offsetHeight}px`;
-        this.el.open = true;
-        window.requestAnimationFrame(() => this.expand());
-      }
-
-      expand() {
-        this.isExpanding = true;
-        const startHeight = `${this.el.offsetHeight}px`;
-        const endHeight = `${this.el.scrollHeight}px`;
-        this.animation?.cancel();
-        this.animation = this.el.animate({ height: [startHeight, endHeight] }, { duration: 250, easing: 'ease-out' });
-        this.animation.onfinish = () => this.onAnimationFinish(true);
-        this.animation.oncancel = () => { this.isExpanding = false; };
-      }
-
-      onAnimationFinish(open: boolean) {
-        this.el.open = open;
-        this.animation = null;
-        this.isClosing = false;
-        this.isExpanding = false;
-        this.el.style.height = '';
-        this.el.style.overflow = '';
-      }
-    }
-
-    document.querySelectorAll<HTMLDetailsElement>('details[data-accordion]').forEach((el) => {
-      (el as any)._accordion = new Accordion(el);
-    });
-  </script>
+  <Faq faqs={faqs} />
 
   <Onboarding />
   <Footer />
