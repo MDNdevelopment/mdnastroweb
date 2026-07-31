@@ -78,6 +78,10 @@ function initWhy(reduced: boolean) {
 // ---- Proceso: acto pinneado con mockup de navegador que evoluciona en 4 capas ----
 function initProceso(reduced: boolean) {
   const pin = document.querySelector<HTMLElement>('[data-pw-proceso-pin]');
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  if (pin && header) {
+    pin.style.height = `calc(100vh - ${Math.ceil(header.getBoundingClientRect().height)}px)`;
+  }
   const stageWrap = document.querySelector<HTMLElement>('[data-pw-stage-wrap]');
   const stepsNav = document.querySelector<HTMLElement>('[data-pw-steps-nav]');
   const panels = document.querySelector<HTMLElement>('[data-pw-panels]');
@@ -136,11 +140,13 @@ function initProceso(reduced: boolean) {
   const dots = ['#55514B', '#FFB200', '#FFB200', '#7FBF6A'];
   const pinScrollPct = 420; // largo del pin en % de viewport
 
+  const headerH = header ? Math.ceil(header.getBoundingClientRect().height) : 0;
+
   const tl = gsap.timeline({
     defaults: { ease: 'power2.inOut' },
     scrollTrigger: {
       trigger: pin,
-      start: 'top top',
+      start: `top top+=${headerH}`,
       end: () => `+=${pinScrollPct}%`,
       scrub: 0.8,
       pin: true,
