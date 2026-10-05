@@ -10,7 +10,7 @@ import { redesPlanes, redesPorQue, stats } from '../data/content';
 const faqs = [
   {
     q: '¿Cuánto cuesta la gestión de redes sociales?',
-    a: 'Tenemos tres planes mensuales: MDN Lite desde $550, MDN Plus desde $750 y MDN Premium desde $1.000. El presupuesto de pauta publicitaria y los modelos para las sesiones no están incluidos.',
+    a: 'Tenemos tres planes mensuales: MDN Lite, MDN Plus y MDN Premium. Escríbenos y te cotizamos el que mejor se ajuste a tu marca. El presupuesto de pauta publicitaria y los modelos para las sesiones no están incluidos.',
   },
   {
     q: '¿Qué redes sociales manejan?',
@@ -54,16 +54,13 @@ const jsonLd = [
         '@type': 'Offer',
         name: p.nombre,
         description: p.resumen,
-        price: p.precio.replace(/[^0-9]/g, ''),
-        priceCurrency: 'USD',
-        priceSpecification: { '@type': 'UnitPriceSpecification', price: p.precio.replace(/[^0-9]/g, ''), priceCurrency: 'USD', unitText: 'MONTH' },
       })),
     },
   },
 ];
 
 const proceso = [
-  { title: 'Estrategia', desc: 'Estudiamos tu marca, tu público y tu mercado. Definimos objetivos, tono de voz y qué contenido tiene que mover a cada red.' },
+  { title: 'Tácticas', desc: 'Estudiamos tu marca, tu público y tu mercado. Definimos objetivos, tono de voz y qué contenido tiene que mover a cada red.' },
   { title: 'Calendario', desc: 'Cada mes recibes un calendario de contenidos aprobado por ti: qué se publica, cuándo, en qué formato y con qué objetivo.' },
   { title: 'Producción', desc: 'Pautas de foto y video, diseño de piezas, reels y copys. Todo con una línea gráfica coherente y listo para publicar.' },
   { title: 'Comunidad', desc: 'Respondemos a tu comunidad y medimos con indicadores de gestión para ajustar cada mes.' },
@@ -96,7 +93,7 @@ const calendario = [
 ---
 <Base
   title="Gestión de Redes Sociales en Venezuela | MDN Publicidad"
-  description="Gestionamos tus redes sociales: estrategia, calendario de contenidos, producción, comunidad y publicidad en Instagram, Facebook, TikTok, LinkedIn y YouTube. Planes desde $550 al mes."
+  description="Gestionamos tus redes sociales: estrategia, calendario de contenidos, producción, comunidad y publicidad en Instagram, Facebook, TikTok, LinkedIn y YouTube."
 >
   <Fragment slot="head">
     {jsonLd.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
@@ -186,7 +183,7 @@ const calendario = [
           data-ga-label="rs_hero_ver_planes"
           class="inline-flex items-center gap-2 text-[14px] font-semibold tracking-[1px] uppercase text-[#F6F3EC] no-underline py-4 px-2 border-b border-white/20 transition-colors duration-300 hover:border-[#FFB200]"
         >
-          Ver planes y precios
+          Ver planes
         </a>
       </div>
     </div>
@@ -222,7 +219,7 @@ const calendario = [
       </div>
 
       <div class="grid gap-4 mt-4" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
-        {stats.map((s) => (s.value === 15 ? { ...s, value: 16 } : s)).map((s) => (
+        {stats.map((s) => (s.value === 15 ? { ...s, value: 16 } : s.value === 100 ? { value: 200, label: 'Logos diseñados' } : s)).map((s) => (
           <div data-rs-stat class="opacity-0 flex items-baseline gap-4 rounded-2xl border border-white/10 px-7 py-5">
             <span class="font-display font-extrabold text-[#F6F3EC] leading-none" style="font-size:clamp(34px,3.6vw,46px);">
               +<span data-rs-count data-target={s.value}>0</span>
@@ -429,7 +426,7 @@ const calendario = [
                   </div>
                 </div>
                 <div data-rs-result class="rounded-lg bg-[#FFB200] text-[#0C0B0A] px-3 py-2.5 font-display font-extrabold uppercase text-[14px] leading-[1.1]">
-                  Ajustamos la estrategia cada mes
+                  Ajustamos las tácticas cada mes
                 </div>
               </div>
             </div>
@@ -458,11 +455,6 @@ const calendario = [
           >
             <h3 class="m-0 font-display font-bold uppercase text-[22px] text-[#F6F3EC]">{p.nombre}</h3>
             <p class="m-0 mt-2 text-[16px] leading-[1.5] text-[#9a9489]">{p.resumen}</p>
-
-            <div class="mt-5 flex items-baseline gap-2">
-              <span class="font-display font-extrabold text-[#FFB200]" style="font-size:clamp(30px,3vw,38px);">{p.precio}</span>
-              <span class="text-[13px] text-[#9a9489]">{p.precioNota}</span>
-            </div>
 
             <p class="m-0 mt-6 mb-3 font-display font-bold uppercase tracking-[1.4px] text-[14px] text-[#FFB200]">Redes</p>
             <ul class="m-0 p-0 list-none flex flex-col gap-3">
@@ -505,7 +497,7 @@ const calendario = [
       </div>
 
       <p class="mt-8 mb-0 text-[14px] leading-[1.6] text-[#6f6a61]">
-        El presupuesto de pauta publicitaria y los modelos para las sesiones no están incluidos. Precios en dólares, mensuales.
+        El presupuesto de pauta publicitaria y los modelos para las sesiones no están incluidos.
       </p>
     </div>
   </section>

@@ -35,7 +35,7 @@ export const services: { tag: string; title: string; desc: string; image: string
     image: 'redes-sociales.webp',
     alt: 'Gestión de redes sociales para marcas — MDN Publicidad',
     href: '/gestion-de-redes-sociales/',
-    srText: 'Planes de gestión de redes sociales desde $550 al mes: MDN Lite, MDN Plus y MDN Premium.',
+    srText: 'Planes de gestión de redes sociales: MDN Lite, MDN Plus y MDN Premium.',
   },
   {
     tag: 'Identidad visual',
@@ -233,7 +233,7 @@ export const homeFaqs = [
   },
   {
     q: '¿Qué incluye la gestión de redes sociales?',
-    a: 'Tenemos tres planes desde $550 al mes. Incluyen estrategia inicial, calendario de contenidos, publicaciones en Instagram, Facebook, TikTok, LinkedIn o YouTube según el plan, gestión de la comunidad y puesta en marcha de publicidad.',
+    a: 'Tenemos tres planes: MDN Lite, MDN Plus y MDN Premium. Incluyen estrategia inicial, calendario de contenidos, publicaciones en Instagram, Facebook, TikTok, LinkedIn o YouTube según el plan, gestión de la comunidad y puesta en marcha de publicidad.',
   },
   {
     q: '¿Ofrecen soporte después de la entrega?',

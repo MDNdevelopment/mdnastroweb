@@ -10,7 +10,7 @@
 
 ## Servicios
 - [Diseño y desarrollo web](https://mdnpublicidad.com/paginas-web/) — desde 600 USD
-- [Gestión de redes sociales](https://mdnpublicidad.com/gestion-de-redes-sociales/) — desde 550 USD al mes
+- [Gestión de redes sociales](https://mdnpublicidad.com/gestion-de-redes-sociales/)
 - [Branding y diseño gráfico](https://mdnpublicidad.com/)
 - [Producciones audiovisuales 2D y 3D](https://mdnpublicidad.com/)
 
@@ -22,9 +22,9 @@
 Todos los planes incluyen hosting, dominio, SSL y soporte.
 
 ## Planes de redes sociales
-- [MDN Lite](https://mdnpublicidad.com/gestion-de-redes-sociales/): 550 USD al mes, Instagram y Facebook.
-- [MDN Plus](https://mdnpublicidad.com/gestion-de-redes-sociales/): 750 USD al mes, suma TikTok y WhatsApp Business.
-- [MDN Premium](https://mdnpublicidad.com/gestion-de-redes-sociales/): 1.000 USD al mes, suma LinkedIn, YouTube, material POP y Ads.
+- [MDN Lite](https://mdnpublicidad.com/gestion-de-redes-sociales/): Instagram y Facebook.
+- [MDN Plus](https://mdnpublicidad.com/gestion-de-redes-sociales/): suma TikTok y WhatsApp Business.
+- [MDN Premium](https://mdnpublicidad.com/gestion-de-redes-sociales/): suma LinkedIn, YouTube, material POP y Ads.
 
 ## Legal
 - [Política de privacidad](https://mdnpublicidad.com/politica-de-privacidad/)
