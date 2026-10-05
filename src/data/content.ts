@@ -1,3 +1,9 @@
+export const WHATSAPP_NUMBER = '584126395734';
+export const PHONE_DISPLAY = '+58 412-6395734';
+
+export const waLink = (text?: string) =>
+  `https://wa.me/${WHATSAPP_NUMBER}${text ? `?text=${encodeURIComponent(text)}` : ''}`;
+
 export const wallTags = [
   ['Reels', '#2a2d52', 'reels.webp'], ['Carrusel', '#4a2e2a', 'carrusel.webp'], ['Campaña', '#2a4a3a', 'campana.webp'],
   ['Branding', '#52472a', 'branding.webp'], ['Cocktail', '#3a2a4a', 'cocktail.webp'], ['Deportes', '#2a3d52', 'deportes.webp'],
@@ -12,13 +18,15 @@ export const helpItems = [
   { title: 'Convertimos', desc: 'Optimizamos cada pieza y llamada a la acción para convertir visitas en clientes.' },
 ];
 
-export const services = [
+export const services: { tag: string; title: string; desc: string; image: string; alt: string; href?: string; srText?: string }[] = [
   {
     tag: 'Desarrollo a medida',
     title: 'Plataformas y proyectos web',
     desc: 'Diseño y desarrollo de páginas web a medida: landing pages, sitios corporativos y sistemas con panel de gestión, desde sitios web hasta aplicaciones y herramientas interactivas que facilitan la experiencia del usuario y optimizan la gestión de tu negocio.',
     image: 'web.webp',
     alt: 'Diseño y desarrollo de páginas web — MDN Publicidad',
+    href: '/paginas-web/',
+    srText: 'Planes de páginas web desde $600: Landing, Web corporativa y Sistema a medida — con hosting, dominio y soporte incluidos.',
   },
   {
     tag: 'Estrategia & contenido',
@@ -26,6 +34,8 @@ export const services = [
     desc: 'Analizamos tu marca y el mercado para desarrollar planes personalizados que maximizan el impacto de cada campaña, ya sea en redes sociales o en otras plataformas digitales. Desde la creación de contenido hasta la comprensión de resultados, optimizamos cada paso para maximizar tu impacto digital.',
     image: 'redes-sociales.webp',
     alt: 'Gestión de redes sociales para marcas — MDN Publicidad',
+    href: '/gestion-de-redes-sociales/',
+    srText: 'Planes de gestión de redes sociales desde $550 al mes: MDN Lite, MDN Plus y MDN Premium.',
   },
   {
     tag: 'Identidad visual',
@@ -98,6 +108,85 @@ export const paginasWebPlanes = [
   },
 ] as const;
 
+export type Red = 'instagram' | 'facebook' | 'tiktok' | 'linkedin' | 'youtube';
+
+export const redesPlanes: {
+  nombre: string;
+  precio: string;
+  precioNota: string;
+  resumen: string;
+  redes: { red: Red; texto: string }[];
+  incluye: string[];
+  destacado: boolean;
+}[] = [
+  {
+    nombre: 'MDN Lite',
+    precio: '$550',
+    precioNota: 'al mes',
+    resumen: 'Manejo base de tus redes para empezar a construir comunidad.',
+    redes: [
+      { red: 'instagram', texto: '4 publicaciones a la semana entre post y reels' },
+      { red: 'facebook', texto: 'Creación de fan page (si no tienes) y posteo automático desde Instagram' },
+    ],
+    incluye: [
+      'Seguimiento y gestión de la comunidad',
+      'Calendario mensual de contenidos',
+      '1 pauta de fotos o videos al mes (no incluye modelo)',
+      'Entrega y puesta en marcha de estrategia inicial + acciones',
+      'Configuración de cuenta de Facebook Ads y puesta en marcha de publicidad mensual (no incluye presupuesto)',
+    ],
+    destacado: false,
+  },
+  {
+    nombre: 'MDN Plus',
+    precio: '$750',
+    precioNota: 'al mes',
+    resumen: 'Más frecuencia, TikTok y WhatsApp Business configurado.',
+    redes: [
+      { red: 'instagram', texto: 'Post y reels diarios o interdiarios, según la estrategia' },
+      { red: 'facebook', texto: 'Fan page y posteo automático desde Instagram' },
+      { red: 'tiktok', texto: 'Contenidos con personalidad de marca para potenciar tu comunidad, 4 publicaciones al mes' },
+    ],
+    incluye: [
+      'Seguimiento y gestión de la comunidad',
+      '2 pautas de fotos o videos al mes: una para Instagram y otra para TikTok (no incluye modelo)',
+      'Entrega y puesta en marcha de estrategia inicial + acciones',
+      'Configuración, actualización y monitoreo inicial de WhatsApp Business (catálogo, respuestas rápidas, atención al cliente)',
+      'Configuración de cuenta de Facebook Ads y puesta en marcha de publicidad mensual (no incluye presupuesto)',
+    ],
+    destacado: true,
+  },
+  {
+    nombre: 'MDN Premium',
+    precio: '$1.000',
+    precioNota: 'al mes',
+    resumen: 'Presencia completa en cinco plataformas con ads y material POP.',
+    redes: [
+      { red: 'instagram', texto: 'Post, reels e historias diarios o interdiarios, según la estrategia' },
+      { red: 'facebook', texto: 'Fan page y posteo automático desde Instagram' },
+      { red: 'tiktok', texto: 'Contenidos con personalidad de marca, 8 publicaciones al mes' },
+      { red: 'linkedin', texto: 'Una publicación semanal' },
+      { red: 'youtube', texto: 'Creación y optimización del perfil, con contenidos coherentes para la plataforma' },
+    ],
+    incluye: [
+      'Seguimiento y gestión de la comunidad',
+      '3 pautas de fotos o videos al mes (no incluye modelo)',
+      'Entrega y puesta en marcha de estrategia inicial + acciones',
+      'Diseño de hasta 2 piezas de material POP en pequeña escala',
+      'Configuración, actualización y monitoreo inicial de WhatsApp Business (catálogo, respuestas rápidas, atención al cliente efectiva)',
+      'Desarrollo, creación de piezas y puesta en marcha de Ads en las plataformas, según tus objetivos de mercado y tu presupuesto',
+    ],
+    destacado: false,
+  },
+];
+
+export const redesPorQue = [
+  'Más de 16 años impulsando y creando marcas nacionales e internacionales.',
+  'La agencia de publicidad con la estructura y el equipo más grande del occidente del país.',
+  'Liderazgo creativo en gestión de redes, identidades visuales, producciones audiovisuales, proyectos web, asesorías y acompañamientos.',
+  'Compromiso con la profesionalización de nuestros clientes (organización y capacitación) y con la optimización constante de nuestro trabajo mediante indicadores de gestión.',
+];
+
 export const proyectos = [
   {
     nombre: 'Da Vinci Ristorante',
@@ -144,7 +233,7 @@ export const homeFaqs = [
   },
   {
     q: '¿Qué incluye la gestión de redes sociales?',
-    a: 'Estrategia de contenido, diseño de piezas, calendario de publicación, gestión de la comunidad y análisis de resultados.',
+    a: 'Tenemos tres planes desde $550 al mes. Incluyen estrategia inicial, calendario de contenidos, publicaciones en Instagram, Facebook, TikTok, LinkedIn o YouTube según el plan, gestión de la comunidad y puesta en marcha de publicidad.',
   },
   {
     q: '¿Ofrecen soporte después de la entrega?',

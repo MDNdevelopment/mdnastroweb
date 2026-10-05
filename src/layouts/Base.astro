@@ -1,7 +1,7 @@
 ---
-import { Font } from 'astro:assets';
-import CookieBanner from '../components/CookieBanner.astro';
-import Footer from '../components/Footer.astro';
+import { Font } from "astro:assets";
+import CookieBanner from "../components/CookieBanner.astro";
+import Footer from "../components/Footer.astro";
 
 interface Props {
   title?: string;
@@ -9,14 +9,15 @@ interface Props {
   image?: string;
 }
 const {
-  title = 'MDN Publicidad Studio — Fortalecemos tu Presencia Digital',
-  description = 'Estudio creativo de publicidad: diseño y desarrollo de páginas web, gestión de redes sociales y branding. Venezuela · Chile · Miami.',
-  image = '/assets/og-card.jpg',
+  title = "MDN Publicidad Studio — Fortalecemos tu Presencia Digital",
+  description = "Estudio creativo de publicidad: diseño y desarrollo de páginas web, gestión de redes sociales y branding. Venezuela · Chile · Miami.",
+  image = "/assets/og-card.jpg",
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL(image, Astro.site);
 ---
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -59,34 +60,37 @@ const socialImageURL = new URL(image, Astro.site);
 
     <!-- Google tag (gtag.js) + Consent Mode v2: sin consentimiento del usuario no se
          almacenan cookies de analítica (ver CookieBanner.astro) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VBSVY6EV2J"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VBSVY6EV2J"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag() {
+        dataLayer.push(arguments);
+      }
 
       // Por defecto, todo denegado hasta que el usuario decida en el banner de cookies
-      gtag('consent', 'default', {
-        ad_storage: 'denied',
-        ad_user_data: 'denied',
-        ad_personalization: 'denied',
-        analytics_storage: 'denied',
+      gtag("consent", "default", {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: "denied",
         wait_for_update: 500,
       });
 
       // Si ya había aceptado en una visita anterior, restaurar el consentimiento
       try {
-        if (localStorage.getItem('mdn-cookie-consent') === 'accepted') {
-          gtag('consent', 'update', {
-            ad_storage: 'granted',
-            ad_user_data: 'granted',
-            ad_personalization: 'granted',
-            analytics_storage: 'granted',
+        if (localStorage.getItem("mdn-cookie-consent") === "accepted") {
+          gtag("consent", "update", {
+            ad_storage: "granted",
+            ad_user_data: "granted",
+            ad_personalization: "granted",
+            analytics_storage: "granted",
           });
         }
       } catch (e) {}
 
-      gtag('js', new Date());
-      gtag('config', 'G-VBSVY6EV2J');
+      gtag("js", new Date());
+      gtag("config", "G-VBSVY6EV2J");
     </script>
 
     <!-- Cloudflare Turnstile: se carga bajo demanda desde OnboardingForm.tsx (paso 2)
@@ -108,14 +112,26 @@ const socialImageURL = new URL(image, Astro.site);
         ],
         "contactPoint": {
           "@type": "ContactPoint",
-          "telephone": "+1-786-450-4876",
+          "telephone": "+58-412-6395734",
           "email": "info@mdnpublicidad.com",
           "contactType": "customer service"
         },
         "address": [
-          { "@type": "PostalAddress", "addressLocality": "Maracaibo", "addressCountry": "VE" },
-          { "@type": "PostalAddress", "addressLocality": "Santiago", "addressCountry": "CL" },
-          { "@type": "PostalAddress", "addressLocality": "Miami", "addressCountry": "US" }
+          {
+            "@type": "PostalAddress",
+            "addressLocality": "Maracaibo",
+            "addressCountry": "VE"
+          },
+          {
+            "@type": "PostalAddress",
+            "addressLocality": "Santiago",
+            "addressCountry": "CL"
+          },
+          {
+            "@type": "PostalAddress",
+            "addressLocality": "Miami",
+            "addressCountry": "US"
+          }
         ],
         "areaServed": ["Venezuela", "Chile", "Estados Unidos"]
       }
@@ -139,7 +155,11 @@ const socialImageURL = new URL(image, Astro.site);
         "serviceType": "Diseño y desarrollo de páginas web",
         "name": "Páginas web — MDN Publicidad",
         "description": "Diseño y desarrollo de páginas web: landing pages, sitios corporativos y sistemas a medida con hosting, dominio y soporte incluidos.",
-        "provider": { "@type": "ProfessionalService", "name": "MDN Publicidad Studio", "url": "https://mdnpublicidad.com" },
+        "provider": {
+          "@type": "ProfessionalService",
+          "name": "MDN Publicidad Studio",
+          "url": "https://mdnpublicidad.com"
+        },
         "areaServed": ["Venezuela", "Chile", "Estados Unidos"],
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
@@ -147,19 +167,31 @@ const socialImageURL = new URL(image, Astro.site);
           "itemListElement": [
             {
               "@type": "Offer",
-              "itemOffered": { "@type": "Service", "name": "Landing", "description": "Una sola página, ideal para captar contactos. Entrega en 3 días." },
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Landing",
+                "description": "Una sola página, ideal para captar contactos. Entrega en 3 días."
+              },
               "price": "600",
               "priceCurrency": "USD"
             },
             {
               "@type": "Offer",
-              "itemOffered": { "@type": "Service", "name": "Web corporativa", "description": "Inicio + 4 secciones para mostrar tu empresa. Entrega en 15 días." },
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Web corporativa",
+                "description": "Inicio + 4 secciones para mostrar tu empresa. Entrega en 15 días."
+              },
               "price": "1000",
               "priceCurrency": "USD"
             },
             {
               "@type": "Offer",
-              "itemOffered": { "@type": "Service", "name": "Sistema", "description": "Web + panel de control para gestionar contenido, reservas o usuarios. Entrega en 30 días." },
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Sistema",
+                "description": "Web + panel de control para gestionar contenido, reservas o usuarios. Entrega en 30 días."
+              },
               "price": "2500",
               "priceCurrency": "USD"
             }
@@ -175,14 +207,16 @@ const socialImageURL = new URL(image, Astro.site);
     <slot name="head" />
   </head>
   <body>
-    <div id="mdn-site" class="relative bg-[#0C0B0A] text-[#F6F3EC] overflow-x-clip">
-
+    <div
+      id="mdn-site"
+      class="relative bg-[#0C0B0A] text-[#F6F3EC] overflow-x-clip"
+    >
       <!-- Grain overlay -->
       <div
         aria-hidden="true"
         style="position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.05;mix-blend-mode:overlay;background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%222%22/></filter><rect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/></svg>')"
-      ></div>
-
+      >
+      </div>
 
       <slot />
 
@@ -190,7 +224,7 @@ const socialImageURL = new URL(image, Astro.site);
 
       <!-- WhatsApp FAB -->
       <a
-        href="https://wa.me/17864504876"
+        href="https://wa.me/584126395734"
         data-whatsapp
         data-ga-event="whatsapp_click"
         data-ga-location="fab"
@@ -200,7 +234,9 @@ const socialImageURL = new URL(image, Astro.site);
         class="fixed bottom-6 right-6 z-[8500] w-14 h-14 rounded-full bg-[#25D366] grid place-items-center shadow-[0_8px_22px_rgba(0,0,0,.4)] transition-transform duration-300 hover:scale-110"
       >
         <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff">
-          <path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.27-1.38a9.86 9.86 0 0 0 4.77 1.22h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.13-2.9-7A9.82 9.82 0 0 0 12.04 2zm0 1.65c2.2 0 4.27.86 5.83 2.42a8.2 8.2 0 0 1 2.42 5.83c0 4.54-3.7 8.24-8.25 8.24a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.12.82.83-3.05-.2-.31a8.2 8.2 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.25-8.24zm-2.56 4.4c-.13 0-.34.05-.52.24-.18.2-.69.68-.69 1.65 0 .97.71 1.91.81 2.04.1.13 1.39 2.12 3.37 2.98.47.2.84.32 1.12.42.47.15.9.13 1.24.08.38-.06 1.16-.47 1.33-.93.16-.46.16-.85.11-.93-.05-.08-.18-.13-.38-.23-.2-.1-1.16-.57-1.34-.64-.18-.07-.31-.1-.44.1-.13.2-.5.64-.62.77-.11.13-.23.15-.43.05-.2-.1-.84-.31-1.6-.99-.59-.53-.99-1.18-1.11-1.38-.12-.2-.01-.31.09-.41.09-.09.2-.23.3-.35.1-.12.13-.2.2-.34.07-.13.03-.25-.02-.35-.05-.1-.44-1.08-.62-1.48-.16-.38-.32-.33-.44-.34h-.38z"/>
+          <path
+            d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.27-1.38a9.86 9.86 0 0 0 4.77 1.22h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.13-2.9-7A9.82 9.82 0 0 0 12.04 2zm0 1.65c2.2 0 4.27.86 5.83 2.42a8.2 8.2 0 0 1 2.42 5.83c0 4.54-3.7 8.24-8.25 8.24a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.12.82.83-3.05-.2-.31a8.2 8.2 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.25-8.24zm-2.56 4.4c-.13 0-.34.05-.52.24-.18.2-.69.68-.69 1.65 0 .97.71 1.91.81 2.04.1.13 1.39 2.12 3.37 2.98.47.2.84.32 1.12.42.47.15.9.13 1.24.08.38-.06 1.16-.47 1.33-.93.16-.46.16-.85.11-.93-.05-.08-.18-.13-.38-.23-.2-.1-1.16-.57-1.34-.64-.18-.07-.31-.1-.44.1-.13.2-.5.64-.62.77-.11.13-.23.15-.43.05-.2-.1-.84-.31-1.6-.99-.59-.53-.99-1.18-1.11-1.38-.12-.2-.01-.31.09-.41.09-.09.2-.23.3-.35.1-.12.13-.2.2-.34.07-.13.03-.25-.02-.35-.05-.1-.44-1.08-.62-1.48-.16-.38-.32-.33-.44-.34h-.38z"
+          ></path>
         </svg>
       </a>
 
@@ -208,8 +244,14 @@ const socialImageURL = new URL(image, Astro.site);
     </div>
 
     <script>
-      import '../scripts/animations';
-      import '../scripts/analytics';
+      import "../scripts/animations";
+      import "../scripts/analytics";
     </script>
+    <script
+      src="https://mdn.veli.com.ar/embed/chat.js"
+      data-token="b8rttxz87kiln6p8gfg7h2nqoyvakurj"
+      data-url="https://mdn.veli.com.ar"
+      data-theme="dark"
+      data-position="right"></script>
   </body>
 </html>

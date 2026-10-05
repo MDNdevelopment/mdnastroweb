@@ -51,6 +51,11 @@ if (document.querySelector('[data-pw-hero]')) {
   import('./paginas-web').then(m => m.initPaginasWeb(prefersReduced));
 }
 
+// ---- Página de gestión de redes sociales ----
+if (document.querySelector('[data-rs-hero]')) {
+  import('./redes-sociales').then(m => m.initRedesSociales(prefersReduced));
+}
+
 // ---- Magnetic buttons ----
 if (!prefersReduced) {
   document.querySelectorAll<HTMLElement>('[data-magnetic]').forEach(btn => {

@@ -58,13 +58,11 @@ const getServiceImage = (filename?: string) =>
               <h3 class="m-0 mb-4 font-display font-bold uppercase leading-none tracking-[.3px] text-[#F6F3EC]" style="font-size:clamp(26px,2.7vw,38px);">{s.title}</h3>
               <p class="m-0 text-[18px] leading-[1.65] text-[#B8B3A8]">{s.desc}</p>
               <div class="relative mt-auto pt-5" style="min-height:52px;">
-                {s.title === 'Plataformas y proyectos web' && (
+                {s.href && (
                   <>
-                    <p class="sr-only">
-                      Planes de páginas web desde $600: Landing, Web corporativa y Sistema a medida — con hosting, dominio y soporte incluidos.
-                    </p>
+                    {s.srText && <p class="sr-only">{s.srText}</p>}
                     <a
-                      href="/paginas-web/"
+                      href={s.href}
                       class="relative z-10 inline-flex items-center gap-2.5 text-[14px] font-bold tracking-[1px] uppercase text-[#0C0B0A] bg-[#FFB200] no-underline px-8 py-4 rounded-full transition-colors duration-300 hover:bg-[#FFC233]"
                     >
                       Ver opciones

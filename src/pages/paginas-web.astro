@@ -575,7 +575,7 @@ const whyStats = [
   <script>
     document.querySelectorAll<HTMLAnchorElement>('a[data-plan]').forEach((el) => {
       el.addEventListener('click', () => {
-        window.dispatchEvent(new CustomEvent('mdn:plan-selected', { detail: el.dataset.plan }));
+        window.dispatchEvent(new CustomEvent('mdn:plan-selected', { detail: { servicio: 'web', plan: el.dataset.plan } }));
         (window as any).gtag?.('event', 'select_plan', { plan_name: el.dataset.plan });
       });
     });
