@@ -73,5 +73,23 @@ if (!prefersReduced) {
   });
 }
 
-// Refresh ScrollTrigger after fonts load
-document.fonts.ready.then(() => ScrollTrigger.refresh());
+// Refresh ScrollTrigger after fonts load, then re-align to the URL hash:
+// los pin-spacers se crean después del salto nativo al ancla y lo desplazan.
+function scrollToHash() {
+  const id = decodeURIComponent(location.hash.slice(1));
+  const target = id && document.getElementById(id);
+  if (!target) return;
+  const top = target.getBoundingClientRect().top + window.scrollY;
+  window.scrollTo(0, top);
+}
+
+if (location.hash && 'scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+Promise.all([
+  document.fonts.ready,
+  new Promise(r => document.readyState === 'complete' ? r(null) : window.addEventListener('load', r, { once: true })),
+  new Promise(r => setTimeout(r, 150)),
+]).then(() => {
+  ScrollTrigger.refresh();
+  scrollToHash();
+});
