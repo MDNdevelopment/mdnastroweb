@@ -15,22 +15,23 @@ const secciones = [
   {
     titulo: '2. Qué datos recopilamos',
     body: [
-      'A través de nuestro formulario de contacto ("solicitar mi página web" / onboarding) recopilamos los datos que tú nos proporcionas voluntariamente: nombre, empresa, teléfono, correo electrónico, servicios de interés, tipo de página (si aplica), objetivo principal y el mensaje que nos escribas.',
+      'Nuestro formulario de contacto no guarda tus datos en ninguna base de datos de MDN. Tienes dos formas de usarlo. Por WhatsApp (principal): con lo que escribes (nombre, empresa, servicios de interés, tipo de página o plan, y tu mensaje) el sitio arma un mensaje y abre un chat de WhatsApp con ese texto ya escrito; la información solo nos llega si tú envías ese mensaje. Por correo (alternativa): al pulsar "Envíalo por correo", los mismos datos más el correo o teléfono que indiques se envían a nuestro correo de contacto para poder responderte.',
+      'Si nos escribes por WhatsApp, por correo o usas el chat del sitio, recibimos también los datos que WhatsApp o el chat nos muestren (por ejemplo, tu número de teléfono y tu nombre de perfil).',
       'También recopilamos datos de navegación mediante cookies de analítica (Google Analytics), solo si aceptas su uso. Más información en nuestra ',
     ],
-    linkCookiesIndex: 1,
+    linkCookiesIndex: 2,
   },
   {
     titulo: '3. Para qué usamos tus datos',
     body: [
-      'Usamos tus datos exclusivamente para responder a tu solicitud de contacto o presupuesto, entender tu proyecto y, si avanzamos, prestarte el servicio contratado.',
+      'Usamos los datos que nos envías por WhatsApp, por correo o por el chat exclusivamente para responder a tu solicitud de contacto o presupuesto, entender tu proyecto y, si avanzamos, prestarte el servicio contratado.',
       'No vendemos ni cedemos tus datos personales a terceros con fines comerciales ajenos a nuestro servicio.',
     ],
   },
   {
     titulo: '4. Base legal',
     body: [
-      'El tratamiento se basa en tu consentimiento, otorgado al completar y enviar voluntariamente el formulario de contacto de este sitio.',
+      'El tratamiento se basa en tu consentimiento, otorgado al enviarnos voluntariamente un mensaje por WhatsApp, por correo desde el formulario o por el chat del sitio, y, para las cookies de analítica, al aceptarlas en el aviso de cookies.',
     ],
   },
   {
@@ -39,17 +40,18 @@ const secciones = [
       'Para operar el sitio y prestar el servicio trabajamos con los siguientes proveedores (encargados del tratamiento), que procesan datos en nuestro nombre y bajo sus propias políticas de seguridad:',
     ],
     lista: [
-      'Supabase — almacenamiento de la información enviada por el formulario.',
-      'Cloudflare (Turnstile) — verificación anti-spam del formulario de contacto.',
+      'WhatsApp (Meta) — canal por el que recibimos tus mensajes; se rige por sus propios términos y política de privacidad.',
+      'Veli — asistente de chat del sitio (mdn.veli.com.ar), si decides escribirle.',
       'Google Analytics — analítica del sitio, solo si aceptas cookies de analítica.',
       'Cloudinary — alojamiento de imágenes del sitio.',
       'Netlify — alojamiento (hosting) del sitio web.',
+      'n8n y Mailgun — envío del correo cuando eliges la opción "Envíalo por correo" del formulario.',
     ],
   },
   {
     titulo: '6. Cuánto tiempo conservamos tus datos',
     body: [
-      'Conservamos tus datos mientras exista una relación comercial o de interés con nosotros, y mientras no solicites su eliminación. Puedes pedir que eliminemos tus datos en cualquier momento escribiendo a info@mdnpublicidad.com.',
+      'Conservamos las conversaciones y datos que nos envías mientras exista una relación comercial o de interés con nosotros, y mientras no solicites su eliminación. Puedes pedir que eliminemos tus datos en cualquier momento escribiendo a info@mdnpublicidad.com.',
     ],
   },
   {

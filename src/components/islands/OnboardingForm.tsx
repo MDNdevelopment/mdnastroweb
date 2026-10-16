@@ -7,7 +7,7 @@ const REDES_CHIP = 'Gestión de redes';
 const TIPOS_PAGINA = ['Landing', 'Web corporativa', 'Sistema', 'Ayúdenme a elegir'];
 const PLANES_REDES = ['MDN Lite', 'MDN Plus', 'MDN Premium', 'Ayúdenme a elegir'];
 
-type Status = 'idle' | 'sent';
+type Status = 'idle' | 'sent' | 'emailed';
 
 interface Fields {
   nombre: string;
@@ -16,6 +16,7 @@ interface Fields {
   tipoPagina: string;
   planRedes: string;
   mensaje: string;
+  contacto: string;
 }
 
 const INPUT_BASE =
@@ -44,9 +45,11 @@ function buildMessage(f: Fields) {
 
 export default function OnboardingForm() {
   const [status, setStatus] = useState<Status>('idle');
-  const [f, setF] = useState<Fields>({ nombre: '', empresa: '', servicios: [], tipoPagina: '', planRedes: '', mensaje: '' });
+  const [f, setF] = useState<Fields>({ nombre: '', empresa: '', servicios: [], tipoPagina: '', planRedes: '', mensaje: '', contacto: '' });
   const [errors, setErrors] = useState<Partial<Record<keyof Fields, string>>>({});
   const [link, setLink] = useState('');
+  const [sending, setSending] = useState(false);
+  const [emailError, setEmailError] = useState(false);
 
   useEffect(() => {
     const onPlanSelected = (e: Event) => {
@@ -74,24 +77,63 @@ export default function OnboardingForm() {
     clearError('servicios');
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const validate = (needContact: boolean) => {
     const err: typeof errors = {};
     if (!f.nombre.trim()) err.nombre = 'required';
     if (!f.empresa.trim()) err.empresa = 'required';
     if (f.servicios.length === 0) err.servicios = 'required';
     if (!f.mensaje.trim()) err.mensaje = 'required';
+    if (needContact && !f.contacto.trim()) err.contacto = 'required';
     setErrors(err);
-    if (Object.keys(err).length) return;
+    return Object.keys(err).length === 0;
+  };
+
+  const leadParams = (method: string) => ({
+    method,
+    tipo_pagina: f.servicios.includes(WEB_CHIP) ? f.tipoPagina || undefined : undefined,
+    plan_redes: f.servicios.includes(REDES_CHIP) ? f.planRedes || undefined : undefined,
+    servicios: f.servicios.join(', '),
+  });
+
+  // Opción secundaria: para quien no tiene WhatsApp en este equipo
+  const sendByEmail = async () => {
+    setEmailError(false);
+    if (sending || !validate(true)) return;
+    setSending(true);
+    try {
+      const res = await fetch('/api/contacto/', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          nombre: f.nombre,
+          empresa: f.empresa,
+          contacto: f.contacto,
+          servicios: f.servicios,
+          tipoPagina: f.servicios.includes(WEB_CHIP) ? f.tipoPagina : '',
+          planRedes: f.servicios.includes(REDES_CHIP) ? f.planRedes : '',
+          mensaje: f.mensaje,
+          pagina: window.location.href,
+          web: (document.getElementById('mdn-web-field') as HTMLInputElement | null)?.value ?? '',
+        }),
+      });
+      if (!res.ok) throw new Error('send_failed');
+      trackEvent('generate_lead', leadParams('email'));
+      setStatus('emailed');
+    } catch {
+      setEmailError(true);
+    } finally {
+      setSending(false);
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validate(false)) return;
 
     const url = waLink(buildMessage(f));
     setLink(url);
     setStatus('sent');
-    trackEvent('generate_lead', {
-      tipo_pagina: f.servicios.includes(WEB_CHIP) ? f.tipoPagina || undefined : undefined,
-      plan_redes: f.servicios.includes(REDES_CHIP) ? f.planRedes || undefined : undefined,
-      servicios: f.servicios.join(', '),
-    });
+    trackEvent('generate_lead', leadParams('whatsapp'));
     if (!window.open(url, '_blank', 'noopener,noreferrer')) window.location.href = url;
   };
 
@@ -119,6 +161,22 @@ export default function OnboardingForm() {
     );
   }
 
+  if (status === 'emailed') {
+    return (
+      <div className="text-center py-8 px-2.5">
+        <div className="w-[74px] h-[74px] rounded-full bg-[#FFB200] grid place-items-center mx-auto mb-6">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#0C0B0A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M20 6L9 17l-5-5"/>
+          </svg>
+        </div>
+        <h3 className="m-0 font-display font-extrabold uppercase" style={{ fontSize: 'clamp(28px,4vw,46px)' }}>¡Mensaje enviado!</h3>
+        <p className="mt-3.5 mx-auto mb-0 max-w-[420px] text-[16px] leading-[1.6] text-[#B8B3A8]">
+          Recibimos tu solicitud y te respondemos pronto a <strong className="text-[#F6F3EC]">{f.contacto.trim()}</strong>.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <form onSubmit={handleSubmit} noValidate>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-[18px_22px]">
@@ -141,6 +199,24 @@ export default function OnboardingForm() {
             />
           </label>
         ))}
+        <label className="flex flex-col gap-2.5 sm:col-span-2">
+          <span className={LABEL_BASE}>Correo o teléfono (para responderte si no usas WhatsApp)</span>
+          <input
+            name="contacto"
+            type="text"
+            autoComplete="email"
+            placeholder="tucorreo@ejemplo.com o +58 412 000 0000"
+            value={f.contacto}
+            onChange={e => {
+              setF(prev => ({ ...prev, contacto: e.target.value }));
+              clearError('contacto');
+            }}
+            className={`${INPUT_BASE} ${errors.contacto ? '!border-[#ff5b4d]' : ''}`}
+          />
+          {errors.contacto && <span className="text-[13px] text-[#ff5b4d]">Déjanos un correo o teléfono para poder responderte.</span>}
+        </label>
+        {/* Campo trampa anti-spam: oculto para las personas */}
+        <input id="mdn-web-field" name="web" type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
       </div>
 
       <p className={`${SUBTITLE} mt-8`}>¿Qué servicios necesitas? *</p>
@@ -229,6 +305,22 @@ export default function OnboardingForm() {
             <path d="M5 12h14M13 6l6 6-6 6"/>
           </svg>
         </button>
+      </div>
+      <div className="mt-5 flex flex-col items-end gap-2 text-right">
+        <p className="m-0 text-[14px] text-[#9a9489]">¿No tienes WhatsApp en este equipo?</p>
+        <button
+          type="button"
+          onClick={sendByEmail}
+          disabled={sending}
+          className="font-sans text-[14px] font-semibold text-[#F6F3EC] bg-transparent border-0 p-0 cursor-pointer underline decoration-white/30 underline-offset-4 transition-colors duration-250 hover:text-[#FFB200] disabled:opacity-60 disabled:cursor-wait"
+        >
+          {sending ? 'Enviando…' : 'Envíalo por correo'}
+        </button>
+        {emailError && (
+          <p role="alert" className="m-0 text-[13px] text-[#ff5b4d]">
+            No pudimos enviarlo. Inténtalo de nuevo o escríbenos a info@mdnpublicidad.com.
+          </p>
+        )}
       </div>
     </form>
   );
