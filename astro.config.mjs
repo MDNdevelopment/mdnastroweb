@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig, fontProviders, envField } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
 import netlify from '@astrojs/netlify';
@@ -12,13 +12,6 @@ export default defineConfig({
   integrations: [react()],
   vite: {
     plugins: [tailwindcss()],
-  },
-  env: {
-    schema: {
-      // Webhook de n8n que envía el correo del formulario (ver src/pages/api/contacto.ts)
-      N8N_CONTACT_WEBHOOK_URL: envField.string({ context: 'server', access: 'secret' }),
-      N8N_CONTACT_SECRET: envField.string({ context: 'server', access: 'secret' }),
-    },
   },
   compressHTML: true,
   prefetch: { defaultStrategy: 'viewport' },

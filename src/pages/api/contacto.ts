@@ -2,9 +2,12 @@
 // de n8n (que manda el correo con Mailgun a transferenciasmdn@gmail.com). Así la URL del webhook y
 // el secreto nunca llegan al navegador.
 import type { APIRoute } from 'astro';
-import { N8N_CONTACT_WEBHOOK_URL, N8N_CONTACT_SECRET } from 'astro:env/server';
 
 export const prerender = false;
+
+// Solo process.env: referenciar import.meta.env haría que Vite copiara el secreto dentro del paquete.
+// En local, arrancar con: node --env-file=.env node_modules/astro/bin/astro.mjs dev
+const env = (key: string): string => process.env[key] ?? '';
 
 const MAX = { nombre: 120, empresa: 120, contacto: 160, mensaje: 3000 };
 const json = (body: Record<string, unknown>, status = 200) =>
@@ -41,10 +44,14 @@ export const POST: APIRoute = async ({ request, site }) => {
     return json({ ok: false, error: 'invalid' }, 422);
   }
 
+  const webhook = env('N8N_CONTACT_WEBHOOK_URL');
+  const secret = env('N8N_CONTACT_SECRET');
+  if (!webhook || !secret) return json({ ok: false, error: 'not_configured' }, 500);
+
   try {
-    const res = await fetch(N8N_CONTACT_WEBHOOK_URL, {
+    const res = await fetch(webhook, {
       method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-mdn-secret': N8N_CONTACT_SECRET },
+      headers: { 'content-type': 'application/json', 'x-mdn-secret': secret },
       body: JSON.stringify(data),
       signal: AbortSignal.timeout(15000),
     });
