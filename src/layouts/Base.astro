@@ -62,8 +62,9 @@ const socialImageURL = new URL(image, Astro.site);
          almacenan cookies de analítica (ver CookieBanner.astro) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VBSVY6EV2J"
     ></script>
-    <script>
+    <script is:inline>
       window.dataLayer = window.dataLayer || [];
+      // Debe ser global (window.gtag): lo usan CookieBanner y analytics.ts
       function gtag() {
         dataLayer.push(arguments);
       }
