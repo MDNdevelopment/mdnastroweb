@@ -7,7 +7,7 @@ import netlify from '@astrojs/netlify';
 export default defineConfig({
   site: 'https://mdnpublicidad.com',
   trailingSlash: 'always',
-  output: 'server',
+  output: 'static',
   adapter: netlify(),
   integrations: [react()],
   vite: {
