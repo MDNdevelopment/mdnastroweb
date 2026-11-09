@@ -134,7 +134,11 @@ export default function OnboardingForm() {
     setLink(url);
     setStatus('sent');
     trackEvent('generate_lead', leadParams('whatsapp'));
-    if (!window.open(url, '_blank', 'noopener,noreferrer')) window.location.href = url;
+    // Sin 'noopener' en features: con él, window.open siempre devuelve null y
+    // el fallback abría WhatsApp también en esta pestaña (dos pestañas).
+    const win = window.open(url, '_blank');
+    if (win) win.opener = null;
+    else window.location.href = url; // pop-up bloqueado: abrir en esta pestaña
   };
 
   if (status === 'sent') {
