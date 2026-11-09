@@ -5,7 +5,7 @@
 
 ## Páginas
 - [Inicio](https://mdnpublicidad.com/): servicios, portafolio y contacto.
-- [Páginas web y planes](https://mdnpublicidad.com/paginas-web/): landing, web corporativa y sistemas a medida.
+- [Páginas web y planes](https://mdnpublicidad.com/paginas-web/): landing y web corporativa.
 - [Gestión de redes sociales](https://mdnpublicidad.com/gestion-de-redes-sociales/): planes MDN Lite, Plus y Premium.
 
 ## Servicios
@@ -16,8 +16,7 @@
 
 ## Planes web
 - [Landing](https://mdnpublicidad.com/paginas-web/): 600 USD, una página, entrega en 3 días.
-- [Web corporativa](https://mdnpublicidad.com/paginas-web/): 1.000 USD, inicio + 4 secciones, entrega en 15 días.
-- [Sistema a medida](https://mdnpublicidad.com/paginas-web/): desde 2.500 USD, con panel de control, entrega en 30 días.
+- [Web corporativa](https://mdnpublicidad.com/paginas-web/): 2.500 USD, inicio + 4 secciones, entrega en 15 días.
 
 Todos los planes incluyen hosting, dominio, SSL y soporte.
 

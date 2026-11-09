@@ -4,7 +4,7 @@ import { trackEvent } from '../../scripts/analytics';
 
 const WEB_CHIP = 'Web & apps';
 const REDES_CHIP = 'Gestión de redes';
-const TIPOS_PAGINA = ['Landing', 'Web corporativa', 'Sistema', 'Ayúdenme a elegir'];
+const TIPOS_PAGINA = ['Landing', 'Web corporativa', 'Ayúdenme a elegir']; // 'Sistema' oculto temporalmente
 const PLANES_REDES = ['MDN Lite', 'MDN Plus', 'MDN Premium', 'Ayúdenme a elegir'];
 
 type Status = 'idle' | 'sent' | 'emailed';

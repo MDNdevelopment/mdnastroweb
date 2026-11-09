@@ -22,11 +22,11 @@ export const services: { tag: string; title: string; desc: string; image: string
   {
     tag: 'Desarrollo a medida',
     title: 'Plataformas y proyectos web',
-    desc: 'Diseño y desarrollo de páginas web a medida: landing pages, sitios corporativos y sistemas con panel de gestión, desde sitios web hasta aplicaciones y herramientas interactivas que facilitan la experiencia del usuario y optimizan la gestión de tu negocio.',
+    desc: 'Diseño y desarrollo de páginas web a medida: landing pages y sitios corporativos, desde sitios web hasta aplicaciones y herramientas interactivas que facilitan la experiencia del usuario y optimizan la gestión de tu negocio.',
     image: 'web.webp',
     alt: 'Diseño y desarrollo de páginas web — MDN Publicidad',
     href: '/paginas-web/',
-    srText: 'Planes de páginas web desde $600: Landing, Web corporativa y Sistema a medida — con hosting, dominio y soporte incluidos.',
+    srText: 'Planes de páginas web desde $600: Landing y Web corporativa — con hosting, dominio y soporte incluidos.',
   },
   {
     tag: 'Estrategia & contenido',
@@ -78,7 +78,7 @@ export const paginasWebPlanes = [
   },
   {
     nombre: 'Web corporativa',
-    precio: '$1.000',
+    precio: '$2.500',
     precioNota: 'pago único',
     resumen: 'Inicio + 4 secciones para mostrar tu empresa.',
     entrega: '15 días',
@@ -105,6 +105,7 @@ export const paginasWebPlanes = [
     ],
     idealPara: 'Catálogos, reservas de citas, portales de clientes',
     destacado: false,
+    oculto: true, // Plan oculto temporalmente; cambiar a false para volver a mostrarlo
   },
 ] as const;
 
@@ -217,11 +218,11 @@ export const proyectos = [
 export const homeFaqs = [
   {
     q: '¿Cuánto cuesta una página web?',
-    a: 'Desde $600 una landing page, $1.000 una web corporativa y desde $2.500 un sistema a medida con panel de control. Todos incluyen hosting, dominio, SSL y soporte.',
+    a: '$600 una landing page y $2.500 una web corporativa. Todos incluyen hosting, dominio, SSL y soporte.',
   },
   {
     q: '¿Cuánto tardan en entregar?',
-    a: 'Una landing se entrega en 3 días, una web corporativa en 15 y un sistema a medida en 30, dependiendo del alcance del proyecto.',
+    a: 'Una landing se entrega en 3 días y una web corporativa en 15, dependiendo del alcance del proyecto.',
   },
   {
     q: '¿El hosting y el dominio están incluidos?',
